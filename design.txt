@@ -1,0 +1,45 @@
+dungeon brawler 2
+
+level layouts
+	structured level layouts - several rooms then boss, get item, next floor
+	enemies come from edges kinda like vampire survivors - swarm floors - monster house!
+		big text flashes up on screen when this happens
+		what other events like this can we add?
+	enemies come from entrances of unexplored areas
+	some levels have rooms or snaking pathways connecting the entrances
+
+diff chars to choose from with diff attacks, stats, & supers
+	--hold a+d or left+right to charge up & use super ability
+		big text or some kind of cool animation when this happens
+	--ctrls for wasd, ijkl, arrow keys, & mouse
+	char ideas
+		healer
+		spaceship pilot with laser gun
+
+starting room
+	start out as spark/ghost & choose char from lineup
+	target dummies to test your attacks on
+	button to add/remove ai chars
+
+choose from selection of items after beating boss
+	walk over one to pick it up & see desc, can swap out with others by walking over
+		them & prev held one goes back to orig pos - go to exit to apply
+	sometimes you get secret but powerful item (u dont know what it is until u equip)
+
+can choose diff areas at the start - sets enemies, bosses, environment hazards, & even items
+enemies appear differently in diff areas - castle = rise up from ground, space station = warp in, etc
+	demon lord castle
+		--skeleton & vampire enemies
+		minibosses - each have flavor text like gyoubu from sekirou
+		loot rooms to get items in?
+			diff rarities - common = +1 armor or dmg, rare = spawn more bullets, etc
+	space station
+		spider enemies
+		laser beams & such
+	undersea
+	graveyard
+
+
+
+
+sometimes big versions of regular enemies spawn with scaled up sprite, more hp, slower spd, & diff bullet pattern
