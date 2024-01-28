@@ -12,19 +12,57 @@ diff chars to choose from with diff attacks, stats, & supers
 	--hold a+d or left+right to charge up & use super ability
 		big text or some kind of cool animation when this happens
 	--ctrls for wasd, ijkl, arrow keys, & mouse
+		gamepad controls?
 	char ideas
-		healer
-		spaceship pilot with laser gun
+		maou castle
+			healer
+			ninja/rogue
+				rapid fire med range daggers
+				ult - become invisible (enemies dont target you, maybe bullets can't hit you either?)
+			wizard
+				huge, slow, long range, slow fire rate, seeking fireballs
+		space
+			spaceship pilot with laser gun
+			slow firing but powerful railgun char
+				maybe this is just ult for pilot?
+			robot
+			alien
 
 starting room
 	start out as spark/ghost & choose char from lineup
 	target dummies to test your attacks on
 	button to add/remove ai chars
+		hold buttons for a sec to take control of ai, it takes ctrl back after 2s idle?
 
 choose from selection of items after beating boss
 	walk over one to pick it up & see desc, can swap out with others by walking over
 		them & prev held one goes back to orig pos - go to exit to apply
 	sometimes you get secret but powerful item (u dont know what it is until u equip)
+	spawn 1 treasure chest for each player that has to be opened to reveal item
+
+items
+	how do we make fun & simple synergies with these?
+		events - shoot bullet, deal dmg, take dmg, kill enemy, die, hit wall with bullet,
+			hit nothing with bullet, pierce through x enemies
+		modifiers - bullets bounce, seeking bullets, bullet piercing, knockback
+	item ideas
+		--if item creates bullets, use it's own sprite for those bullets (if applicable, like for weps)
+		common
+			--dagger - every 3rd enemy hit, shoot a short range dagger
+			--poison vial - on enemy kill spawn bullet that targets nearest enemy
+			--quickbow - every 3rd pierce on 2 enemies, fire 3 arrows in rapid succession
+			--arrow - every 3rd shot gains +1 piercing
+			--fire staff - shoot fireball at random enemy every 3s
+			--healing staff - shoot a seeking healing bullet at teammate every 5s
+			--sword - every 5th enemy killed, spawn aoe of bullets around self
+			--vampire sword - every 3rd enemy killed, heal 1 hp
+			
+			--flame armor - on taking dmg, spawn aoe ring of bullets around yourself
+			--ninja armor - on taking dmg, shoot a dagger back at your attacker
+		rare - these are gonna be like really really rare
+			--poison jug - spawn aoe of bullets around enemy on kill
+			--mega crossbow - every 3rd pierce on 2 enemies, shoot a mega piercing arrow that ignores walls
+			--quiver - all shots gain +1 piercing
 
 can choose diff areas at the start - sets enemies, bosses, environment hazards, & even items
 enemies appear differently in diff areas - castle = rise up from ground, space station = warp in, etc
@@ -33,13 +71,22 @@ enemies appear differently in diff areas - castle = rise up from ground, space s
 		minibosses - each have flavor text like gyoubu from sekirou
 		loot rooms to get items in?
 			diff rarities - common = +1 armor or dmg, rare = spawn more bullets, etc
+				-> golden chest is higher tier loot
 	space station
 		spider enemies
 		laser beams & such
+		bullet hell level where all the players are shooting up at the boss & dodging bullet hell bullets
 	undersea
 	graveyard
+	forest
+		elves, wolves, mushroom, tree, & other forest related enemies
 
 
 
 
-sometimes big versions of regular enemies spawn with scaled up sprite, more hp, slower spd, & diff bullet pattern
+--sometimes big versions of regular enemies spawn with scaled sprite, more hp, slower spd, & diff bullet patterns
+show hearts when player takes dmg
+	also show when standing still?
+custom font drawing system with 3x5 font
+	define rect for it to be drawn in
+ghost ult can spawn little health bauble for living players

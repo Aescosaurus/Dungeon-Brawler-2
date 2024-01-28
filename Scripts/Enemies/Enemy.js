@@ -35,6 +35,15 @@ class Enemy extends Entity
 	
 	Update( info )
 	{
+		this.UpdateMove( info )
+		
+		this.UpdateAttack( info )
+		
+		this.UpdateAnim()
+	}
+	
+	UpdateMove( info )
+	{
 		if( this.moveDelay.Update() )
 		{
 			this.aiMove = this.ai.GetMove( this,info )
@@ -42,7 +51,10 @@ class Enemy extends Entity
 		}
 		// this.pos.Add( move.Scale( this.spd  ) )
 		this.TryMove( this.aiMove.Copy().Scale( this.spd ),info.map )
-		
+	}
+	
+	UpdateAttack( info )
+	{
 		if( this.attackTimer.Update() )
 		{
 			this.attackTimer.Reset()
@@ -55,12 +67,15 @@ class Enemy extends Entity
 				{
 					const bullet = new AnimBullet( this.pos,ang,this.bulletSpd,
 						this.bulletRange,this.animBulletSprPath )
-					bullet.size = Vec2.One().Scale( 4 )
+					bullet.parent = this
 					info.enemyBullets.push( bullet )
 				}
 			}
 		}
-		
+	}
+	
+	UpdateAnim()
+	{
 		if( this.animHand )
 		{
 			this.animHand.SwitchTo( this.aiMove.Equals( Vec2.Zero() ) ? 0 : 1,false )
@@ -86,6 +101,12 @@ class Enemy extends Entity
 			}
 		}
 		else super.Draw( gfx )
+	}
+	
+	SetBoss()
+	{
+		this.isBoss = true
+		this.size.Scale( this.bossScale )
 	}
 	
 	GetVelocity()

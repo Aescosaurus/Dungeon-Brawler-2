@@ -66,4 +66,25 @@ class Graphics
 		this.ctx.rotate( -angle )
 		this.ctx.translate( -xMove,-yMove )
 	}
+	
+	DrawSpriteRotatedScaled( x,y,sprite,xScale,yScale,angle )
+	{
+		angle *= ( Math.PI / 180 )
+		
+		const xMove = x
+		const yMove = y
+		
+		this.ctx.translate( xMove,yMove )
+		this.ctx.rotate( angle )
+		
+		const drawWidth = sprite.width * xScale
+		const drawHeight = sprite.height * yScale
+		
+		this.ctx.drawImage( sprite.img,
+			-drawWidth / 2,-drawHeight / 2,
+			drawWidth,drawHeight )
+		
+		this.ctx.rotate( -angle )
+		this.ctx.translate( -xMove,-yMove )
+	}
 }

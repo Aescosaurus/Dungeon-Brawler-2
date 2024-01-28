@@ -25,3 +25,19 @@ Utils.RoughlyEquals = function( a,b,thresh = 0.0001 )
 {
 	return( Math.abs( a - b ) < thresh )
 }
+
+Utils.GetAng = function( pos,targetPos )
+{
+	const diff = targetPos.Copy().Subtract( pos )
+	return( Math.atan2( diff.y,diff.x ) )
+}
+
+Utils.Deg2Rad = function( deg )
+{
+	return( deg * ( Math.PI / 180 ) )
+}
+
+Utils.Rad2Deg = function( rad )
+{
+	return( rad * ( 180 / Math.PI ) )
+}

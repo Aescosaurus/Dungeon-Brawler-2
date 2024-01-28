@@ -1,13 +1,12 @@
 class Anim
 {
-	// playSpd is how long each frame lasts -> 1 / fps
-	constructor( sprSheet,strip,nFrames,playSpd = 1 / 4 )
+	constructor( sprSheet,strip,nFrames,fps = 4 )
 	{
 		this.sprSht = sprSheet
 		this.strip = strip
 		this.nFrames = nFrames
 		
-		this.timer = new Timer( playSpd )
+		this.timer = new Timer( 1 / fps )
 		this.frameCounter = new Counter( nFrames )
 	}
 	

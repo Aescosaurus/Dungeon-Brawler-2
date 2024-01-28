@@ -3,6 +3,7 @@ class Player extends Entity
 	constructor( pos,ctrls,hp = 10,sprShtPath = null )
 	{
 		super( pos,Vec2.One().Scale( 7.5 ),hp )
+		this.maxHP = hp
 		
 		this.ctrls = ctrls
 		
@@ -32,6 +33,18 @@ class Player extends Entity
 		
 		this.superChargeTimer = new Timer( 0.4 )
 		this.superResetTimer = new Timer( 5.0,true )
+		
+		this.isPlayer = true
+		
+		this.enemyArr = []
+		this.playerBullets = []
+		this.players = []
+		this.enemyBullets = []
+		
+		this.items = []
+		this.buffs = []
+		
+		// this.PickupItem( new Quiver() )
 	}
 	
 	Update( info )
@@ -79,6 +92,28 @@ class Player extends Entity
 		}
 	}
 	
+	UpdateMisc()
+	{
+		const itemUpdateInfo = this.GenerateItemInfo()
+		
+		for( const item of this.items )
+		{
+			item.Update( itemUpdateInfo )
+			
+			for( const buff of item.buffs ) this.buffs.push( buff )
+			item.buffs.length = 0
+		}
+		
+		for( let i = 0; i < this.buffs.length; ++i )
+		{
+			if( this.buffs[i].UsedUp() )
+			{
+				this.buffs.splice( i,1 )
+				--i
+			}
+		}
+	}
+	
 	Draw( gfx )
 	{
 		if( this.sprSht != null )
@@ -87,6 +122,13 @@ class Player extends Entity
 				gfx,this.dir < 0 )
 		}
 		else super.Draw( gfx )
+	}
+	
+	Damage( dmg,attacker )
+	{
+		super.Damage( dmg,attacker )
+		
+		this.OnTakeDmg( attacker )
 	}
 	
 	UseSuper( info )
@@ -106,6 +148,18 @@ class Player extends Entity
 	{
 		const bullet = createBulletFunc( this.pos,ang,this.bulletSpd,this.bulletRange,this )
 		bullet.dmg = dmg
+		bullet.parent = this
+		
+		for( const buff of this.buffs )
+		{
+			if( buff.type == BuffType.Piercing )
+			{
+				++bullet.hp
+				buff.UseBuff()
+				break
+			}
+		}
+		
 		info.playerBullets.push( bullet )
 	}
 	
@@ -136,5 +190,83 @@ class Player extends Entity
 		bullet.rotateOffset = self.bulletRot
 		bullet.rotate = true
 		return( bullet )
+	}
+	
+	ItemFireBullet( pos,ang,bulletSpd,bulletRange,info,createBulletFunc,dmg = this.bulletDmg )
+	{
+		const bullet = createBulletFunc( pos,ang,bulletSpd,bulletRange,this )
+		bullet.dmg = dmg
+		bullet.parent = this
+		info.playerBullets.push( bullet )
+	}
+	
+	PickupItem( item )
+	{
+		this.items.push( item )
+		
+		const info = this.GenerateItemInfo()
+		item.TriggerPickup( info )
+	}
+	
+	SetupInfo( enemies,playerBullets,players,enemyBullets )
+	{
+		this.enemyArr = enemies
+		this.playerBullets = playerBullets
+		this.players = players
+		this.enemyBullets = enemyBullets
+	}
+	
+	GenerateItemInfo()
+	{
+		const info = {}
+		
+		info.self = this
+		info.enemies = this.enemyArr
+		info.playerBullets = this.playerBullets
+		info.players = this.players
+		info.enemyBullets = this.enemyBullets
+		
+		return( info )
+	}
+	
+	OnEnemyHit( enemy )
+	{
+		const info = this.GenerateItemInfo()
+		info.enemy = enemy
+		for( const item of this.items )
+		{
+			item.OnEnemyHit( info )
+		}
+	}
+	
+	OnEnemyKill( enemy )
+	{
+		const info = this.GenerateItemInfo()
+		info.enemy = enemy
+		for( const item of this.items )
+		{
+			item.OnKill( info )
+		}
+	}
+	
+	OnPierce( enemy,nHits )
+	{
+		const info = this.GenerateItemInfo()
+		info.enemy = enemy
+		info.nHits = nHits
+		for( const item of this.items )
+		{
+			item.OnPierce( info )
+		}
+	}
+	
+	OnTakeDmg( attacker )
+	{
+		const info = this.GenerateItemInfo()
+		info.enemy = attacker
+		for( const item of this.items )
+		{
+			item.OnTakeDmg( info )
+		}
 	}
 }

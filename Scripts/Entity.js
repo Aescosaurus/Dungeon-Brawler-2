@@ -7,6 +7,7 @@ class Entity
 		
 		this.col = "#FF00FF"
 		
+		this.maxHP = hp
 		this.hp = hp
 		this.dir = 1
 		this.moveVec = Vec2.Zero()
@@ -67,10 +68,26 @@ class Entity
 		this.moveVec = move.Copy()
 	}
 	
+	Damage( dmg,attacker )
+	{
+		this.hp -= dmg
+	}
+	
+	Heal( amount,healer )
+	{
+		const missingHP = this.maxHP - this.hp
+		if( amount > missingHP ) amount = missingHP
+		this.hp += amount
+	}
+	
 	CheckOverlap( other )
 	{
-		return( this.pos.x + this.size.x > other.pos.x && this.pos.x < other.pos.x + other.size.x &&
-			this.pos.y + this.size.y > other.pos.y && this.pos.y < other.pos.y + other.size.y )
+		const center = this.pos.Copy().Subtract( this.size.Copy().Divide( 2 ) )
+		const otherCenter = other.pos.Copy().Subtract( other.size.Copy().Divide( 2 ) )
+		// return( this.pos.x + this.size.x > other.pos.x && this.pos.x < other.pos.x + other.size.x &&
+		// 	this.pos.y + this.size.y > other.pos.y && this.pos.y < other.pos.y + other.size.y )
+		return( center.x + this.size.x > otherCenter.x && center.x < otherCenter.x + other.size.x &&
+			center.y + this.size.y > otherCenter.y && center.y < otherCenter.y + other.size.y )
 	}
 	
 	IsDead()

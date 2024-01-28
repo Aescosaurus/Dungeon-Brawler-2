@@ -11,6 +11,8 @@ class PlayerManager
 			new PlayerControl( 0,0,0,0,true )
 		]
 		
+		this.deadPlayers = []
+		
 		this.maxPlayers = this.ctrls.length
 		
 		this.colors = [
@@ -22,6 +24,10 @@ class PlayerManager
 		
 		this.canAdd = false
 		this.canRemove = false
+		
+		this.enemyList = []
+		this.playerBullets = []
+		this.enemyBullets = []
 	}
 	
 	Update( mouse,kbd,map,enemies,playerBullets,enemyBullets,gfx )
@@ -35,7 +41,12 @@ class PlayerManager
 		playerUpdateInfo.enemyBullets = enemyBullets
 		playerUpdateInfo.gfx = gfx
 		
-		for( const player of this.players ) player.Update( playerUpdateInfo )
+		for( const player of this.players )
+		{
+			player.Update( playerUpdateInfo )
+			
+			player.UpdateMisc()
+		}
 		
 		const addDown = kbd.KeyDown( 187 )
 		const removeDown = kbd.KeyDown( 189 )
@@ -70,6 +81,8 @@ class PlayerManager
 			else if( this.players.length == 3 ) player = new Player( playerPos,this.ctrls[this.players.length] )
 			this.players.push( player )
 			
+			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
+			
 			const lastPlayer = this.players.length - 1
 			this.players[lastPlayer].col = this.colors[lastPlayer]
 		}
@@ -90,6 +103,7 @@ class PlayerManager
 		{
 			if( this.players[i].hp <= 0 && !this.players[i].isGhost )
 			{
+				this.deadPlayers[i] = this.players[i]
 				this.players[i] = new Ghost( this.players[i].pos.Copy(),this.ctrls[i] )
 			}
 		}
@@ -97,7 +111,25 @@ class PlayerManager
 	
 	TryReviveGhosts()
 	{
-		if( this.GetLivingPlayers().length != this.GetAllPlayers().length ) console.log( "no reviving allowed!" )
+		// if( this.GetLivingPlayers().length != this.GetAllPlayers().length ) console.log( "no reviving allowed!" )
+		
+		for( let i = 0; i < this.players.length; ++i )
+		{
+			if( this.players[i].isGhost )
+			{
+				this.players[i] = this.deadPlayers[i]
+				this.players[i].hp = this.players[i].maxHP
+			}
+		}
+		
+		this.deadPlayers = []
+	}
+	
+	SetInfo( enemies,playerBullets,enemyBullets )
+	{
+		this.enemyList = enemies
+		this.playerBullets = playerBullets
+		this.enemyBullets = enemyBullets
 	}
 	
 	GetLivingPlayers()

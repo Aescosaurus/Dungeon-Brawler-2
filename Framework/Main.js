@@ -15,8 +15,10 @@ class Main
 		this.playerBullets = []
 		this.enemyBullets = []
 		
+		this.playerManager.SetInfo( this.enemies,this.playerBullets,this.enemyBullets )
+		
 		this.enemySpawnTimer = new Timer( 1.0 )
-		this.enemyCounter = 2
+		this.enemyCounter = 3
 		this.waveCounter = 0
 	}
 	
@@ -62,7 +64,7 @@ class Main
 			else
 			{
 				this.SpawnEnemyWave( this.enemyCounter )
-				this.enemyCounter += Utils.RandInt( 1,3 )
+				this.enemyCounter += Utils.RandInt( 1,4 )
 			}
 			
 			this.enemySpawnTimer.Reset()

@@ -1,11 +1,11 @@
 class AnimBullet extends Bullet
 {
-	constructor( pos,ang,spd,range,animPath )
+	constructor( pos,ang,spd,range,animPath,nSprs = 2,animSpd = 4 )
 	{
 		super( pos,ang,spd,range,null )
 		
 		this.sprSht = new SprSheet( SpriteCodex.LoadSpr( animPath ),this.size.x,this.size.y )
-		this.anim = new Anim( this.sprSht,0,2 )
+		this.anim = new Anim( this.sprSht,0,nSprs,animSpd )
 	}
 	
 	Update( map,targets )
