@@ -5,10 +5,12 @@ class PlayerManager
 		this.players = []
 		
 		this.ctrls = [
-			new PlayerControl( "W","S","A","D" ),
-			new PlayerControl( 38,40,37,39 ),
-			new PlayerControl( "I","K","J","L" ),
-			new PlayerControl( 0,0,0,0,true )
+			new WASDControl( "W","S","A","D" ),
+			new WASDControl( 38,40,37,39 ),
+			new WASDControl( "I","K","J","L" ),
+			new MouseControl(),
+			new GamepadControl( 0,0,10 ),
+			new GamepadControl( 0,1,11 )
 		]
 		
 		this.deadPlayers = []
@@ -16,6 +18,8 @@ class PlayerManager
 		this.maxPlayers = this.ctrls.length
 		
 		this.colors = [
+			"white",
+			"black",
 			"darkturquoise",
 			"slateblue",
 			"darksalmon",
@@ -30,11 +34,12 @@ class PlayerManager
 		this.enemyBullets = []
 	}
 	
-	Update( mouse,kbd,map,enemies,playerBullets,enemyBullets,gfx )
+	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx )
 	{
 		const playerUpdateInfo = {}
 		playerUpdateInfo.mouse = mouse
 		playerUpdateInfo.kbd = kbd
+		playerUpdateInfo.gpad = gpad
 		playerUpdateInfo.map = map
 		playerUpdateInfo.enemies = enemies
 		playerUpdateInfo.playerBullets = playerBullets
@@ -79,6 +84,8 @@ class PlayerManager
 			else if( this.players.length == 1 ) player = new Archer( playerPos,this.ctrls[this.players.length] )
 			else if( this.players.length == 2 ) player = new Player( playerPos,this.ctrls[this.players.length] )
 			else if( this.players.length == 3 ) player = new Player( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 4 ) player = new Player( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 5 ) player = new Player( playerPos,this.ctrls[this.players.length] )
 			this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )

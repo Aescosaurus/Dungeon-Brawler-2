@@ -58,8 +58,8 @@ class Player extends Entity
 	
 	UpdateMove( info )
 	{
-		this.move = this.ctrls.GetMove( info.mouse,info.kbd,this.pos )
-		this.move.Normalize()
+		this.move = this.ctrls.GetMove( info.mouse,info.kbd,info.gpad,this.pos )
+		// this.move.Normalize()
 		
 		// this.pos.Add( move.Copy().Scale( this.spd ) )
 		this.TryMove( this.move.Copy().Scale( this.spd ),info.map )
@@ -69,9 +69,9 @@ class Player extends Entity
 	{
 		if( this.superResetTimer.Update() )
 		{
-			if( this.ctrls.HoldingSuperKeys( info.mouse,info.kbd ) )
+			if( this.ctrls.HoldingSuperKeys( info.mouse,info.kbd,info.gpad ) )
 			{
-				if( this.superChargeTimer.Update() )
+				if( this.superChargeTimer.Update() || !this.ctrls.HasSuperTimer() )
 				{
 					this.UseSuper( info )
 					this.superChargeTimer.Reset()

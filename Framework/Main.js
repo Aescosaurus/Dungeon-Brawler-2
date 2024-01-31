@@ -5,6 +5,7 @@ class Main
 		this.gfx = new Graphics()
 		this.kbd = new Keyboard()
 		this.mouse = new Mouse( this.gfx )
+		this.gpad = new Gamepad()
 		
 		this.map = new Map( this.gfx )
 		
@@ -24,7 +25,7 @@ class Main
 	
 	Update()
 	{
-		this.playerManager.Update( this.mouse,this.kbd,this.map,
+		this.playerManager.Update( this.mouse,this.kbd,this.gpad,this.map,
 			this.enemies,this.playerBullets,this.enemyBullets,this.gfx )
 		
 		const enemyUpdateInfo = {}
@@ -44,6 +45,7 @@ class Main
 		
 		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() )
 		{
+			return
 			this.playerManager.TryReviveGhosts()
 			
 			if( this.waveCounter == 5 )
@@ -121,6 +123,7 @@ const main = new Main()
 setInterval( function()
 {
 	main.gfx.DrawRect( 0,0,main.gfx.width,main.gfx.height,"#000000" )
+	main.gpad.PollGamepads()
 	main.Update()
 	main.Draw()
 },1000 / 60.0 )
