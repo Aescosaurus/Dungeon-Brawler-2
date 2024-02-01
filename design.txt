@@ -15,29 +15,31 @@ diff chars to choose from with diff attacks, stats, & supers
 		gamepad controls?
 	char ideas
 		maou castle
-			healer
-				mace/flail weapon? spins around you constantly
-				ult - throw a bunch of healing baubles all over the map
-			ninja/rogue
-				rapid fire med range daggers
-					fire in facing direction, no auto aim?
-				ult - become invisible (enemies dont target you, maybe bullets can't hit you either?)
-				really high move speed to position for attacks
-			wizard
-				huge, slow, long range, slow fire rate, seeking fireballs
-					that deal aoe? this can kinda be like astronomer from db1
+			--healer
+				--mace/flail weapon? spins around you constantly
+				--ult - throw a bunch of healing baubles all over the map
+			--ninja/rogue
+				--rapid fire med range daggers
+					--fire in facing direction, no auto aim?
+				--ult - become invisible (enemies dont target you, maybe bullets can't hit you either?)
+				--really high move speed to position for attacks
+			--wizard
+				--huge, slow, long range, slow fire rate, seeking fireballs
+					/that deal aoe? this can kinda be like astronomer from db1
+					--multiple slow, low damage shots go in all directions?
+						--slow at first then speed up over time when they find a target
 				ult - rains meteors all around the map
 					these leave fire aoe that does dmg over time?
-			lancer
-				spear that pierces enemies
-				ult - throw spinning spears in each direction
-					charge towards enemy & spawn a spear shotgun in front of you
-				isnt this just the knight but better? I wanna have spear user but how to give unique identity?
-					lower hp really high speed
-					maybe have a really slow fire rate? & really high range
-					or maybe this one fire facing dir w/o auto aim
-					*walk to charge spear, stand still to fire
-						gains dmg & range the longer you charge, can be held at max charge
+			--lancer
+				--spear that pierces enemies
+				/ult - throw spinning spears in each direction
+					--charge towards enemy & spawn a spear shotgun in front of you
+				/isnt this just the knight but better? I wanna have spear user but how to give unique identity?
+					-lower hp really high speed
+					--maybe have a really slow fire rate? & really high range
+					--or maybe this one fire facing dir w/o auto aim
+					--*walk to charge spear, stand still to fire
+						--gains dmg & range the longer you charge, can be held at max charge
 		space
 			spaceship pilot with laser gun
 			slow firing but powerful railgun char
@@ -113,5 +115,6 @@ indicator to show when ult's ready?
 	burst of aoe particles when it becomes ready, constant stream while it's ready
 custom font drawing system with 3x5 font
 	define rect for it to be drawn in
-ghost ult can spawn little health bauble for living players
-	health bauble can't be picked up if at full hp
+--ghost ult can spawn little health bauble for living players
+	--health bauble can't be picked up if at full hp
+particles for enemy hit

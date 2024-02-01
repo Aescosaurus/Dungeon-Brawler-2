@@ -78,6 +78,7 @@ class Entity
 		const missingHP = this.maxHP - this.hp
 		if( amount > missingHP ) amount = missingHP
 		this.hp += amount
+		return( amount > 0 )
 	}
 	
 	CheckOverlap( other )

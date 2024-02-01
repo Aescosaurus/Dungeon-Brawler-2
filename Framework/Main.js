@@ -25,11 +25,16 @@ class Main
 	
 	Update()
 	{
+		// const mouseDiff = new Vec2( this.mouse.x,this.mouse.y ).Subtract(
+		// 	new Vec2( this.gfx.width,this.gfx.height ).Divide( 2 ) )
+		// const mouseAng = Math.atan2( mouseDiff.y,mouseDiff.x )
+		// console.log( Math.floor( Utils.Rad2Deg( mouseAng ) ) )
+		
 		this.playerManager.Update( this.mouse,this.kbd,this.gpad,this.map,
 			this.enemies,this.playerBullets,this.enemyBullets,this.gfx )
 		
 		const enemyUpdateInfo = {}
-		enemyUpdateInfo.players = this.playerManager.GetLivingPlayers()
+		enemyUpdateInfo.players = this.playerManager.GetPlayerTargets()
 		enemyUpdateInfo.map = this.map
 		enemyUpdateInfo.enemyBullets = this.enemyBullets
 		
@@ -45,7 +50,6 @@ class Main
 		
 		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() )
 		{
-			return
 			this.playerManager.TryReviveGhosts()
 			
 			if( this.waveCounter == 5 )

@@ -43,4 +43,9 @@ class Anim
 		this.timer.Reset()
 		this.frameCounter.Reset()
 	}
+	
+	SetFPS( fps )
+	{
+		this.timer.SetDur( 1 / fps )
+	}
 }

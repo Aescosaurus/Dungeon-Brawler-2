@@ -30,12 +30,26 @@ class Vec2
 		return( this )
 	}
 	
+	MultiplyVec( vec )
+	{
+		this.x *= vec.x
+		this.y *= vec.y
+		
+		return( this )
+	}
+	
 	Divide( amount )
 	{
 		this.x /= amount
 		this.y /= amount
 		
 		return( this )
+	}
+	
+	Set( other )
+	{
+		this.x = other.x
+		this.y = other.y
 	}
 	
 	GetLenSq()

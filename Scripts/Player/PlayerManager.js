@@ -82,10 +82,10 @@ class PlayerManager
 			let player = null
 			if( this.players.length == 0 ) player = new Knight( playerPos,this.ctrls[this.players.length] )
 			else if( this.players.length == 1 ) player = new Archer( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 2 ) player = new Player( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 3 ) player = new Player( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 4 ) player = new Player( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 5 ) player = new Player( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 2 ) player = new Healer( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 3 ) player = new Rogue( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 4 ) player = new Lancer( playerPos,this.ctrls[this.players.length] )
+			else if( this.players.length == 5 ) player = new Wizard( playerPos,this.ctrls[this.players.length] )
 			this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
@@ -110,6 +110,7 @@ class PlayerManager
 		{
 			if( this.players[i].hp <= 0 && !this.players[i].isGhost )
 			{
+				this.players[i].OnKill()
 				this.deadPlayers[i] = this.players[i]
 				this.players[i] = new Ghost( this.players[i].pos.Copy(),this.ctrls[i] )
 			}
@@ -146,6 +147,16 @@ class PlayerManager
 		for( const player of this.players )
 		{
 			if( !player.isGhost ) players.push( player )
+		}
+		return( players )
+	}
+	
+	GetPlayerTargets()
+	{
+		const players = []
+		for( const player of this.players )
+		{
+			if( !player.isGhost && player.targetable ) players.push( player )
 		}
 		return( players )
 	}

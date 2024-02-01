@@ -7,12 +7,14 @@ class Ghost extends Player
 		this.spd = 1.7
 		
 		this.isGhost = true
+		
+		this.healSpawnDev = new Range( -10,10 )
 	}
 	
 	Update( info )
 	{
 		// ghost can move through walls
-		this.move = this.ctrls.GetMove( info.mouse,info.kbd,this.pos )
+		this.move = this.ctrls.GetMove( info.mouse,info.kbd,info.gpad,this.pos )
 		this.move.Normalize()
 		this.pos.Add( this.move.Copy().Scale( this.spd ) )
 		if( !Utils.RoughlyEquals( this.move.x,0 ) ) this.dir = Math.sign( this.move.x )
@@ -29,6 +31,9 @@ class Ghost extends Player
 	
 	UseSuper( info )
 	{
-		// what does ghost do as super lol
+		const healBauble = new HealBauble( this.pos,this.pos.Copy().Add(
+			new Vec2( this.healSpawnDev.GetRandVal(),this.healSpawnDev.GetRandVal() ) ),
+			0.5 )
+		info.enemyBullets.push( healBauble )
 	}
 }

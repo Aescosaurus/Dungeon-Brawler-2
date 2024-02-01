@@ -21,7 +21,7 @@ TargetFinder.FindClosest = function( self,targets,ignoreTarget = null )
 
 TargetFinder.FindClosestArr = function( self,targets )
 {
-	let closest = []
+	const closest = []
 	for( const target of targets )
 	{
 		const curDist = target.pos.Copy().Subtract( self.pos ).GetLenSq()
@@ -32,6 +32,26 @@ TargetFinder.FindClosestArr = function( self,targets )
 	{
 		return( a.dist - b.dist )
 	} )
+	
+	return( closest )
+}
+
+// find target that is as close to dist away from you as possible
+TargetFinder.FindAtDist = function( self,targets,dist )
+{
+	const targetDistSq = dist * dist
+	let closest = null
+	let error = 9999999
+	for( const target of targets )
+	{
+		const curDist = target.pos.Copy().Subtract( self.pos ).GetLenSq()
+		const curError = curDist - targetDistSq
+		if( curError < error )
+		{
+			closest = target
+			error = curError
+		}
+	}
 	
 	return( closest )
 }

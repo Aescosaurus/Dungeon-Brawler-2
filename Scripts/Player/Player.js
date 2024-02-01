@@ -35,6 +35,7 @@ class Player extends Entity
 		this.superResetTimer = new Timer( 5.0,true )
 		
 		this.isPlayer = true
+		this.targetable = true
 		
 		this.enemyArr = []
 		this.playerBullets = []
@@ -135,6 +136,8 @@ class Player extends Entity
 	{
 		console.log( "Used super!" )
 	}
+	
+	OnKill() {}
 	
 	HandleSimpleShooting( info )
 	{

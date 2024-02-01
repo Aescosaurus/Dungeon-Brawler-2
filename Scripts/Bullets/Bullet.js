@@ -85,6 +85,13 @@ class Bullet extends Entity
 					this.bulletScale.x,this.bulletScale.y,
 					this.angle + this.rotateOffset + this.rot )
 			}
+			else if( !this.bulletScale.Equals( Vec2.One() ) )
+			{
+				gfx.DrawSpriteRotatedScaled( this.pos.x,this.pos.y,
+					this.spr,
+					this.bulletScale.x,this.bulletScale.y,
+					0 )
+			}
 			else
 			{
 				gfx.DrawSprite( this.pos.x - this.spr.width / 2,this.pos.y - this.spr.height / 2,
@@ -99,9 +106,18 @@ class Bullet extends Entity
 	
 	HandleHit( target )
 	{
-		--this.hp
-		if( this.dmg > 0 ) target.Damage( this.dmg,this.parent )
-		else target.Heal( this.dmg,this.parent )
+		let consumeHP = false
+		if( this.dmg > 0 )
+		{
+			target.Damage( this.dmg,this.parent )
+			consumeHP = true
+		}
+		else if( target.Heal( Math.abs( this.dmg ),this.parent ) )
+		{
+			consumeHP = true
+		}
+		
+		if( consumeHP ) --this.hp
 		
 		/*if( this.hp > 0 )*/ this.hitEnemies.push( target )
 		
@@ -135,6 +151,18 @@ class Bullet extends Entity
 	ScaleUp( scale )
 	{
 		this.bulletScale = Vec2.One().Scale( scale )
+	}
+	
+	// handle overlap for bigger bullets
+	CheckOverlap( other )
+	{
+		const mySize = this.size.Copy().MultiplyVec( this.bulletScale )
+		
+		const center = this.pos.Copy().Subtract( mySize.Copy().Divide( 2 ) )
+		const otherCenter = other.pos.Copy().Subtract( other.size.Copy().Divide( 2 ) )
+		
+		return( center.x + mySize.x > otherCenter.x && center.x < otherCenter.x + other.size.x &&
+			center.y + mySize.y > otherCenter.y && center.y < otherCenter.y + other.size.y )
 	}
 	
 	IsDead()

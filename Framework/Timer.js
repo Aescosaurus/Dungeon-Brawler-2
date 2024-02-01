@@ -19,13 +19,29 @@ class Timer
 		this.curTime = 0
 	}
 	
-	SetDur( dur )
+	SetDur( dur,setFinished = false )
 	{
 		this.dur = dur * 60
+		if( setFinished ) this.curTime = this.dur + 1
+	}
+	
+	Finish()
+	{
+		this.curTime = this.dur + 1
+	}
+	
+	GetDur()
+	{
+		return( this.dur / 60 )
 	}
 	
 	IsDone()
 	{
 		return( this.curTime >= this.dur )
+	}
+	
+	GetPercent()
+	{
+		return( Math.min( this.curTime / this.dur,1 ) )
 	}
 }
