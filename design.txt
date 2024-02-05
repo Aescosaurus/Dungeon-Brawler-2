@@ -12,7 +12,7 @@ diff chars to choose from with diff attacks, stats, & supers
 	--hold a+d or left+right to charge up & use super ability
 		big text or some kind of cool animation when this happens
 	--ctrls for wasd, ijkl, arrow keys, & mouse
-		gamepad controls?
+		--gamepad controls?
 	char ideas
 		maou castle
 			--healer
@@ -118,3 +118,4 @@ custom font drawing system with 3x5 font
 --ghost ult can spawn little health bauble for living players
 	--health bauble can't be picked up if at full hp
 particles for enemy hit
+bosses with cool bullet hell patterns

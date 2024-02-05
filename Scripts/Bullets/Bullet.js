@@ -5,7 +5,7 @@ class Bullet extends Entity
 		super( pos,Vec2.One().Scale( 4 ) )
 		this.col = "red"
 		this.hp = 1
-		this.angle = ang * ( 180 / Math.PI )
+		this.angle = Utils.Rad2Deg( ang )
 		this.parent = null
 		
 		this.vel = new Vec2( Math.cos( ang ),Math.sin( ang ) ).Scale( spd )

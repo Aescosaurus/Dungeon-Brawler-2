@@ -6,12 +6,12 @@ class Quickbow extends Item
 		
 		this.pierceCounter.SetCount( 3 )
 		
-		this.arrowCounter = new Counter( 3,true )
-		this.arrowRefire = new Timer( 0.1,true )
-		
-		this.nArrows = this.arrowCounter.GetCount()
-		this.arrowSpread = Utils.Deg2Rad( 15 )
-		this.arrowStartAng = 0
+		this.arrowSpread = 15
+		this.nArrows = 3
+		this.sprayPattern = new SprayPattern( new ShotPattern(),this.arrowSpread,0.1,this.nArrows )
+		this.firing = false
+		this.selfTarget = Vec2.Zero()
+		this.arrowTarget = Vec2.Zero()
 		
 		this.spr = SpriteCodex.LoadSpr( "Images/Items/Quickbow.png" )
 		this.bulletSpr = SpriteCodex.LoadSpr( "Images/Bullet/Arrow.png" )
@@ -19,28 +19,31 @@ class Quickbow extends Item
 	
 	Update( info )
 	{
-		if( !this.arrowCounter.IsDone() )
+		if( this.firing )
 		{
-			if( this.arrowRefire.Update() )
+			const result = this.sprayPattern.Update( this.selfTarget,this.arrowTarget )
+			if( result )
 			{
-				this.arrowRefire.Reset()
-				this.arrowCounter.Tick()
-				
-				// const ang = this.arrowStartAng +
-				// 	( ( this.arrowCounter.GetCount() / this.nArrows ) -
-				// 	this.nArrows / 2 ) * this.arrowSpread
-				const ang = this.arrowStartAng +
-					( this.arrowCounter.GetPercent() / 2 ) * this.arrowSpread
-				
-				this.FireBullet( info.self.pos,ang,info )
+				if( result.done ) this.firing = false
+				else
+				{
+					const angs = result.angs
+					for( const ang of angs )
+					{
+						this.FireBullet( info.self.pos,
+						ang - Utils.Deg2Rad( this.arrowSpread * this.nArrows / 2 ),
+						info )
+					}
+				}
 			}
 		}
 	}
 	
 	TriggerPierce( info )
 	{
-		this.arrowCounter.Reset()
-		this.arrowStartAng = Utils.GetAng( info.self.pos,info.enemy.pos )
+		this.firing = true
+		this.selfTarget = info.self.pos.Copy()
+		this.arrowTarget = info.enemy.pos.Copy()
 	}
 	
 	CreateBullet( pos,ang,bulletSpd,bulletRange,self,itemSelf )

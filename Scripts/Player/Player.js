@@ -46,6 +46,7 @@ class Player extends Entity
 		this.buffs = []
 		
 		// this.PickupItem( new Quiver() )
+		// this.PickupItem( new Quickbow() )
 	}
 	
 	Update( info )
