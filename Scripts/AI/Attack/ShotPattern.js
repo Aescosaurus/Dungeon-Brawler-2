@@ -7,7 +7,7 @@ class ShotPattern
 		else this.spread = shotAng * ( Math.PI / 180 )
 	}
 	
-	GetShotAngles( myPos,targetPos )
+	GetShotAngles( myPos = Vec2.Zero(),targetPos = Vec2.Up() )
 	{
 		const shotAngs = []
 		

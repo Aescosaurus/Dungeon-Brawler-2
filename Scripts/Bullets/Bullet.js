@@ -1,5 +1,6 @@
 class Bullet extends Entity
 {
+	// takes ang in radians
 	constructor( pos,ang,spd,range = 50,spr = null )
 	{
 		super( pos,Vec2.One().Scale( 4 ) )

@@ -3,6 +3,7 @@ class SkeletonBoss extends Skeleton
 	constructor( pos )
 	{
 		super( pos )
+		this.bossScale = 3
 		this.SetBoss()
 		
 		this.hp = 80

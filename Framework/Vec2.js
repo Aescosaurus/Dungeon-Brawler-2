@@ -130,3 +130,8 @@ Vec2.Right = function()
 {
 	return( new Vec2( 1,0 ) )
 }
+
+Vec2.Rand = function()
+{
+	return( new Vec2( Utils.RandFloat( -1,1 ),Utils.RandFloat( -1,1 ) ) )
+}

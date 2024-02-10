@@ -21,14 +21,12 @@ class Main
 		this.enemySpawnTimer = new Timer( 1.0 )
 		this.enemyCounter = 3
 		this.waveCounter = 0
+		this.bossInterval = 3
 	}
 	
 	Update()
 	{
-		// const mouseDiff = new Vec2( this.mouse.x,this.mouse.y ).Subtract(
-		// 	new Vec2( this.gfx.width,this.gfx.height ).Divide( 2 ) )
-		// const mouseAng = Math.atan2( mouseDiff.y,mouseDiff.x )
-		// console.log( Math.floor( Utils.Rad2Deg( mouseAng ) ) )
+		if( this.kbd.KeyDown( 8 ) ) this.enemies.length = 0
 		
 		this.playerManager.Update( this.mouse,this.kbd,this.gpad,this.map,
 			this.enemies,this.playerBullets,this.enemyBullets,this.gfx )
@@ -52,15 +50,16 @@ class Main
 		{
 			this.playerManager.TryReviveGhosts()
 			
-			if( this.waveCounter == 5 )
+			if( this.waveCounter == this.bossInterval )
 			{
 				this.map.EmptyCenter()
 			}
-			else if( this.waveCounter == 6 )
+			else if( this.waveCounter == this.bossInterval + 1 )
 			{
-				this.enemies.push( new SkeletonBoss( new Vec2( this.gfx.width / 2,this.gfx.height / 2 ) ) )
+				// this.enemies.push( new SkeletonBoss( new Vec2( this.gfx.width / 2,this.gfx.height / 2 ) ) )
+				this.enemies.push( new DarkHorse( new Vec2( this.gfx.width / 2,this.gfx.height / 2 ) ) )
 			}
-			else if( this.waveCounter == 7 )
+			else if( this.waveCounter == this.bossInterval + 2 )
 			{
 				// todo: loot!
 				

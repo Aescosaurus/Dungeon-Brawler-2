@@ -55,3 +55,25 @@ TargetFinder.FindAtDist = function( self,targets,dist )
 	
 	return( closest )
 }
+
+TargetFinder.FindFarthest = function( self,targets )
+{
+	let farthest = null
+	let farthestDist = 0
+	for( const target of targets )
+	{
+		const curDist = target.pos.Copy().Subtract( self.pos ).GetLenSq()
+		if( curDist > farthestDist )
+		{
+			farthest = target
+			farthestDist = curDist
+		}
+	}
+	
+	return( farthest )
+}
+
+TargetFinder.FindRandom = function( targets )
+{
+	return( targets[Utils.RandInt( 0,targets.length )] )
+}

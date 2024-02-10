@@ -13,6 +13,7 @@ diff chars to choose from with diff attacks, stats, & supers
 		big text or some kind of cool animation when this happens
 	--ctrls for wasd, ijkl, arrow keys, & mouse
 		--gamepad controls?
+		support for numpad controls - 8456
 	char ideas
 		maou castle
 			--healer
@@ -108,9 +109,10 @@ enemies appear differently in diff areas - castle = rise up from ground, space s
 
 
 --sometimes big versions of regular enemies spawn with scaled sprite, more hp, slower spd, & diff bullet patterns
-show hearts when player takes dmg
+show hearts when player takes dmg/heals
 	also show when standing still?
 	hearts break up into 1/4s to display hp?
+		or maybe act like hp bar where it empties a pixel at a time
 indicator to show when ult's ready?
 	burst of aoe particles when it becomes ready, constant stream while it's ready
 custom font drawing system with 3x5 font
@@ -119,3 +121,5 @@ custom font drawing system with 3x5 font
 	--health bauble can't be picked up if at full hp
 particles for enemy hit
 bosses with cool bullet hell patterns
+	bullet patterns that make the players play together
+		spinny attacks to make them move together, tight shotguns in each dir so they group

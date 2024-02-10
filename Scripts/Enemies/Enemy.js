@@ -30,7 +30,7 @@ class Enemy extends Entity
 		this.targetStyle = TargetFinder.FindClosest
 		
 		this.isBoss = false
-		this.bossScale = 3
+		this.bossScale = 2
 	}
 	
 	Update( info )
@@ -63,13 +63,7 @@ class Enemy extends Entity
 			if( target != null )
 			{
 				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos,target )
-				for( const ang of angs )
-				{
-					const bullet = new AnimBullet( this.pos,ang,this.bulletSpd,
-						this.bulletRange,this.animBulletSprPath )
-					bullet.parent = this
-					info.enemyBullets.push( bullet )
-				}
+				for( const ang of angs ) this.FireBullet( ang,info )
 			}
 		}
 	}
@@ -103,10 +97,19 @@ class Enemy extends Entity
 		else super.Draw( gfx )
 	}
 	
-	SetBoss()
+	SetBoss( scale = this.bossScale )
 	{
+		this.bossScale = scale
 		this.isBoss = true
-		this.size.Scale( this.bossScale )
+		this.size.Scale( scale )
+	}
+	
+	FireBullet( ang,info,spd = this.bulletSpd,range = this.bulletRange )
+	{
+		const bullet = new AnimBullet( this.pos,ang,spd,
+			range,this.animBulletSprPath )
+		bullet.parent = this
+		info.enemyBullets.push( bullet )
 	}
 	
 	GetVelocity()
