@@ -32,10 +32,26 @@ class PlayerManager
 		this.enemyList = []
 		this.playerBullets = []
 		this.enemyBullets = []
+		
+		this.canSpawnSpecificPlayer = true
 	}
 	
 	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx )
 	{
+		let spawnPlayer = -1
+		if( kbd.KeyDown( "1" ) ) spawnPlayer = 0
+		else if( kbd.KeyDown( "2" ) ) spawnPlayer = 1
+		else if( kbd.KeyDown( "3" ) ) spawnPlayer = 2
+		else if( kbd.KeyDown( "4" ) ) spawnPlayer = 3
+		else if( kbd.KeyDown( "5" ) ) spawnPlayer = 4
+		else if( kbd.KeyDown( "6" ) ) spawnPlayer = 5
+		else this.canSpawnSpecificPlayer = true
+		if( spawnPlayer > -1 && this.canSpawnSpecificPlayer )
+		{
+			this.SpawnSpecificPlayer( spawnPlayer,map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
+			this.canSpawnSpecificPlayer = false
+		}
+		
 		const playerUpdateInfo = {}
 		playerUpdateInfo.mouse = mouse
 		playerUpdateInfo.kbd = kbd
@@ -78,14 +94,26 @@ class PlayerManager
 	{
 		if( this.players.length < this.maxPlayers )
 		{
+			this.SpawnSpecificPlayer( this.players.length,pos,map )
+		}
+		else
+		{
+			console.log( "Already at max players!" )
+		}
+	}
+	
+	SpawnSpecificPlayer( index,pos,map )
+	{
+		if( this.players.length < this.maxPlayers )
+		{
 			const playerPos = pos.Copy().Add( Vec2.One().Scale( map.tileSize / 2 ) )
 			let player = null
-			if( this.players.length == 0 ) player = new Knight( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 1 ) player = new Archer( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 2 ) player = new Healer( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 3 ) player = new Rogue( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 4 ) player = new Lancer( playerPos,this.ctrls[this.players.length] )
-			else if( this.players.length == 5 ) player = new Wizard( playerPos,this.ctrls[this.players.length] )
+			if( index == 0 ) player = new Knight( playerPos,this.ctrls[this.players.length] )
+			else if( index == 1 ) player = new Archer( playerPos,this.ctrls[this.players.length] )
+			else if( index == 2 ) player = new Healer( playerPos,this.ctrls[this.players.length] )
+			else if( index == 3 ) player = new Rogue( playerPos,this.ctrls[this.players.length] )
+			else if( index == 4 ) player = new Lancer( playerPos,this.ctrls[this.players.length] )
+			else if( index == 5 ) player = new Wizard( playerPos,this.ctrls[this.players.length] )
 			this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
