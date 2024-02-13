@@ -17,6 +17,13 @@ class PlayerManager
 		
 		this.maxPlayers = this.ctrls.length
 		
+		this.unspawnedPlayers = []
+		for( let i = 0; i < this.maxPlayers; ++i )
+		{
+			this.unspawnedPlayers.push( i )
+			this.players.push( new PlaceholderPlayer( this.ctrls[i] ) )
+		}
+		
 		this.colors = [
 			"white",
 			"black",
@@ -38,19 +45,19 @@ class PlayerManager
 	
 	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx )
 	{
-		let spawnPlayer = -1
-		if( kbd.KeyDown( "1" ) ) spawnPlayer = 0
-		else if( kbd.KeyDown( "2" ) ) spawnPlayer = 1
-		else if( kbd.KeyDown( "3" ) ) spawnPlayer = 2
-		else if( kbd.KeyDown( "4" ) ) spawnPlayer = 3
-		else if( kbd.KeyDown( "5" ) ) spawnPlayer = 4
-		else if( kbd.KeyDown( "6" ) ) spawnPlayer = 5
-		else this.canSpawnSpecificPlayer = true
-		if( spawnPlayer > -1 && this.canSpawnSpecificPlayer )
-		{
-			this.SpawnSpecificPlayer( spawnPlayer,map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
-			this.canSpawnSpecificPlayer = false
-		}
+		// let spawnPlayer = -1
+		// if( kbd.KeyDown( "1" ) ) spawnPlayer = 0
+		// else if( kbd.KeyDown( "2" ) ) spawnPlayer = 1
+		// else if( kbd.KeyDown( "3" ) ) spawnPlayer = 2
+		// else if( kbd.KeyDown( "4" ) ) spawnPlayer = 3
+		// else if( kbd.KeyDown( "5" ) ) spawnPlayer = 4
+		// else if( kbd.KeyDown( "6" ) ) spawnPlayer = 5
+		// else this.canSpawnSpecificPlayer = true
+		// if( spawnPlayer > -1 && this.canSpawnSpecificPlayer )
+		// {
+		// 	this.SpawnSpecificPlayer( spawnPlayer,map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
+		// 	this.canSpawnSpecificPlayer = false
+		// }
 		
 		const playerUpdateInfo = {}
 		playerUpdateInfo.mouse = mouse
@@ -69,18 +76,32 @@ class PlayerManager
 			player.UpdateMisc()
 		}
 		
-		const addDown = kbd.KeyDown( 187 )
-		const removeDown = kbd.KeyDown( 189 )
-		if( addDown && this.canAdd )
+		// const addDown = kbd.KeyDown( 187 )
+		// const removeDown = kbd.KeyDown( 189 )
+		// if( addDown && this.canAdd )
+		// {
+		// 	this.AddPlayer( map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
+		// }
+		// else if( removeDown && this.canRemove )
+		// {
+		// 	this.RemovePlayer()
+		// }
+		// this.canAdd = !addDown
+		// this.canRemove = !removeDown
+		
+		for( let i = 0; i < this.players.length; ++i )
 		{
-			this.AddPlayer( map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
+			const curPlayer = this.players[i]
+			if( curPlayer.isPlaceholder && curPlayer.SpawnIn() )
+			{
+				this.unspawnedPlayers.sort( function() { return( Math.random() - 0.5 ) } )
+				const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
+					this.players[i].ctrls,
+					map.Tile2WorldPos( map.GetRandEmptyTilePos() ),
+					map )
+				this.players.splice( i,1,newPlayer )
+			}
 		}
-		else if( removeDown && this.canRemove )
-		{
-			this.RemovePlayer()
-		}
-		this.canAdd = !addDown
-		this.canRemove = !removeDown
 		
 		this.CheckForGhosts()
 	}
@@ -90,47 +111,48 @@ class PlayerManager
 		for( const player of this.players ) player.Draw( gfx )
 	}
 	
-	AddPlayer( pos,map )
-	{
-		if( this.players.length < this.maxPlayers )
-		{
-			this.SpawnSpecificPlayer( this.players.length,pos,map )
-		}
-		else
-		{
-			console.log( "Already at max players!" )
-		}
-	}
+	// AddPlayer( pos,map )
+	// {
+	// 	if( this.players.length < this.maxPlayers )
+	// 	{
+	// 		this.SpawnSpecificPlayer( this.players.length,pos,map )
+	// 	}
+	// 	else
+	// 	{
+	// 		console.log( "Already at max players!" )
+	// 	}
+	// }
 	
-	SpawnSpecificPlayer( index,pos,map )
+	SpawnSpecificPlayer( index,ctrls,pos,map )
 	{
-		if( this.players.length < this.maxPlayers )
+		// if( this.players.length < this.maxPlayers )
 		{
 			const playerPos = pos.Copy().Add( Vec2.One().Scale( map.tileSize / 2 ) )
 			let player = null
-			if( index == 0 ) player = new Knight( playerPos,this.ctrls[this.players.length] )
-			else if( index == 1 ) player = new Archer( playerPos,this.ctrls[this.players.length] )
-			else if( index == 2 ) player = new Healer( playerPos,this.ctrls[this.players.length] )
-			else if( index == 3 ) player = new Rogue( playerPos,this.ctrls[this.players.length] )
-			else if( index == 4 ) player = new Lancer( playerPos,this.ctrls[this.players.length] )
-			else if( index == 5 ) player = new Wizard( playerPos,this.ctrls[this.players.length] )
-			this.players.push( player )
+			if( index == 0 ) player = new Knight( playerPos,ctrls )
+			else if( index == 1 ) player = new Archer( playerPos,ctrls )
+			else if( index == 2 ) player = new Healer( playerPos,ctrls )
+			else if( index == 3 ) player = new Rogue( playerPos,ctrls )
+			else if( index == 4 ) player = new Lancer( playerPos,ctrls )
+			else if( index == 5 ) player = new Wizard( playerPos,ctrls )
+			// this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
 			
-			const lastPlayer = this.players.length - 1
-			this.players[lastPlayer].col = this.colors[lastPlayer]
+			// const lastPlayer = this.players.length - 1
+			// this.players[lastPlayer].col = this.colors[lastPlayer]
+			return( player )
 		}
-		else
-		{
-			console.log( "Already at max players!" )
-		}
+		// else
+		// {
+		// 	console.log( "Already at max players!" )
+		// }
 	}
 	
-	RemovePlayer()
-	{
-		this.players.pop()
-	}
+	// RemovePlayer()
+	// {
+	// 	this.players.pop()
+	// }
 	
 	CheckForGhosts()
 	{
@@ -174,7 +196,7 @@ class PlayerManager
 		const players = []
 		for( const player of this.players )
 		{
-			if( !player.isGhost ) players.push( player )
+			if( !player.isGhost && !player.isPlaceholder ) players.push( player )
 		}
 		return( players )
 	}

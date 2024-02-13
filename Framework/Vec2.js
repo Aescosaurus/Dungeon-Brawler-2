@@ -64,10 +64,11 @@ class Vec2
 	
 	Normalize()
 	{
-		let len = this.GetLen()
+		const lenSq = this.GetLenSq()
 		
-		if( len > 0.0 )
+		if( lenSq > 0.0 )
 		{
+			const len = Math.sqrt( lenSq )
 			this.x /= len
 			this.y /= len
 		}

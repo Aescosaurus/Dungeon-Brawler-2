@@ -109,10 +109,10 @@ enemies appear differently in diff areas - castle = rise up from ground, space s
 
 
 --sometimes big versions of regular enemies spawn with scaled sprite, more hp, slower spd, & diff bullet patterns
-show hearts when player takes dmg/heals
-	also show when standing still?
-	hearts break up into 1/4s to display hp?
-		or maybe act like hp bar where it empties a pixel at a time
+--show hearts when player takes dmg/heals
+	/also show when standing still?
+	/hearts break up into 1/4s to display hp?
+		--or maybe act like hp bar where it empties a pixel at a time
 indicator to show when ult's ready?
 	burst of aoe particles when it becomes ready, constant stream while it's ready
 custom font drawing system with 3x5 font
