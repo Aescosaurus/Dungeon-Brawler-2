@@ -75,6 +75,7 @@ class Entity
 	
 	Heal( amount,healer )
 	{
+		amount = Math.abs( amount )
 		const missingHP = this.maxHP - this.hp
 		if( amount > missingHP ) amount = missingHP
 		this.hp += amount

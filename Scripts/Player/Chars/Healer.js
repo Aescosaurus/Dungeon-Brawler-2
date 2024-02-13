@@ -33,9 +33,22 @@ class Healer extends Player
 	
 	UseSuper( info )
 	{
-		for( let i = 0; i < this.nSuperHealBaubles; ++i )
+		const spawnSpots = []
+		for( let y = 1; y < info.map.height - 1; ++y )
 		{
-			const healSpot = info.map.Tile2WorldPos( info.map.GetRandEmptyTilePos() )
+			for( let x = 1; x < info.map.width - 1; ++x )
+			{
+				if( info.map.IsWalkableTile( x,y ) ) spawnSpots.push( new Vec2( x,y ) )
+			}
+		}
+		
+		const nBaubles = Math.min( this.nSuperHealBaubles,spawnSpots.length )
+		
+		spawnSpots.sort( function() { return( Math.random() - 0.5 ) } )
+		
+		for( let i = 0; i < nBaubles; ++i )
+		{
+			const healSpot = info.map.Tile2WorldPos( spawnSpots[i] )
 				.Add( Vec2.One().Scale( info.map.tileSize / 2 ) )
 			
 			const healBauble = new HealBauble( this.pos,healSpot,0.5 )

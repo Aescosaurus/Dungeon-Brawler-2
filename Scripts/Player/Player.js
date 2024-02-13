@@ -147,9 +147,9 @@ class Player extends Entity
 	
 	Heal( amount,healer )
 	{
-		super.Heal( amount,healer )
-		
-		this.heartBarDisappearTimer.Reset()
+		const healed = super.Heal( amount,healer )
+		if( healed ) this.heartBarDisappearTimer.Reset()
+		return( healed )
 	}
 	
 	UseSuper( info )

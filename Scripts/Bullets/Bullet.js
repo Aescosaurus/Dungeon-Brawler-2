@@ -118,9 +118,11 @@ class Bullet extends Entity
 			consumeHP = true
 		}
 		
-		if( consumeHP ) --this.hp
-		
-		/*if( this.hp > 0 )*/ this.hitEnemies.push( target )
+		if( consumeHP )
+		{
+			--this.hp
+			this.hitEnemies.push( target )
+		}
 		
 		if( this.parent && this.parent.isPlayer )
 		{
