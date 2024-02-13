@@ -18,6 +18,9 @@ class Player extends Entity
 			this.animHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
 		}
 		
+		this.heartBar = new PlayerHeartBar( this.maxHP )
+		this.heartBarDisappearTimer = new Timer( 1.2,true )
+		
 		this.col = "#FFFF00"
 		
 		this.spd = 1.5
@@ -114,6 +117,8 @@ class Player extends Entity
 				--i
 			}
 		}
+		
+		this.heartBarDisappearTimer.Update()
 	}
 	
 	Draw( gfx )
@@ -124,6 +129,11 @@ class Player extends Entity
 				gfx,this.dir < 0 )
 		}
 		else super.Draw( gfx )
+		
+		if( !this.heartBarDisappearTimer.IsDone() )
+		{
+			this.heartBar.Draw( this.pos,this.hp,gfx )
+		}
 	}
 	
 	Damage( dmg,attacker )
@@ -131,6 +141,15 @@ class Player extends Entity
 		super.Damage( dmg,attacker )
 		
 		this.OnTakeDmg( attacker )
+		
+		this.heartBarDisappearTimer.Reset()
+	}
+	
+	Heal( amount,healer )
+	{
+		super.Heal( amount,healer )
+		
+		this.heartBarDisappearTimer.Reset()
 	}
 	
 	UseSuper( info )

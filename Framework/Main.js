@@ -22,6 +22,8 @@ class Main
 		this.enemyCounter = 3
 		this.waveCounter = 0
 		this.bossInterval = 3
+		
+		this.disableSpawnEnemies = false
 	}
 	
 	Update()
@@ -46,7 +48,7 @@ class Main
 		this.RemoveDeadEntities( this.playerBullets )
 		this.RemoveDeadEntities( this.enemyBullets )
 		
-		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() )
+		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() && !this.disableSpawnEnemies )
 		{
 			this.playerManager.TryReviveGhosts()
 			
