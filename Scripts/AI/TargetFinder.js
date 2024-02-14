@@ -73,7 +73,12 @@ TargetFinder.FindFarthest = function( self,targets )
 	return( farthest )
 }
 
-TargetFinder.FindRandom = function( targets )
+TargetFinder.FindRandom = function( unused,targets )
 {
 	return( targets[Utils.RandInt( 0,targets.length )] )
+}
+
+TargetFinder.Up = function( unused,unused )
+{
+	return( Vec2.Up() )
 }

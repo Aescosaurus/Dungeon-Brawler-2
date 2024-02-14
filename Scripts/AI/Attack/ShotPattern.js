@@ -1,10 +1,13 @@
 class ShotPattern
 {
-	constructor( nShots = 1,shotAng = 15,autoAng = false )
+	// angleOffset is degrees
+	constructor( nShots = 1,shotAng = 15,autoAng = false,angleOffset = 0 )
 	{
 		this.nShots = nShots
 		if( autoAng ) this.spread = ( 360 / nShots ) * ( Math.PI / 180 )
 		else this.spread = shotAng * ( Math.PI / 180 )
+		
+		this.angleOffset = Utils.Deg2Rad( angleOffset )
 	}
 	
 	GetShotAngles( myPos = Vec2.Zero(),targetPos = Vec2.Up() )
@@ -24,7 +27,7 @@ class ShotPattern
 			for( let i = -hSize; i < hSize; ++i )
 			{
 				const curAng = ang + i * this.spread + ( this.spread / 2 )
-				shotAngs.push( curAng )
+				shotAngs.push( curAng + this.angleOffset )
 			}
 		}
 		else
@@ -33,7 +36,7 @@ class ShotPattern
 			for( let i = -hSize; i <= hSize; ++i )
 			{
 				const curAng = ang + i * this.spread
-				shotAngs.push( curAng )
+				shotAngs.push( curAng + this.angleOffset )
 			}
 		}
 		

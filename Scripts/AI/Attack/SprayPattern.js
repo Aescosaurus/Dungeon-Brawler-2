@@ -43,4 +43,9 @@ class SprayPattern
 	{
 		return( this.done )
 	}
+	
+	GetDur()
+	{
+		return( this.shotInterval.GetDur() * this.shotCount.GetCount() )
+	}
 }

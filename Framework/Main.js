@@ -20,7 +20,7 @@ class Main
 		
 		this.enemySpawnTimer = new Timer( 1.0 )
 		this.enemyCounter = 3
-		this.waveCounter = 0
+		this.waveCounter = 3
 		this.bossInterval = 3
 		
 		this.disableSpawnEnemies = false
