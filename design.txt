@@ -10,37 +10,11 @@ level layouts
 
 diff chars to choose from with diff attacks, stats, & supers
 	--hold a+d or left+right to charge up & use super ability
-		big text or some kind of cool animation when this happens
+		/big text or some kind of cool animation when this happens
 	--ctrls for wasd, ijkl, arrow keys, & mouse
 		--gamepad controls?
 		support for numpad controls - 8456
 	char ideas
-		maou castle
-			--healer
-				--mace/flail weapon? spins around you constantly
-				--ult - throw a bunch of healing baubles all over the map
-			--ninja/rogue
-				--rapid fire med range daggers
-					--fire in facing direction, no auto aim?
-				--ult - become invisible (enemies dont target you, maybe bullets can't hit you either?)
-				--really high move speed to position for attacks
-			--wizard
-				--huge, slow, long range, slow fire rate, seeking fireballs
-					/that deal aoe? this can kinda be like astronomer from db1
-					--multiple slow, low damage shots go in all directions?
-						--slow at first then speed up over time when they find a target
-				ult - rains meteors all around the map
-					these leave fire aoe that does dmg over time?
-			--lancer
-				--spear that pierces enemies
-				/ult - throw spinning spears in each direction
-					--charge towards enemy & spawn a spear shotgun in front of you
-				/isnt this just the knight but better? I wanna have spear user but how to give unique identity?
-					-lower hp really high speed
-					--maybe have a really slow fire rate? & really high range
-					--or maybe this one fire facing dir w/o auto aim
-					--*walk to charge spear, stand still to fire
-						--gains dmg & range the longer you charge, can be held at max charge
 		space
 			spaceship pilot with laser gun
 			slow firing but powerful railgun char
@@ -69,24 +43,6 @@ items
 		events - shoot bullet, deal dmg, take dmg, kill enemy, die, hit wall with bullet,
 			hit nothing with bullet, pierce through x enemies
 		modifiers - bullets bounce, seeking bullets, bullet piercing, knockback
-	item ideas
-		--if item creates bullets, use it's own sprite for those bullets (if applicable, like for weps)
-		common
-			--dagger - every 3rd enemy hit, shoot a short range dagger
-			--poison vial - on enemy kill spawn bullet that targets nearest enemy
-			--quickbow - every 3rd pierce on 2 enemies, fire 3 arrows in rapid succession
-			--arrow - every 3rd shot gains +1 piercing
-			--fire staff - shoot fireball at random enemy every 3s
-			--healing staff - shoot a seeking healing bullet at teammate every 5s
-			--sword - every 5th enemy killed, spawn aoe of bullets around self
-			--vampire sword - every 3rd enemy killed, heal 1 hp
-			
-			--flame armor - on taking dmg, spawn aoe ring of bullets around yourself
-			--ninja armor - on taking dmg, shoot a dagger back at your attacker
-		rare - these are gonna be like really really rare
-			--poison jug - spawn aoe of bullets around enemy on kill
-			--mega crossbow - every 3rd pierce on 2 enemies, shoot a mega piercing arrow that ignores walls
-			--quiver - all shots gain +1 piercing
 
 can choose diff areas at the start - sets enemies, bosses, environment hazards, & even items
 enemies appear differently in diff areas - castle = rise up from ground, space station = warp in, etc
@@ -123,3 +79,6 @@ particles for enemy hit
 bosses with cool bullet hell patterns
 	bullet patterns that make the players play together
 		spinny attacks to make them move together, tight shotguns in each dir so they group
+
+
+db2 dungeon diner spinoff - serve food to dungeon customers

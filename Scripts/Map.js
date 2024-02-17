@@ -16,9 +16,10 @@ class Map
 			throw new Error( "Invalid gfx screen size! width: " + this.width + " height: " + this.height )
 		}
 		
-		this.tileSprSht = new SprSheet( new Sprite( "Images/DungeonTiles.png" ),8,8 )
+		this.tileSprSht = new SprSheet( new Sprite( "Images/Tiles/DungeonTiles.png" ),8,8 )
 		
-		this.GenerateMap()
+		// this.GenerateMap()
+		this.ClearTiles()
 		
 		// console.log( this.width + " " + this.height )
 	}
@@ -61,8 +62,13 @@ class Map
 		}
 	}
 	
-	EmptyCenter()
+	CreateWalledEmptyMap()
 	{
+		for( let y = 0; y < this.height; ++y ) this.SetTile( 0,y,1 )
+		for( let y = 0; y < this.height; ++y ) this.SetTile( this.width - 1,y,1 )
+		for( let x = 0; x < this.width; ++x ) this.SetTile( x,0,1 )
+		for( let x = 0; x < this.width; ++x ) this.SetTile( x,this.height - 1,1 )
+		
 		for( let y = 1; y < this.height - 1; ++y )
 		{
 			for( let x  = 1; x < this.width - 1; ++x )
@@ -70,6 +76,18 @@ class Map
 				this.SetTile( x,y,0 )
 			}
 		}
+	}
+	
+	ClearTiles()
+	{
+		this.tiles = []
+		
+		for( let i = 0; i < this.width * this.height; ++i ) this.tiles.push( 0 )
+	}
+	
+	SetTileSprSht( newSprSht )
+	{
+		this.tileSprSht = newSprSht
 	}
 	
 	SetTile( x,y,tile )
@@ -127,5 +145,10 @@ class Map
 		tiles.sort( function( a,b ) { return( Utils.RandFloat( 0,1 ) - 0.5 ) } )
 		
 		return( tiles[0] )
+	}
+	
+	GetCenterTile()
+	{
+		return( new Vec2( this.width,this.height ).Divide( 2 ).Floor() )
 	}
 }
