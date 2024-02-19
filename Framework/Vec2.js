@@ -46,6 +46,14 @@ class Vec2
 		return( this )
 	}
 	
+	DivideVec( vec )
+	{
+		this.x /= vec.x
+		this.y /= vec.y
+		
+		return( this )
+	}
+	
 	Set( other )
 	{
 		this.x = other.x

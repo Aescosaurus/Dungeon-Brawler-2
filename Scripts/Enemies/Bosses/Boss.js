@@ -14,4 +14,15 @@ class Boss extends Enemy
 			this.animHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
 		}
 	}
+	
+	UpdateAnim()
+	{
+		if( this.animHand )
+		{
+			// don't auto switch anims for bosses
+			// this.animHand.SwitchTo( this.aiMove.Equals( Vec2.Zero() ) ? 0 : 1,false )
+			
+			this.animHand.Update()
+		}
+	}
 }

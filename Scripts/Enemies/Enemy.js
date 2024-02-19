@@ -6,7 +6,6 @@ class Enemy extends Entity
 		// this.col = "#" + Utils.RandHexChar( 10,16 ) + Utils.RandHexChar( 10,16 ) +
 		// 	 Utils.RandHexChar( 0,5 ) + Utils.RandHexChar( 0,5 ) + 
 		// 	 Utils.RandHexChar( 0,5 ) + Utils.RandHexChar( 0,5 )
-		this.col = "red"
 		
 		this.animBulletSprPath = "Images/Bullet/EnemyBullet.png"
 		
@@ -17,6 +16,7 @@ class Enemy extends Entity
 			this.walkAnim = new Anim( this.sprSht,1,2 )
 			this.animHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
 		}
+		else this.col = "red"
 		
 		this.ai = new FollowTargetAI()
 		this.spd = 0.6
@@ -62,7 +62,7 @@ class Enemy extends Entity
 			const target = this.targetStyle( this,info.players )
 			if( target != null )
 			{
-				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos,target )
+				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos )
 				for( const ang of angs ) this.FireBullet( ang,info )
 			}
 		}

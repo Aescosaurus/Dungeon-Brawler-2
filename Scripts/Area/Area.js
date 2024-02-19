@@ -18,10 +18,10 @@ class Area
 		map.CreateWalledEmptyMap()
 	}
 	
-	GenerateEnemyWave( nEnemies,map )
+	GenerateEnemyWave( map )
 	{
 		const enemies = []
-		for( let i = 0; i < nEnemies; ++i )
+		for( let i = 0; i < 3; ++i )
 		{
 			const spawnPos = map.Tile2WorldPos( map.GetRandEmptyTilePos() )
 				.Add( Vec2.One().Scale( 4 ) )

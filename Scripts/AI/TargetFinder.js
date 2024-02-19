@@ -78,7 +78,12 @@ TargetFinder.FindRandom = function( unused,targets )
 	return( targets[Utils.RandInt( 0,targets.length )] )
 }
 
-TargetFinder.Up = function( unused,unused )
+TargetFinder.Up = function( self,unused )
 {
-	return( Vec2.Up() )
+	return( { pos: self.pos.Copy().Add( Vec2.Up() ) } )
+}
+
+TargetFinder.TargetAIMove = function( self,unused )
+{
+	return( { pos: self.pos.Copy().Add( self.aiMove ) } )
 }

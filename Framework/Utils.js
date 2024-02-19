@@ -46,3 +46,8 @@ Utils.Lerp = function( a,b,t )
 {
 	return( a * ( 1 - t ) + ( b * t ) )
 }
+
+Utils.ShuffleArr = function( arr )
+{
+	arr.sort( function() { return( Math.random() - 0.5 ) } )
+}

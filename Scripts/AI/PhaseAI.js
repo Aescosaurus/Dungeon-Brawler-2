@@ -90,7 +90,7 @@ class PhaseAttackPatternSpray extends PhasePattern
 	{
 		if( this.done ) return( true )
 		
-		const result = this.sprayPattern.Update( self.pos,this.targetAI( self,info.players ) )
+		const result = this.sprayPattern.Update( self.pos,this.targetAI( self,info.players ).pos )
 		if( result )
 		{
 			if( result.done )
@@ -128,6 +128,9 @@ class PhaseAttackPatternSpray extends PhasePattern
 
 class Phase
 {
+	// dur = how long phase lasts
+	// count = how many times to repeat phase
+	// countWait = how long to wait before restarting phase
 	constructor( moveAI,spd,attackPatternList,dur = -1,count = 1,countWait = 0 )
 	{
 		this.moveAI = moveAI ? moveAI : new StandStillAI()

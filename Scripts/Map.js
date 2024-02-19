@@ -97,6 +97,16 @@ class Map
 		this.tiles[y * this.width + x] = tile
 	}
 	
+	SetTileFloor( x,y )
+	{
+		this.SetTile( x,y,0 )
+	}
+	
+	SetTileWall( x,y )
+	{
+		this.SetTile( x,y,1 )
+	}
+	
 	GetTile( x,y )
 	{
 		if( !this.IsTileOnScreen( x,y ) ) throw new Error( "Tile not on screen! x: " + x + " y: " + y )

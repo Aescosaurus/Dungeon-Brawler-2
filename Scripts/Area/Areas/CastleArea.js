@@ -17,8 +17,9 @@ class CastleArea extends Area
 		map.CreateWalledEmptyMap()
 	}
 	
-	GenerateEnemyWave( nEnemies,map )
+	GenerateEnemyWave( map )
 	{
+		const nEnemies = ( this.curWave + 1 ) * 3
 		const enemies = []
 		for( let i = 0; i < nEnemies; ++i )
 		{

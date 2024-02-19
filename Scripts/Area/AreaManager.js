@@ -15,17 +15,18 @@ class AreaManager
 		this.playerManager.SetInfo( this.enemies,this.playerBullets,this.enemyBullets )
 		
 		this.enemySpawnTimer = new Timer( 0.6 ) // from 1.0
-		this.enemyCounter = 3
+		this.enemyActivateTimer = new Timer( 1.0 )
 		this.waveCounter = 0
 		// this.bossInterval = 3
 		
 		this.areas = [
+			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
 			new Area( 3,"Images/Tiles/ForestTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 			new CastleArea( 99,"Images/Tiles/DungeonTiles.png" )
 		]
 		
-		this.curArea = 1
+		this.curArea = 0
 		
 		this.LoadMap()
 		
@@ -39,12 +40,19 @@ class AreaManager
 		this.playerManager.Update( mouse,kbd,gpad,this.map,
 			this.enemies,this.playerBullets,this.enemyBullets,this.gfx )
 		
-		const enemyUpdateInfo = {}
-		enemyUpdateInfo.players = this.playerManager.GetPlayerTargets()
-		enemyUpdateInfo.map = this.map
-		enemyUpdateInfo.enemyBullets = this.enemyBullets
-		
-		for( const enemy of this.enemies ) enemy.Update( enemyUpdateInfo )
+		if( this.enemyActivateTimer.Update() )
+		{
+			const enemyUpdateInfo = {}
+			enemyUpdateInfo.players = this.playerManager.GetPlayerTargets()
+			enemyUpdateInfo.map = this.map
+			enemyUpdateInfo.enemyBullets = this.enemyBullets
+			
+			for( const enemy of this.enemies ) enemy.Update( enemyUpdateInfo )
+		}
+		else
+		{
+			for( const enemy of this.enemies ) enemy.UpdateAnim()
+		}
 			
 		const playerList = this.playerManager.GetAllPlayers()
 		for( const bullet of this.playerBullets ) bullet.Update( this.map,this.enemies )
@@ -57,6 +65,8 @@ class AreaManager
 		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() && !this.disableSpawnEnemies )
 		{
 			this.playerManager.TryReviveGhosts()
+			
+			this.enemyActivateTimer.Reset()
 			
 			const bossWave = this.areas[this.curArea].GetBossWave()
 			
@@ -82,10 +92,10 @@ class AreaManager
 			else
 			{
 				// this.SpawnEnemyWave( this.enemyCounter )
-				const enemies = this.areas[this.curArea].GenerateEnemyWave( this.enemyCounter,this.map )
+				const enemies = this.areas[this.curArea].GenerateEnemyWave( this.map )
 				for( const enemy of enemies ) this.enemies.push( enemy )
 				
-				this.enemyCounter += Utils.RandInt( 1,4 )
+				// this.enemyCounter += Utils.RandInt( 1,4 )
 			}
 			
 			this.enemySpawnTimer.Reset()
