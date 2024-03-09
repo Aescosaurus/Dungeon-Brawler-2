@@ -40,8 +40,6 @@ class CastleArea extends Area
 			enemies.push( enemy )
 		}
 		
-		++this.curWave
-		
 		return( enemies )
 	}
 	

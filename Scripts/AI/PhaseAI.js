@@ -84,18 +84,29 @@ class PhaseAttackPatternSpray extends PhasePattern
 		this.targetAI = targetAI
 		
 		this.done = false
+		
+		this.targetPos = null
 	}
 	
 	Update( self,info )
 	{
 		if( this.done ) return( true )
 		
-		const result = this.sprayPattern.Update( self.pos,this.targetAI( self,info.players ).pos )
+		if( this.targetPos == null )
+		{
+			let target = this.targetAI( self,info.players )
+			if( target == null ) target = { pos: info.map.Tile2WorldPos(
+				info.map.GetRandTilePos() ) }
+			this.targetPos = target.pos.Copy()
+		}
+		
+		const result = this.sprayPattern.Update( self.pos,this.targetPos )
 		if( result )
 		{
 			if( result.done )
 			{
 				this.done = true
+				this.targetPos = null
 			}
 			else
 			{
@@ -171,6 +182,8 @@ class Phase
 		{
 			this.timer.Reset()
 			this.countWait.Reset()
+			
+			for( const pattern of this.attackPatternList ) pattern.Reset()
 			
 			this.moveAI.Reset()
 			self.aiMove = Vec2.Zero()

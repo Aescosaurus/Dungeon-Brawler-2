@@ -16,17 +16,18 @@ class AreaManager
 		
 		this.enemySpawnTimer = new Timer( 0.6 ) // from 1.0
 		this.enemyActivateTimer = new Timer( 1.0 )
-		this.waveCounter = 0
+		this.waveCounter = 4 // 0
 		// this.bossInterval = 3
 		
 		this.areas = [
 			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
-			new Area( 3,"Images/Tiles/ForestTiles.png" ),
+			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
-			new CastleArea( 99,"Images/Tiles/DungeonTiles.png" )
+			new CastleArea( 99,"Images/Tiles/DungeonTiles.png" ),
+			new Area( 3,"Images/Tiles/ForestTiles.png" )
 		]
 		
-		this.curArea = 0
+		this.curArea = 1
 		
 		this.LoadMap()
 		
@@ -94,6 +95,7 @@ class AreaManager
 				// this.SpawnEnemyWave( this.enemyCounter )
 				const enemies = this.areas[this.curArea].GenerateEnemyWave( this.map )
 				for( const enemy of enemies ) this.enemies.push( enemy )
+				this.areas[this.curArea].IncrementWave()
 				
 				// this.enemyCounter += Utils.RandInt( 1,4 )
 			}

@@ -79,6 +79,13 @@ particles for enemy hit
 bosses with cool bullet hell patterns
 	bullet patterns that make the players play together
 		spinny attacks to make them move together, tight shotguns in each dir so they group
+daily challenge - randomly generated levels of all the areas & enemies, using date as seed
+lancer - have min charge on spear, just won't fire unless it's charged enough - like enough for 0.5 dmg
+difficulty option before starting - easy = more player hp, enemy shot timers made longer, etc
+
+
+
+
 
 
 db2 dungeon diner spinoff - serve food to dungeon customers

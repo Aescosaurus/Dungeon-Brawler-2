@@ -62,7 +62,8 @@ class Enemy extends Entity
 			const target = this.targetStyle( this,info.players )
 			if( target != null )
 			{
-				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos )
+				// need to pass target here for PredictShotPattern
+				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos,target )
 				for( const ang of angs ) this.FireBullet( ang,info )
 			}
 		}

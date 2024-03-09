@@ -75,7 +75,8 @@ TargetFinder.FindFarthest = function( self,targets )
 
 TargetFinder.FindRandom = function( unused,targets )
 {
-	return( targets[Utils.RandInt( 0,targets.length )] )
+	if( targets.length < 1 ) return( null )
+	else return( targets[Utils.RandInt( 0,targets.length )] )
 }
 
 TargetFinder.Up = function( self,unused )

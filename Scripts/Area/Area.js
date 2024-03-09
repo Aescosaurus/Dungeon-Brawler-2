@@ -39,6 +39,11 @@ class Area
 		return( new Boss( map.Tile2WorldPos( map.GetCenterTile() ) ) )
 	}
 	
+	IncrementWave()
+	{
+		++this.curWave
+	}
+	
 	GetTileSheet()
 	{
 		return( this.tileSheet )
@@ -52,5 +57,11 @@ class Area
 	GetBossWave()
 	{
 		return( this.nWaves )
+	}
+	
+	GetRandEnemySpawnPos( map )
+	{
+		return( map.Tile2WorldPos( map.GetRandEmptyTilePos() )
+			.Add( Vec2.One().Scale( 4 ) ) )
 	}
 }

@@ -60,6 +60,12 @@ class Vec2
 		this.y = other.y
 	}
 	
+	SetXY( x,y )
+	{
+		this.x = x
+		this.y = y
+	}
+	
 	GetLenSq()
 	{
 		return( this.x * this.x + this.y * this.y )

@@ -85,8 +85,6 @@ class TavernArea extends Area
 			break
 		}
 		
-		++this.curWave
-		
 		return( enemies )
 	}
 	
@@ -94,8 +92,7 @@ class TavernArea extends Area
 	{
 		for( let i = 0; i < amount; ++i )
 		{
-			const spawnPos = map.Tile2WorldPos( map.GetRandEmptyTilePos() )
-				.Add( Vec2.One().Scale( 4 ) )
+			const spawnPos = this.GetRandEnemySpawnPos( map )
 			let enemy = null
 			switch( type )
 			{
