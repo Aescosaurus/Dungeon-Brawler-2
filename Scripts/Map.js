@@ -4,7 +4,7 @@ class Map
 	{
 		this.tiles = []
 		
-		this.tileSize = 8
+		this.tileSize = gfx.tileSize
 		
 		this.width = gfx.width / this.tileSize
 		this.height = gfx.height / this.tileSize
@@ -37,7 +37,7 @@ class Map
 				// gfx.DrawRect( x * this.tileSize,y * this.tileSize,
 				// 	this.tileSize,this.tileSize,
 				// 	col )
-				this.tileSprSht.Draw( x * this.tileSize,y * this.tileSize,
+				this.tileSprSht.DrawTile( x * this.tileSize,y * this.tileSize,
 					0,tile,gfx )
 			}
 		}

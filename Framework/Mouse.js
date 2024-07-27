@@ -18,8 +18,8 @@ class Mouse
 			self.x = event.clientX - rect.left - root.scrollLeft
 			self.y = event.clientY - rect.top - root.scrollTop
 			
-			self.x = Math.floor( self.x / gfx.scale )
-			self.y = Math.floor( self.y / gfx.scale )
+			self.x = Math.floor( self.x / gfx.xScale )
+			self.y = Math.floor( self.y / gfx.yScale )
 		} )
 	}
 }

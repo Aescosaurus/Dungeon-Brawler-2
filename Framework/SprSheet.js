@@ -88,6 +88,40 @@ class SprSheet
 		}
 	}
 	
+	DrawTile( x,y,strip,index,gfx,flipped = false )
+	{
+		const safetyStart = -0.01
+		const safetyExpand = 1.02
+		
+		if( flipped )
+		{
+			// gfx.ctx.save()
+			gfx.ctx.translate( x + this.itemWidth,y )
+			gfx.ctx.scale( -1,1 )
+			
+			// gfx.ctx.drawImage( this.img,index * this.itemWidth,strip * this.itemHeight,
+			// 	this.itemWidth,this.itemHeight,
+			// 	x - gfx.width + this.itemWidth,y,
+			// 	-this.itemWidth,this.itemHeight )
+				
+			gfx.ctx.drawImage( this.spr.img,index * this.itemWidth,strip * this.itemHeight,
+				this.itemWidth,this.itemHeight,
+				safetyStart,safetyStart,
+				this.itemWidth * safetyExpand,this.itemHeight * safetyExpand )
+			
+			// gfx.ctx.restore()
+			gfx.ctx.scale( -1,1 )
+			gfx.ctx.translate( -( x + this.itemWidth ),-y )
+		}
+		else
+		{
+			gfx.ctx.drawImage( this.spr.img,index * this.itemWidth,strip * this.itemHeight,
+				this.itemWidth,this.itemHeight,
+				x + safetyStart,y + safetyStart,
+				this.itemWidth * safetyExpand,this.itemHeight * safetyExpand )
+		}
+	}
+	
 	// certain decimal values make the clipping have a line on the edge
 	// & if we round the movement is jagged
 	// jk this happens no matter what, idk how to solve this other than adding 1px buffer in img
