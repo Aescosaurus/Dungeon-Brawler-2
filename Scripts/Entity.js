@@ -11,6 +11,10 @@ class Entity
 		this.hp = hp
 		this.dir = 1
 		this.moveVec = Vec2.Zero()
+		
+		this.hitColors = [
+			"#f01c3a"
+		]
 	}
 	
 	Update() {}
@@ -100,5 +104,10 @@ class Entity
 	GetMoveVec()
 	{
 		return( this.moveVec )
+	}
+	
+	GetHitColors()
+	{
+		return( this.hitColors )
 	}
 }

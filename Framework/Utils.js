@@ -49,5 +49,19 @@ Utils.Lerp = function( a,b,t )
 
 Utils.ShuffleArr = function( arr )
 {
-	arr.sort( function() { return( Math.random() - 0.5 ) } )
+	let i = arr.length
+	
+	while( i > 0 )
+	{
+		const cur = Math.floor( Math.random() * i-- )
+		
+		const temp = arr[i]
+		arr[i] = arr[cur]
+		arr[cur] = temp
+	}
+}
+
+Utils.ArrayChooseRand = function( arr )
+{
+	return( arr[Utils.RandInt( 0,arr.length )] )
 }

@@ -8,6 +8,8 @@ class Healer extends Player
 		this.spinSpd = 5
 		this.mace = null
 		
+		this.bulletDmg = 1.5
+		
 		this.nSuperHealBaubles = 12
 		
 		this.maceChainSpr = SpriteCodex.LoadSpr( "Images/Bullet/MaceChain.png" )
@@ -20,6 +22,7 @@ class Healer extends Player
 		if( this.mace == null && info.enemies.length > 0 )
 		{
 			this.mace = new MaceBullet( this,this.spinRange,this.spinSpd )
+			this.mace.dmg = this.bulletDmg
 			info.playerBullets.push( this.mace )
 		}
 		else if( info.enemies.length > 0 )

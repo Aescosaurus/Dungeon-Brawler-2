@@ -18,10 +18,14 @@ class MaceBullet extends Bullet
 		this.dmgCounters = []
 		
 		this.alive = 2
+		
+		this.partDir = Vec2.Zero()
 	}
 	
 	Update( map,targets )
 	{
+		const lastPos = this.pos.Copy()
+		
 		this.rot += this.spinSpd
 		
 		this.pos = this.spinParent.pos.Copy()
@@ -48,16 +52,26 @@ class MaceBullet extends Bullet
 		}
 		
 		--this.alive
+		
+		this.partDir = this.pos.Copy().Subtract( lastPos )
 	}
 	
 	HandleHit( target )
 	{
 		++this.hp
 		const prevHitEnemies = this.hitEnemies.length
-		super.HandleHit( target )
+		super.HandleHit( target,false )
 		if( prevHitEnemies != this.hitEnemies.length )
 		{
 			this.dmgCounters.push( new Timer( this.dmgInterval ) )
+		}
+		
+		const nParts = Math.floor( Bullet.hitPartSpawnRange.GetRandVal() * this.dmg )
+		const hitCols = target.GetHitColors()
+		for( let i = 0; i < nParts; ++i )
+		{
+			ParticleHandler.Get().AddPart( new EnemyHitParticle(
+				this.pos,this.partDir,hitCols,this.dmg ) )
 		}
 	}
 	

@@ -105,13 +105,25 @@ class Bullet extends Entity
 		}
 	}
 	
-	HandleHit( target )
+	HandleHit( target,spawnParts = true )
 	{
 		let consumeHP = false
 		if( this.dmg > 0 )
 		{
 			target.Damage( this.dmg,this.parent )
 			consumeHP = true
+			
+			if( spawnParts )
+			{
+				const nParts = Math.floor( Bullet.hitPartSpawnRange.GetRandVal() *
+					Math.max( 1,this.dmg ) )
+				const hitCols = target.GetHitColors()
+				for( let i = 0; i < nParts; ++i )
+				{
+					ParticleHandler.Get().AddPart( new EnemyHitParticle(
+						this.pos,this.vel,hitCols,this.dmg ) )
+				}
+			}
 		}
 		else if( target.Heal( Math.abs( this.dmg ),this.parent ) )
 		{
@@ -173,3 +185,5 @@ class Bullet extends Entity
 		return( this.range < 0 || this.hp <= 0 )
 	}
 }
+
+Bullet.hitPartSpawnRange = new Range( 2,5 )

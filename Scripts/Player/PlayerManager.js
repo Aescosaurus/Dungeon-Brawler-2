@@ -94,7 +94,7 @@ class PlayerManager
 			const curPlayer = this.players[i]
 			if( curPlayer.isPlaceholder && curPlayer.SpawnIn() )
 			{
-				this.unspawnedPlayers.sort( function() { return( Math.random() - 0.5 ) } )
+				Utils.ShuffleArr( this.unspawnedPlayers )
 				const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
 					this.players[i].ctrls,
 					map.Tile2WorldPos( map.GetRandEmptyTilePos() ),

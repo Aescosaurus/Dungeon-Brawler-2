@@ -5,6 +5,10 @@ class AreaManager
 		this.map = new Map( gfx )
 		this.gfx = gfx
 		
+		this.partHand = new ParticleHandler()
+		const self = this
+		ParticleHandler.Get = function() { return( self.partHand ) }
+		
 		this.playerManager = new PlayerManager()
 		
 		this.enemies = []
@@ -59,9 +63,12 @@ class AreaManager
 		for( const bullet of this.playerBullets ) bullet.Update( this.map,this.enemies )
 		for( const bullet of this.enemyBullets ) bullet.Update( this.map,playerList )
 		
+		this.partHand.Update()
+		
 		this.RemoveDeadEntities( this.enemies )
 		this.RemoveDeadEntities( this.playerBullets )
 		this.RemoveDeadEntities( this.enemyBullets )
+		this.RemoveDeadEntities( this.partHand.GetParts() )
 		
 		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() && !this.disableSpawnEnemies )
 		{
@@ -115,6 +122,8 @@ class AreaManager
 			
 		for( const bullet of this.playerBullets ) bullet.Draw( gfx )
 		for( const bullet of this.enemyBullets ) bullet.Draw( gfx )
+		
+		this.partHand.Draw( gfx )
 	}
 	
 	RemoveDeadEntities( entityArr )
