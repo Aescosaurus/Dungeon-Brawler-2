@@ -13,7 +13,8 @@ class Entity
 		this.moveVec = Vec2.Zero()
 		
 		this.hitColors = [
-			"#f01c3a"
+			"#f01c3a",
+			"#fc4c39"
 		]
 	}
 	
