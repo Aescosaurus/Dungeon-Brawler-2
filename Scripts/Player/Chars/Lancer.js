@@ -21,6 +21,7 @@ class Lancer extends Player
 		
 		this.spearCharge = new Timer( 1.5 )
 		this.spearSizeRange = new Range( 0.6,2.5 )
+		this.minSpearCharge = 0.2
 		
 		this.aimMove = Vec2.Zero()
 	}
@@ -53,7 +54,7 @@ class Lancer extends Player
 		
 		if( this.move.Equals( Vec2.Zero() ) )
 		{
-			if( this.spearCharge.GetPercent() > 0 )
+			if( this.spearCharge.GetPercent() > this.minSpearCharge )
 			{
 				this.FireBullet( Math.atan2( this.aimMove.y,this.aimMove.x ),info,
 					this.bulletDmg * this.spearCharge.GetPercent() )
