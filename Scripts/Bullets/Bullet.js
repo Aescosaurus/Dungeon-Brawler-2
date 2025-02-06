@@ -53,6 +53,8 @@ class Bullet extends Entity
 			this.hp = -1
 		}
 		
+		if( map.IsTileOnScreen( tilePos.x,tilePos.y ) ) map.StepOnTile( tilePos.x,tilePos.y )
+		
 		if( this.canOnlyHitTarget )
 		{
 			if( this.CheckOverlap( this.seekTarget ) ) this.HandleHit( this.seekTarget )

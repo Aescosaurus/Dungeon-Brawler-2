@@ -69,6 +69,9 @@ class Entity
 		if( !CheckOverlap( new Vec2( xMove * xDir,0 ) ) ) this.pos.x += xMove * xDir
 		if( !CheckOverlap( new Vec2( 0,yMove * yDir ) ) ) this.pos.y += yMove * yDir
 		
+		const myWorldPos = map.World2TilePos( this.pos )
+		if( map.IsTileOnScreen( myWorldPos.x,myWorldPos.y ) ) map.StepOnTile( myWorldPos.x,myWorldPos.y )
+		
 		if( !Utils.RoughlyEquals( move.x,0 ) ) this.dir = Math.sign( move.x )
 		this.moveVec = move.Copy()
 	}

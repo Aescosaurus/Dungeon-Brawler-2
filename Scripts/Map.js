@@ -37,8 +37,9 @@ class Map
 				// gfx.DrawRect( x * this.tileSize,y * this.tileSize,
 				// 	this.tileSize,this.tileSize,
 				// 	col )
+				const strip = Math.floor( tile / 2 )
 				this.tileSprSht.DrawTile( x * this.tileSize,y * this.tileSize,
-					0,tile,gfx )
+					strip,tile - strip * 2,gfx )
 			}
 		}
 	}
@@ -107,6 +108,11 @@ class Map
 		this.SetTile( x,y,1 )
 	}
 	
+	StepOnTile( x,y )
+	{
+		if( this.GetTile( x,y ) == 4 ) this.SetTile( x,y,2 )
+	}
+	
 	GetTile( x,y )
 	{
 		if( !this.IsTileOnScreen( x,y ) ) throw new Error( "Tile not on screen! x: " + x + " y: " + y )
@@ -131,7 +137,7 @@ class Map
 	
 	IsWalkableTile( x,y )
 	{
-		return( this.GetTile( x,y ) == 0 )
+		return( this.GetTile( x,y ) % 2 == 0 )
 	}
 	
 	GetRandTilePos()
@@ -147,8 +153,7 @@ class Map
 		{
 			for( let x = 0; x < this.width; ++x )
 			{
-				const tile = this.GetTile( x,y )
-				if( tile == 0 ) tiles.push( new Vec2( x,y ) )
+				if( this.IsWalkableTile( x,y ) ) tiles.push( new Vec2( x,y ) )
 			}
 		}
 		

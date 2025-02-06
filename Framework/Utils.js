@@ -10,6 +10,21 @@ Utils.RandFloat = function( min,max )
 	return( ( Math.random() * ( max - min ) ) + min )
 }
 
+Utils.RandEvenInt = function( min,max )
+{
+	let rng = Utils.RandInt( min,max )
+	if( rng % 2 != 0 ) --rng
+	if( rng < min ) rng = min + 1
+	return( rng )
+}
+Utils.RandOddInt = function( min,max )
+{
+	let rng = Utils.RandInt( min,max )
+	if( rng % 2 == 0 ) --rng
+	if( rng < min ) rng = min + 1
+	return( rng )
+}
+
 Utils.Choose = function()
 {
 	return( Utils.RandFloat( 0,1 ) < 0.5 )

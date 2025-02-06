@@ -4,65 +4,32 @@ class TavernArea extends Area
 	{
 		map.CreateWalledEmptyMap()
 		
-		const rectSize = new Vec2( map.width,map.height )
-			.Scale( 1 / 5 ).Floor()
-		
-		const allCounterRects = []
-		for( let y = 2; y < map.height - rectSize.y; y += rectSize.y )
+		function CheckAreaFree( checkX,checkY )
 		{
-			for( let x = 2; x < map.width - rectSize.x; x += rectSize.x )
+			for( let y = checkY - 1; y <= checkY + 1; ++y )
 			{
-				allCounterRects.push( Rect.CreateXYWH( x,y,rectSize.x - 2,rectSize.y - 2 ) )
-			}
-		}
-		const counterRects = allCounterRects
-		
-		Utils.ShuffleArr( counterRects )
-		
-		const nCounters = Utils.RandInt( 4,7 )
-		const counterSizeRange = new Range( 3,9 )
-		for( let i = 0; i < nCounters; ++i )
-		{
-			this.GenerateCounter( map,counterRects[i],counterSizeRange.GetRandVal() )
-		}
-	}
-	
-	GenerateCounter( map,rect,size )
-	{
-		const edges = rect.GetEdgeArrs()
-		Utils.ShuffleArr( edges )
-		const usedEdgeTiles = []
-		for( let i = 0; i < 2; ++i )
-		{
-			for( const tile of edges[i] ) usedEdgeTiles.push( tile )
-		}
-		
-		usedEdgeTiles.splice( size,usedEdgeTiles.length - size )
-		
-		if( Utils.Choose() )
-		{
-			for( const tile of usedEdgeTiles )
-			{
-				map.SetTileWall( tile.x,tile.y )
-			}
-		}
-		else // use inverse tiles
-		{
-			const allTiles = rect.GetAreaTiles()
-			for( const tile of allTiles )
-			{
-				let includes = false
-				for( const item of usedEdgeTiles )
+				for( let x = checkX - 1; x <= checkX + 1; ++x )
 				{
-					if( item.Equals( tile ) )
-					{
-						includes = true
-						break
-					}
+					if( !map.IsWalkableTile( x,y ) ) return( false )
 				}
-				
-				if( !includes ) map.SetTileWall( tile.x,tile.y )
 			}
+			
+			return( true )
+		}
+		
+		const nObstacles = Utils.RandInt( 5,25 )
+		for( let i = 0; i < nObstacles; ++i )
+		{
+			const randX = Utils.RandInt( 1,map.width - 1 )
+			const randY = Utils.RandInt( 1,map.height - 1 )
+			if( CheckAreaFree( randX,randY ) ) map.SetTile( randX,randY,Utils.RandOddInt( 2,6 ) )
+		}
+	
+		const nDecos = Utils.RandInt( 3,10 )
+		for( let i = 0; i < 10; ++i )
+		{
+			map.SetTile( Utils.RandInt( 1,map.width - 1 ),Utils.RandInt( 1,map.height - 1 ),
+				Utils.RandEvenInt( 4,7 ) )
 		}
 	}
 	
