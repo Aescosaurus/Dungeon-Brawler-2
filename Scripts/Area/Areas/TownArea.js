@@ -2,7 +2,7 @@ class TownArea extends Area
 {
 	GenerateMap( map )
 	{
-		// map.CreateWalledEmptyMap()
+		map.ClearTiles()
 		
 		const buildingRects = []
 		const lengthRange = new Range( 3,7 )

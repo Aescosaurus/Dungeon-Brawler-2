@@ -15,7 +15,7 @@ class Area
 	
 	GenerateBossMap( map )
 	{
-		map.CreateWalledEmptyMap()
+		// map.CreateWalledEmptyMap()
 	}
 	
 	GenerateEnemyWave( map )

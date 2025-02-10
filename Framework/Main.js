@@ -21,6 +21,8 @@ class Main
 	}
 }
 
+Main.CheatsEnabled = true
+
 const main = new Main()
 
 setInterval( function()

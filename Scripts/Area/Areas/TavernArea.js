@@ -3,6 +3,7 @@ class TavernArea extends Area
 	GenerateMap( map )
 	{
 		map.CreateWalledEmptyMap()
+		for( let x = 1; x < map.width - 1; ++x ) map.SetTile( x,map.height - 1,7 )
 		
 		function CheckAreaFree( checkX,checkY )
 		{
@@ -30,6 +31,17 @@ class TavernArea extends Area
 		{
 			map.SetTile( Utils.RandInt( 1,map.width - 1 ),Utils.RandInt( 1,map.height - 1 ),
 				Utils.RandEvenInt( 4,7 ) )
+		}
+		
+		// free space in center so boss doesn't get blocked
+		const bossFreeArea = 2;
+		const mapCenter = map.GetCenterTile()
+		for( let y = mapCenter.y - bossFreeArea; y < mapCenter.y + bossFreeArea; ++y )
+		{
+			for( let x = mapCenter.x - bossFreeArea; x < mapCenter.x + bossFreeArea; ++x )
+			{
+				map.SetTile( x,y,0 )
+			}
 		}
 	}
 	
