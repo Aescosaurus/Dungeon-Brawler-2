@@ -43,8 +43,8 @@ class Rect
 		const arrs = [ [],[],[],[] ]
 		for( let x = this.left; x <= this.right; ++x ) arrs[0].push( new Vec2( x,this.top ) )
 		for( let x = this.left; x <= this.right; ++x ) arrs[1].push( new Vec2( x,this.bot ) )
-		for( let y = this.top; y <= this.bot; ++y ) arrs[2].push( new Vec2( this.right,y ) )
-		for( let y = this.top; y <= this.bot; ++y ) arrs[3].push( new Vec2( this.left,y ) )
+		for( let y = this.top; y <= this.bot; ++y ) arrs[2].push( new Vec2( this.left,y ) )
+		for( let y = this.top; y <= this.bot; ++y ) arrs[3].push( new Vec2( this.right,y ) )
 		return( arrs )
 	}
 }

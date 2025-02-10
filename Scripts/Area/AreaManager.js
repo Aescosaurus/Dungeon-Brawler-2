@@ -20,7 +20,7 @@ class AreaManager
 		
 		this.enemySpawnTimer = new Timer( 0.6 ) // from 1.0
 		this.enemyActivateTimer = new Timer( 1.0 )
-		this.waveCounter = 4 // 0
+		this.waveCounter = 3
 		// this.bossInterval = 3
 		
 		this.areas = [
@@ -35,7 +35,7 @@ class AreaManager
 		
 		this.LoadMap()
 		
-		this.disableSpawnEnemies = false
+		this.enableEnemySpawning = true
 	}
 	
 	Update( mouse,kbd,gpad )
@@ -70,7 +70,7 @@ class AreaManager
 		this.RemoveDeadEntities( this.enemyBullets )
 		this.RemoveDeadEntities( this.partHand.GetParts() )
 		
-		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() && !this.disableSpawnEnemies )
+		if( this.enemies.length == 0 && this.enemySpawnTimer.Update() && this.enableEnemySpawning )
 		{
 			this.playerManager.TryReviveGhosts()
 			
@@ -81,12 +81,12 @@ class AreaManager
 			if( this.waveCounter == bossWave )
 			{
 				// this.map.CreateWalledEmptyMap()
-				this.areas[this.curArea].GenerateBossMap( this.map )
+				this.areas[this.curArea].GenerateBossMap( this.map,this.enemies )
 			}
 			else if( this.waveCounter == bossWave + 1 )
 			{
 				// this.enemies.push( new SkeletonBoss( new Vec2( this.gfx.width / 2,this.gfx.height / 2 ) ) )
-				this.enemies.push( this.areas[this.curArea].GenerateBoss( this.map ) )
+				this.enemies.push( this.areas[this.curArea].GenerateBoss( this.map,this.enemies ) )
 			}
 			else if( this.waveCounter == bossWave + 2 )
 			{
