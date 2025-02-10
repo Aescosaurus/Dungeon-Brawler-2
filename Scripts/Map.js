@@ -153,7 +153,9 @@ class Map
 		{
 			for( let x = 0; x < this.width; ++x )
 			{
-				if( this.IsWalkableTile( x,y ) ) tiles.push( new Vec2( x,y ) )
+				// use this instead of IsWalkableTile so we don't spawn in areas we shouldn't
+				//  (in town area for example)
+				if( this.GetTile( x,y ) == 0 ) tiles.push( new Vec2( x,y ) )
 			}
 		}
 		
