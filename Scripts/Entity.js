@@ -41,7 +41,8 @@ class Entity
 			for( const spot of spots )
 			{
 				const tilePos = map.World2TilePos( spot.Copy().Add( offset ) )
-				if( !map.IsWalkableTile( tilePos.x,tilePos.y ) )
+				if( !map.IsTileOnScreen( tilePos.x,tilePos.y ) ||
+					!map.IsWalkableTile( tilePos.x,tilePos.y ) )
 				{
 					return( true )
 				}

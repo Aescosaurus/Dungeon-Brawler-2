@@ -54,6 +54,9 @@ class MaceBullet extends Bullet
 		--this.alive
 		
 		this.partDir = this.pos.Copy().Subtract( lastPos )
+		
+		const tilePos = map.World2TilePos( this.pos.Copy() )
+		if( map.IsTileOnScreen( tilePos.x,tilePos.y ) ) map.StepOnTile( tilePos.x,tilePos.y )
 	}
 	
 	HandleHit( target )

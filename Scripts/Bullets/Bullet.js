@@ -49,6 +49,7 @@ class Bullet extends Entity
 		if( !this.ignoreWalls &&
 			( !map.IsTileOnScreen( tilePos.x,tilePos.y ) ||
 			!map.IsWalkableTile( tilePos.x,tilePos.y ) ) )
+			// map.GetTile( tilePos.x,tilePos.y ) == 1 ) )
 		{
 			this.hp = -1
 		}
