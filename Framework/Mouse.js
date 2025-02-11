@@ -22,4 +22,9 @@ class Mouse
 			self.y = Math.floor( self.y / gfx.yScale )
 		} )
 	}
+	
+	GetPos()
+	{
+		return( new Vec2( this.x,this.y ) )
+	}
 }

@@ -94,10 +94,21 @@ class PlayerManager
 			const curPlayer = this.players[i]
 			if( curPlayer.isPlaceholder && curPlayer.SpawnIn() )
 			{
+				let spawnPos = map.Tile2WorldPos( map.GetRandEmptyTilePos() )
+				if( this.players[i].ctrls.isMouse )
+				{
+					const mouseTile = map.World2TilePos( mouse.GetPos() )
+					if( map.IsTileOnScreen( mouseTile.x,mouseTile.y ) &&
+						map.IsWalkableTile( mouseTile.x,mouseTile.y ) )
+					{
+						spawnPos = map.Tile2WorldPos( mouseTile )
+					}
+				}
+				
 				Utils.ShuffleArr( this.unspawnedPlayers )
 				const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
 					this.players[i].ctrls,
-					map.Tile2WorldPos( map.GetRandEmptyTilePos() ),
+					spawnPos,
 					map )
 				this.players.splice( i,1,newPlayer )
 			}

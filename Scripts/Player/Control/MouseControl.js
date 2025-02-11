@@ -6,6 +6,8 @@ class MouseControl extends PlayerControl
 		
 		// prevent player from flickering left to right when on top of mouse
 		this.minDiff = 4
+		
+		this.isMouse = true
 	}
 	
 	GetMove( mouse,kbd,gpad,myPos )
