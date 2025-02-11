@@ -46,10 +46,8 @@ class Bullet extends Entity
 		this.range -= Math.abs( this.vel.y )
 		
 		const tilePos = map.World2TilePos( this.pos.Copy() )
-		if( !this.ignoreWalls &&
-			( !map.IsTileOnScreen( tilePos.x,tilePos.y ) ||
-			!map.IsWalkableTile( tilePos.x,tilePos.y ) ) )
-			// map.GetTile( tilePos.x,tilePos.y ) == 1 ) )
+		if( !map.IsTileOnScreen( tilePos.x,tilePos.y ) ||
+			( !this.ignoreWalls && map.GetTile( tilePos.x,tilePos.y ) == 1 ) )
 		{
 			this.hp = -1
 		}
