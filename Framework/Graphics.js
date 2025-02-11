@@ -14,9 +14,6 @@ class Graphics
 		// this.canv.height *= scale
 		this.ctx.scale( scale,scale )
 		
-		this.ctx.imageSmoothingEnabled = false
-		this.ctx.mozImageSmoothingEnabled = false
-		
 		this.width = this.canv.width / scale
 		this.height = this.canv.height / scale
 		
@@ -24,9 +21,13 @@ class Graphics
 		this.origWidth = this.width
 		this.origHeight = this.height
 		
+		this.UpdateCanvOptions( true,true )
+		
 		// console.log( this.width + " " + this.height )
 		
 		this.tileSize = 8
+		
+		this.fullscreen = false
 		
 		const self = this
 		addEventListener( "resize",function( e ) { self.CheckFullscreen( true ) } )
@@ -35,6 +36,7 @@ class Graphics
 	// if preserve aspect is false it will just try to match screen dimensions
 	CheckFullscreen( preserveAspect )
 	{
+		this.fullscreen = true
 		if( preserveAspect )
 		{
 			this.width = this.origWidth
@@ -73,8 +75,7 @@ class Graphics
 			this.ctx.scale( this.scale,this.scale )
 			// this.ctx.scale( this.canv.width / this.width,this.canv.height / this.height )
 			
-			this.ctx.imageSmoothingEnabled = false
-			this.ctx.mozImageSmoothingEnabled = false
+			this.UpdateCanvOptions( false )
 		}
 		else
 		{
@@ -124,9 +125,42 @@ class Graphics
 			// this.ctx.scale( this.scale,this.scale )
 			this.ctx.scale( this.xScale,this.yScale )
 			
-			this.ctx.imageSmoothingEnabled = false
-			this.ctx.mozImageSmoothingEnabled = false
+			this.UpdateCanvOptions( false )
 		}
+	}
+	
+	RestoreSmallScreen()
+	{
+		this.fullscreen = false
+		
+		this.width = this.origWidth
+		this.height = this.origHeight
+		this.scale = this.origScale
+		this.xScale = this.origScale
+		this.yScale = this.origScale
+		
+		this.canv.width = this.canv.width * this.scale
+		this.canv.height = this.canv.height * this.scale
+		
+		this.ctx.scale( this.scale,this.scale )
+		
+		this.UpdateCanvOptions( true )
+	}
+	
+	UpdateCanvOptions( shrinking,startup = false )
+	{
+		this.ctx.imageSmoothingEnabled = false
+		this.ctx.mozImageSmoothingEnabled = false
+		
+		// this.canv.style.position = shrinking ? "relative" : "static"
+		this.canv.style.position = "relative"
+		this.canv.style.left = shrinking && !startup
+			? Math.floor( ( window.innerWidth - this.origWidth * this.origScale ) / 2 ) + "px"
+			: "0px"
+		
+		this.canv.style.top = shrinking
+			? Math.floor( ( window.innerHeight - this.origHeight * this.origScale ) / 2 ) + "px"
+			: Math.floor( ( window.innerHeight - this.canv.height ) / 2 ) + "px"
 	}
 	
 	DrawRect( x,y,width,height,color )
@@ -204,5 +238,10 @@ class Graphics
 		
 		this.ctx.rotate( -angle )
 		this.ctx.translate( -xMove,-yMove )
+	}
+	
+	IsFullscreen()
+	{
+		return( this.fullscreen )
 	}
 }

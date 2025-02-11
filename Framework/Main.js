@@ -8,10 +8,23 @@ class Main
 		this.gpad = new Gamepad()
 		
 		this.areaManager = new AreaManager( this.gfx )
+		
+		this.canFullscreen = true
 	}
 	
 	Update()
 	{
+		if( this.kbd.KeyDown( "F" ) )
+		{
+			if( this.canFullscreen )
+			{
+				this.canFullscreen = false
+				if( this.gfx.IsFullscreen() ) this.gfx.RestoreSmallScreen()
+				else this.gfx.CheckFullscreen( true )
+			}
+		}
+		else this.canFullscreen = true
+		
 		this.areaManager.Update( this.mouse,this.kbd,this.gpad )
 	}
 	
