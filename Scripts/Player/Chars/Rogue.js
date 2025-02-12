@@ -4,6 +4,12 @@ class Rogue extends Player
 	{
 		super( pos,ctrls,4,"Images/Char/Rogue.png" )
 		
+		this.sprSht = new SprSheet( SpriteCodex.LoadSpr( "Images/Char/RogueInvis.png" ),8,8 )
+		this.idleAnim = new Anim( this.sprSht,0,2 )
+		this.walkAnim = new Anim( this.sprSht,1,2 )
+		this.normalAnimHand = this.animHand
+		this.invisAnimHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
+		
 		this.spd = 1.85
 		
 		this.bulletSpr = SpriteCodex.LoadSpr( "Images/Items/Dagger.png" )
@@ -35,12 +41,17 @@ class Rogue extends Player
 			for( const ang of angs ) this.FireBullet( ang,info )
 		}
 		
-		if( this.invisTimer.Update() ) this.targetable = true
+		if( this.invisTimer.Update() )
+		{
+			this.targetable = true
+			this.animHand = this.normalAnimHand
+		}
 	}
 	
 	UseSuper( info )
 	{
 		this.invisTimer.Reset()
 		this.targetable = false
+		this.animHand = this.invisAnimHand
 	}
 }
