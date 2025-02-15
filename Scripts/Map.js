@@ -16,6 +16,8 @@ class Map
 			throw new Error( "Invalid gfx screen size! width: " + this.width + " height: " + this.height )
 		}
 		
+		this.edgeRect = new Rect( 0,this.height,0,this.width )
+		
 		this.tileSprSht = new SprSheet( new Sprite( "Images/Tiles/DungeonTiles.png" ),8,8 )
 		
 		// this.GenerateMap()
@@ -145,6 +147,23 @@ class Map
 		return( new Vec2( Utils.RandInt( 0,this.width ),Utils.RandInt( 0,this.height ) ) )
 	}
 	
+	GetEmptyTileList()
+	{
+		const tiles = []
+		
+		for( let y = 0; y < this.height; ++y )
+		{
+			for( let x = 0; x < this.width; ++x )
+			{
+				// use this instead of IsWalkableTile so we don't spawn in areas we shouldn't
+				//  (in town area for example)
+				if( this.GetTile( x,y ) == 0 ) tiles.push( new Vec2( x,y ) )
+			}
+		}
+		
+		return( tiles )
+	}
+	
 	GetRandEmptyTilePos()
 	{
 		const tiles = []
@@ -159,7 +178,8 @@ class Map
 			}
 		}
 		
-		tiles.sort( function( a,b ) { return( Utils.RandFloat( 0,1 ) - 0.5 ) } )
+		// tiles.sort( function( a,b ) { return( Utils.RandFloat( 0,1 ) - 0.5 ) } )
+		Utils.ShuffleArr( tiles )
 		
 		return( tiles[0] )
 	}
@@ -167,5 +187,15 @@ class Map
 	GetCenterTile()
 	{
 		return( new Vec2( this.width,this.height ).Divide( 2 ).Floor() )
+	}
+	
+	GetRandEdgeTile()
+	{
+		return( Utils.ArrayChooseRand( this.edgeRect.GetEdgeTiles() ) )
+	}
+	
+	GetEdgeRect()
+	{
+		return( this.edgeRect )
 	}
 }

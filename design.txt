@@ -69,21 +69,23 @@ enemies appear differently in diff areas - castle = rise up from ground, space s
 		--or maybe act like hp bar where it empties a pixel at a time
 indicator to show when ult's ready?
 	burst of aoe particles when it becomes ready, constant stream while it's ready
+	or maybe a little 1px blue bar above/below/to the side that fills up when ready?
+		& disappears when full
 custom font drawing system with 3x5 font
 	define rect for it to be drawn in
 --ghost ult can spawn little health bauble for living players
 	--health bauble can't be picked up if at full hp
-particles for enemy hit
+--particles for enemy hit
 bosses with cool bullet hell patterns
 	bullet patterns that make the players play together
 		spinny attacks to make them move together, tight shotguns in each dir so they group
 daily challenge - randomly generated levels of all the areas & enemies, using date as seed
-lancer - have min charge on spear, just won't fire unless it's charged enough - like enough for 0.5 dmg
+--lancer - have min charge on spear, just won't fire unless it's charged enough - like enough for 0.5 dmg
 difficulty option before starting - easy = more player hp, enemy shot timers made longer, etc
 
+---misc ideas---
 enemy idea - summoner that spawns enemies until defeated
 animated background art items like flag from rotmg pirate cave
-farm level - plant in the center growing bigger & bigger each wave & turns into boss
 different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	speedrun - dungeon rush mode
 		maybe items you have to pick up along the way? like each dungeon has quests like deep rock
@@ -91,3 +93,23 @@ different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	vampire survivors - dungeon swarm mode
 	db2 dungeon diner spinoff - serve food to dungeon customers
 	make these as diff games? like db2.1 & 2.2, etc
+ghosts have diff color/accessory to differentiate which character they are - hat/feather, etc
+--random colors for particles - red/orange blood particles
+once you beat the game it displays you win text, then goes to ng+ - enemies have more hp & dmg
+--add decorations to the levels - some can be walked through & some can't
+	--func to generate random even/odd number for area generation for these
+	--tavern - barrels, bottles, chairs, etc
+--town level - bandits chillin in houses, either come out for the waves or they all come out at the boss
+--farm level - has river running through it which can only be crossed at 1-2 bridges
+farm level - plant in the center growing bigger & bigger each wave & turns into boss & chases you
+	find unconnected areas from neko quest
+	connect each one with bridges
+		shuffle, then connect 0 to 1, 1 to 2, etc
+	vegetable stalks that can be stomped on, if not they turn into enemies on the boss round
+	carrot enemies
+		shoot plus, then 2 shots at player
+	cabbage enemy
+		rolls to random player, then retargets once close enough
+		shoots burst of 3 bullets towards target player
+	boss idea - the trees around the edge become sentient & start attacking you!
+		they walk towards you for a sec, shoot a single bullet, then repeat

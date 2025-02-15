@@ -28,12 +28,13 @@ class AreaManager
 		this.areas = [
 			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
+			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 			new CastleArea( 99,"Images/Tiles/DungeonTiles.png" ),
 			new Area( 3,"Images/Tiles/ForestTiles.png" )
 		]
 		
-		this.curArea = 0
+		this.curArea = 2
 		
 		this.LoadMap()
 		
