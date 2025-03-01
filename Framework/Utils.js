@@ -80,3 +80,12 @@ Utils.ArrayChooseRand = function( arr )
 {
 	return( arr[Utils.RandInt( 0,arr.length )] )
 }
+
+Utils.ArrayContains = function( arr,item,matchFunc = function( a,b ) { return( a == b ) } )
+{
+	for( const arrItem of arr )
+	{
+		if( matchFunc( arrItem,item ) ) return( true )
+	}
+	return( false )
+}

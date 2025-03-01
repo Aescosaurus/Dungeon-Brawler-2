@@ -150,3 +150,8 @@ Vec2.Rand = function()
 {
 	return( new Vec2( Utils.RandFloat( -1,1 ),Utils.RandFloat( -1,1 ) ) )
 }
+
+Vec2.Cardinals = function()
+{
+	return( [ Vec2.Up(),Vec2.Down(),Vec2.Left(),Vec2.Right() ] )
+}

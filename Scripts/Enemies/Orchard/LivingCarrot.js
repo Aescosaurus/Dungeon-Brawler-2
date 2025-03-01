@@ -2,7 +2,7 @@ class LivingCarrot extends Enemy
 {
 	constructor( pos )
 	{
-		super( pos,"Images/Enemy/BanditArcher.png" )
+		super( pos,"Images/Enemy/LivingCarrot.png" )
 		this.hp = 13
 		
 		this.spd = 0.24

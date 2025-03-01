@@ -38,8 +38,8 @@ class AreaManager
 		
 		this.LoadMap()
 		
-		this.enableEnemySpawning = true
-		this.canSkip = false
+		this.enableEnemySpawning = false
+		this.canSkip = false // don't edit this
 	}
 	
 	Update( mouse,kbd,gpad )

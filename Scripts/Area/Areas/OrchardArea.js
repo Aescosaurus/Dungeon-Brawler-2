@@ -34,6 +34,23 @@ class OrchardArea extends Area
 			map.SetTile( tile.x,tile.y,tileType )
 		}
 		
+		const unconnected = this.FindUnconnectedTiles( map )
+		Utils.ShuffleArr( unconnected )
+		for( let i = 0; i < unconnected.length - 1; ++i )
+		{
+			const curGroup = unconnected[i]
+			const nextGroup = unconnected[i + 1]
+			
+			const curve = this.GenerateCurve(
+				Utils.ArrayChooseRand( curGroup ),
+				Utils.ArrayChooseRand( nextGroup ),
+				map.GetRandTilePos(),map.GetRandTilePos(),map )
+			for( const tile of curve )
+			{
+				if( !map.IsWalkableTile( tile.x,tile.y ) ) map.SetTile( tile.x,tile.y,8 )
+			}
+		}
+		
 		const nDecos = Utils.RandInt( 5,16 )
 		const emptyTiles = map.GetEmptyTileList()
 		Utils.ShuffleArr( emptyTiles )
@@ -58,6 +75,71 @@ class OrchardArea extends Area
 		return( curve )
 	}
 	
+	FindUnconnectedTiles( map )
+	{
+		function AddConnectedTiles( pos,arr,existing )
+		{
+			if( Utils.ArrayContains( existing,pos,function( a,b )
+				{
+					return( a.Equals( b ) )
+				} ) )
+			{
+				return
+			}
+			
+			if( map.IsWalkableTile( pos.x,pos.y ) )
+			{
+				arr.push( pos.Copy() )
+				existing.push( pos.Copy() )
+				const dirs = Vec2.Cardinals()
+				for( const dir of dirs )
+				{
+					const checkPos = pos.Copy().Add( dir )
+					
+					if( checkPos.x >= 0 && checkPos.x < map.width &&
+						checkPos.y >= 0 && checkPos.y < map.height )
+					{
+						AddConnectedTiles( checkPos,arr,existing )
+					}
+				}
+			}
+		}
+		
+		const groups = []
+		const coveredTiles = []
+		
+		for( let y = 0; y < map.height; ++y )
+		{
+			for( let x = 0; x < map.width; ++x )
+			{
+				const curPos = new Vec2( x,y )
+				if( map.IsWalkableTile( x,y ) &&
+					!Utils.ArrayContains( coveredTiles,curPos,function( a,b )
+					{
+						return( a.Equals( b ) )
+					} ) )
+				{
+					groups.push( [] )
+					AddConnectedTiles( curPos,groups[groups.length - 1],coveredTiles )
+				}
+			}
+		}
+		
+		return( groups )
+	}
+	
+	GenerateBossMap( map,enemies )
+	{
+		this.carrotSpots = []
+		for( let y = 0; y < map.height; ++y )
+		{
+			for( let x = 0; x < map.width; ++x )
+			{
+				if( map.GetTile( x,y ) == 4 ) this.carrotSpots.push( new Vec2( x,y ) )
+			}
+		}
+	}
+	
 	GenerateEnemyWave( map )
 	{
 		const enemies = []
@@ -67,13 +149,13 @@ class OrchardArea extends Area
 		return( enemies )
 	}
 	
-	// GenerateBoss( map,enemies )
-	// {
-	// 	for( const spot of this.bottleSpots )
-	// 	{
-	// 		map.SetTile( spot.x,spot.y,6 )
-	// 		enemies.push( new LivingWineBottle( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
-	// 	}
-	// 	return( new BanditChief( map.Tile2WorldPos( map.GetCenterTile() ) ) )
-	// }
+	GenerateBoss( map,enemies )
+	{
+		for( const spot of this.carrotSpots )
+		{
+			map.SetTile( spot.x,spot.y,0 )
+			enemies.push( new LivingCarrot( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
+		}
+		return( new BanditChief( map.Tile2WorldPos( map.GetCenterTile() ) ) )
+	}
 }
