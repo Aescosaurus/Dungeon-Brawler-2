@@ -8,7 +8,7 @@ class Area
 		this.curWave = 0
 	}
 	
-	GenerateMap( map )
+	GenerateMap( map,entities )
 	{
 		map.CreateWalledEmptyMap()
 	}

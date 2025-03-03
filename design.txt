@@ -93,23 +93,12 @@ different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	vampire survivors - dungeon swarm mode
 	db2 dungeon diner spinoff - serve food to dungeon customers
 	make these as diff games? like db2.1 & 2.2, etc
+	tower defense?
+	strategy game?
 ghosts have diff color/accessory to differentiate which character they are - hat/feather, etc
---random colors for particles - red/orange blood particles
 once you beat the game it displays you win text, then goes to ng+ - enemies have more hp & dmg
---add decorations to the levels - some can be walked through & some can't
-	--func to generate random even/odd number for area generation for these
-	--tavern - barrels, bottles, chairs, etc
---town level - bandits chillin in houses, either come out for the waves or they all come out at the boss
---farm level - has river running through it which can only be crossed at 1-2 bridges
-farm level - plant in the center growing bigger & bigger each wave & turns into boss & chases you
-	--find unconnected areas from neko quest
-	--connect each one with bridges
-		--shuffle, then connect 0 to 1, 1 to 2, etc
-	--vegetable stalks that can be stomped on, if not they turn into enemies on the boss round
-	--carrot enemies
-		--shoot plus, then 2 shots at player
-	cabbage enemy
-		rolls to random player, then retargets once close enough
-		shoots burst of 3 bullets towards target player
-	boss idea - the trees around the edge become sentient & start attacking you!
-		they walk towards you for a sec, shoot a single bullet, then repeat
+
+
+things that need sprites
+	cabbage roller enemy
+	growing pumpkin - entity & boss

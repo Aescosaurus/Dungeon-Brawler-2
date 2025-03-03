@@ -1,6 +1,6 @@
 class OrchardArea extends Area
 {
-	GenerateMap( map )
+	GenerateMap( map,entities )
 	{
 		map.ClearTiles()
 		map.CreateWalledEmptyMap()
@@ -55,6 +55,48 @@ class OrchardArea extends Area
 		const emptyTiles = map.GetEmptyTileList()
 		Utils.ShuffleArr( emptyTiles )
 		for( let i = 0; i < nDecos; ++i ) map.SetTile( emptyTiles[i].x,emptyTiles[i].y,4 )
+		
+		// find largest unconnected, then put boss at center of random free 3x3 area
+		let largestUnconnected = -1
+		let largestIndex = 0
+		for( let i = 0; i < unconnected.length; ++i )
+		{
+			const curLen = unconnected[i].length
+			if( curLen > largestUnconnected )
+			{
+				largestUnconnected = curLen
+				largestIndex = i
+			}
+		}
+		const bossSpots = []
+		for( let y = 2; y < map.height - 3; ++y )
+		{
+			for( let x = 2; x < map.width - 3; ++x )
+			{
+				let valid = true
+				for( let yy = y - 1; yy < y + 3; ++yy )
+				{
+					for( let xx = x - 1; xx < x + 3; ++xx )
+					{
+						const curTile = map.GetTile( xx,yy )
+						if( !( curTile == 0 || curTile == 4 ) )
+						{
+							valid = false
+							xx = x + 3;
+							yy = y + 3;
+						}
+					}
+				}
+				
+				if( valid )
+				{
+					bossSpots.push( new Vec2( x,y ) )
+				}
+			}
+		}
+		this.bossEntity = new GrowingPumpkinEntity( Utils.ArrayChooseRand( bossSpots )
+			.Copy().Scale( map.tileSize ).Add( new Vec2( 4,4 ) ) )
+		entities.push( this.bossEntity )
 	}
 	
 	// cubic bezier curve
@@ -147,6 +189,8 @@ class OrchardArea extends Area
 		// enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
 		enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
 		
+		this.bossEntity.Grow()
+		
 		return( enemies )
 	}
 	
@@ -155,8 +199,11 @@ class OrchardArea extends Area
 		for( const spot of this.carrotSpots )
 		{
 			map.SetTile( spot.x,spot.y,0 )
-			enemies.push( new LivingCarrot( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
+			// enemies.push( new LivingCarrot( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
 		}
-		return( new BanditChief( map.Tile2WorldPos( map.GetCenterTile() ) ) )
+		
+		this.bossEntity.hp = -1
+		
+		return( new GrowingPumpkinBoss( this.bossEntity.pos.Copy() ) )
 	}
 }

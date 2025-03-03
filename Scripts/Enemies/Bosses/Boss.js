@@ -15,6 +15,13 @@ class Boss extends Enemy
 		}
 	}
 	
+	Update( info )
+	{
+		this.phaseAI.Update( this,info )
+		
+		this.animHand.Update()
+	}
+	
 	UpdateAnim()
 	{
 		if( this.animHand )

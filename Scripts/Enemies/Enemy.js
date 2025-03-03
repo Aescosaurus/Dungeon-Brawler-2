@@ -98,6 +98,11 @@ class Enemy extends Entity
 		else super.Draw( gfx )
 	}
 	
+	Damage( dmg,attacker )
+	{
+		if( !this.invul ) super.Damage( dmg,attacker )
+	}
+	
 	SetBoss( scale = this.bossScale )
 	{
 		this.bossScale = scale
@@ -111,6 +116,11 @@ class Enemy extends Entity
 			range,this.animBulletSprPath )
 		bullet.parent = this
 		info.enemyBullets.push( bullet )
+	}
+	
+	ToggleInvul( invul )
+	{
+		this.invul = invul
 	}
 	
 	GetVelocity()

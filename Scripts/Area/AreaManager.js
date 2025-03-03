@@ -22,7 +22,7 @@ class AreaManager
 		
 		this.enemySpawnTimer = new Timer( 0.6 ) // from 1.0
 		this.enemyActivateTimer = new Timer( 1.0 )
-		this.waveCounter = 0
+		this.waveCounter = 4
 		// this.bossInterval = 3
 		
 		this.areas = [
@@ -167,6 +167,6 @@ class AreaManager
 	LoadMap()
 	{
 		this.map.SetTileSprSht( this.areas[this.curArea].GetTileSheet() )
-		this.areas[this.curArea].GenerateMap( this.map )
+		this.areas[this.curArea].GenerateMap( this.map,this.neutralEntities )
 	}
 }

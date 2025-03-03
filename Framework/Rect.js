@@ -47,6 +47,11 @@ class Rect
 		for( let y = this.top; y <= this.bot; ++y ) arrs[3].push( new Vec2( this.right,y ) )
 		return( arrs )
 	}
+	
+	GetCenter()
+	{
+		return( new Vec2( this.left + this.right,this.top + this.bot ).Divide( 2 ) )
+	}
 }
 
 Rect.CreateXYWH = function( x,y,width,height )
