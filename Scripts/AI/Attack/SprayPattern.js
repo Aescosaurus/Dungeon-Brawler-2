@@ -1,6 +1,6 @@
 class SprayPattern
 {
-	constructor( shotPattern,rotSpd,shotInterval,shotCount )
+	constructor( shotPattern,rotSpd,shotInterval,shotCount,rotCentered = false )
 	{
 		this.shotPattern = shotPattern
 		this.rotSpd = Utils.Deg2Rad( rotSpd )
@@ -9,7 +9,8 @@ class SprayPattern
 		
 		this.done = false
 		
-		this.rot = 0
+		this.startRot = rotCentered ? -this.rotSpd * ( ( shotCount + 1 ) / 2 ) : 0
+		this.rot = this.startRot
 	}
 	
 	Update( myPos,targetPos )
@@ -34,7 +35,7 @@ class SprayPattern
 	Reset()
 	{
 		this.shotCount.Reset()
-		this.rot = 0
+		this.rot = this.startRot
 		this.shotInterval.Reset()
 		this.done = false
 	}

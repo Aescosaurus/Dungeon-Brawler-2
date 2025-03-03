@@ -144,7 +144,8 @@ class OrchardArea extends Area
 	{
 		const enemies = []
 		
-		enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+		// enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+		enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
 		
 		return( enemies )
 	}
