@@ -52,6 +52,20 @@ class Rect
 	{
 		return( new Vec2( this.left + this.right,this.top + this.bot ).Divide( 2 ) )
 	}
+	
+	Contains( pos )
+	{
+		return( pos.x >= this.left && pos.x <= this.right &&
+			pos.y >= this.top && pos.y <= this.bot )
+	}
+	
+	Scale( amount )
+	{
+		this.left *= amount
+		this.right *= amount
+		this.top *= amount
+		this.bot *= amount
+	}
 }
 
 Rect.CreateXYWH = function( x,y,width,height )

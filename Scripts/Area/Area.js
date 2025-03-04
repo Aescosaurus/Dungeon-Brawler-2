@@ -5,6 +5,8 @@ class Area
 		this.nWaves = nWaves
 		this.tileSheet = new SprSheet( new Sprite( tileSheet ),8,8 )
 		
+		this.attackArea = new Rect( -100,-100,9999,9999 )
+		
 		this.curWave = 0
 	}
 	
@@ -63,5 +65,10 @@ class Area
 	{
 		return( map.Tile2WorldPos( map.GetRandEmptyTilePos() )
 			.Add( Vec2.One().Scale( 4 ) ) )
+	}
+	
+	GetAttackArea()
+	{
+		return( this.attackArea )
 	}
 }

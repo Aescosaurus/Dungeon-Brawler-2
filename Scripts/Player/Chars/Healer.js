@@ -19,13 +19,13 @@ class Healer extends Player
 	{
 		super.Update( info )
 		
-		if( this.mace == null && info.enemies.length > 0 )
+		if( this.mace == null && this.CanFire( info ) )
 		{
 			this.mace = new MaceBullet( this,this.spinRange,this.spinSpd )
 			this.mace.dmg = this.bulletDmg
 			info.playerBullets.push( this.mace )
 		}
-		else if( info.enemies.length > 0 )
+		else if( this.CanFire( info ) )
 		{
 			this.mace.KeepAlive()
 			const diff = this.mace.pos.Copy().Subtract( this.pos )

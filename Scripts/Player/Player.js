@@ -161,7 +161,7 @@ class Player extends Entity
 	
 	HandleSimpleShooting( info )
 	{
-		if( this.refire.Update() )
+		if( this.refire.Update() && this.CanFire( info ) )
 		{
 			if( this.TryFireAutoBullet( info ) ) this.refire.Reset()
 		}
@@ -250,6 +250,11 @@ class Player extends Entity
 		info.enemyBullets = this.enemyBullets
 		
 		return( info )
+	}
+	
+	CanFire( info )
+	{
+		return( info.enemies.length > 0 && info.attackArea.Contains( this.pos ) )
 	}
 	
 	OnEnemyHit( enemy )

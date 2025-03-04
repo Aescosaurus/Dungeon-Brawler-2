@@ -26,7 +26,7 @@ class Wizard extends Player
 	{
 		super.Update( info )
 		
-		if( this.refire.Update() && info.enemies.length > 0 )
+		if( this.refire.Update() && this.CanFire( info ) )
 		{
 			this.refire.Reset()
 			

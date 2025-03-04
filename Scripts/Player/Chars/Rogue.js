@@ -33,7 +33,7 @@ class Rogue extends Player
 		
 		if( !this.move.Equals( Vec2.Zero() ) ) this.aimMove.Set( this.move )
 		
-		if( this.refire.Update() && info.enemies.length > 0 )
+		if( this.refire.Update() && this.CanFire( info ) )
 		{
 			this.refire.Reset()
 			// const ang = Math.atan2( this.aimMove.y,this.aimMove.x )

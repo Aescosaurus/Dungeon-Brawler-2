@@ -22,10 +22,11 @@ class AreaManager
 		
 		this.enemySpawnTimer = new Timer( 0.6 ) // from 1.0
 		this.enemyActivateTimer = new Timer( 1.0 )
-		this.waveCounter = 4
+		this.waveCounter = 0
 		// this.bossInterval = 3
 		
 		this.areas = [
+			new CharSelectArea( 1,"Images/Tiles/CharSelectTiles.png" ),
 			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
@@ -34,7 +35,7 @@ class AreaManager
 			new Area( 3,"Images/Tiles/ForestTiles.png" )
 		]
 		
-		this.curArea = 2
+		this.curArea = 0
 		
 		this.LoadMap()
 		
@@ -63,7 +64,7 @@ class AreaManager
 		}
 		
 		this.playerManager.Update( mouse,kbd,gpad,this.map,
-			this.enemies,this.playerBullets,this.enemyBullets,this.gfx )
+			this.enemies,this.playerBullets,this.enemyBullets,this.gfx,this.attackArea )
 		
 		if( this.enemyActivateTimer.Update() )
 		{
@@ -169,5 +170,7 @@ class AreaManager
 	{
 		this.map.SetTileSprSht( this.areas[this.curArea].GetTileSheet() )
 		this.areas[this.curArea].GenerateMap( this.map,this.neutralEntities )
+		
+		this.attackArea = this.areas[this.curArea].GetAttackArea()
 	}
 }

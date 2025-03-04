@@ -43,7 +43,7 @@ class PlayerManager
 		this.canSpawnSpecificPlayer = true
 	}
 	
-	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx )
+	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx,attackArea )
 	{
 		// let spawnPlayer = -1
 		// if( kbd.KeyDown( "1" ) ) spawnPlayer = 0
@@ -68,6 +68,7 @@ class PlayerManager
 		playerUpdateInfo.playerBullets = playerBullets
 		playerUpdateInfo.enemyBullets = enemyBullets
 		playerUpdateInfo.gfx = gfx
+		playerUpdateInfo.attackArea = attackArea
 		
 		for( const player of this.players )
 		{

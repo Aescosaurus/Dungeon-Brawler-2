@@ -54,7 +54,7 @@ class Lancer extends Player
 		
 		if( this.move.Equals( Vec2.Zero() ) )
 		{
-			if( this.spearCharge.GetPercent() > this.minSpearCharge )
+			if( this.spearCharge.GetPercent() > this.minSpearCharge && this.CanFire( info ) )
 			{
 				this.FireBullet( Math.atan2( this.aimMove.y,this.aimMove.x ),info,
 					this.bulletDmg * this.spearCharge.GetPercent() )

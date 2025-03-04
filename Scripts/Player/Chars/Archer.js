@@ -26,12 +26,12 @@ class Archer extends Player
 	{
 		super.Update( info )
 		
-		if( this.refire.Update() )
+		if( this.refire.Update() && this.CanFire( info ) )
 		{
 			if( this.TryFireAutoArcherBullet( info ) ) this.refire.Reset()
 		}
 		
-		if( !this.flurryCounter.IsDone() )
+		if( !this.flurryCounter.IsDone() && this.CanFire( info ) )
 		{
 			if( this.flurryRefire.Update() )
 			{
