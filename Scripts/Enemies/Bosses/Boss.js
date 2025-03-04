@@ -13,11 +13,13 @@ class Boss extends Enemy
 			this.walkAnim = new Anim( this.sprSht,1,2 )
 			this.animHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
 		}
+		
+		this.phase = 0
 	}
 	
 	Update( info )
 	{
-		this.phaseAI.Update( this,info )
+		this.phase = this.phaseAI.Update( this,info )
 		
 		this.animHand.Update()
 	}

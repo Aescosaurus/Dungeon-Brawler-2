@@ -95,9 +95,10 @@ different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	make these as diff games? like db2.1 & 2.2, etc
 	tower defense?
 	strategy game?
+	idle game
 ghosts have diff color/accessory to differentiate which character they are - hat/feather, etc
 once you beat the game it displays you win text, then goes to ng+ - enemies have more hp & dmg
-
+path & bridges on orchard level might need to be 2x2 cuz sometimes they're really hard to walk over
 
 things that need sprites
 	cabbage roller enemy

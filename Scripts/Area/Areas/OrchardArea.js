@@ -69,21 +69,21 @@ class OrchardArea extends Area
 			}
 		}
 		const bossSpots = []
-		for( let y = 2; y < map.height - 3; ++y )
+		for( let y = 3; y < map.height - 5; ++y )
 		{
-			for( let x = 2; x < map.width - 3; ++x )
+			for( let x = 3; x < map.width - 5; ++x )
 			{
 				let valid = true
-				for( let yy = y - 1; yy < y + 3; ++yy )
+				for( let yy = y - 2; yy < y + 4; ++yy )
 				{
-					for( let xx = x - 1; xx < x + 3; ++xx )
+					for( let xx = x - 2; xx < x + 4; ++xx )
 					{
 						const curTile = map.GetTile( xx,yy )
 						if( !( curTile == 0 || curTile == 4 ) )
 						{
 							valid = false
-							xx = x + 3;
-							yy = y + 3;
+							xx = x + 6;
+							yy = y + 6;
 						}
 					}
 				}
@@ -94,6 +94,7 @@ class OrchardArea extends Area
 				}
 			}
 		}
+		if( bossSpots.length < 1 ) bossSpots.push( map.Tile2WorldPos( map.GetCenterTile() ) )
 		this.bossEntity = new GrowingPumpkinEntity( Utils.ArrayChooseRand( bossSpots )
 			.Copy().Scale( map.tileSize ).Add( new Vec2( 4,4 ) ) )
 		entities.push( this.bossEntity )

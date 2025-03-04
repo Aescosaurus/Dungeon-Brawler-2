@@ -71,6 +71,7 @@ class AreaManager
 			enemyUpdateInfo.players = this.playerManager.GetPlayerTargets()
 			enemyUpdateInfo.map = this.map
 			enemyUpdateInfo.enemyBullets = this.enemyBullets
+			enemyUpdateInfo.enemies = this.enemies
 			
 			for( const enemy of this.enemies ) enemy.Update( enemyUpdateInfo )
 		}

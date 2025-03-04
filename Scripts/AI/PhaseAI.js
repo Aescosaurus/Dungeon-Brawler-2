@@ -248,6 +248,7 @@ class PhaseAI
 	
 	GotoNextPhase()
 	{
+		this.phases[this.phaseCounter.GetCurItem()].Reset()
 		this.phaseCounter.Tick()
 	}
 }

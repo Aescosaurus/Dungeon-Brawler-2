@@ -40,11 +40,9 @@ class BanditChief extends Boss
 	
 	Update( info )
 	{
-		const phase = this.phaseAI.Update( this,info )
+		super.Update( info )
 		
-		this.animHand.Update()
-		
-		switch( phase )
+		switch( this.phase )
 		{
 		case 0:
 			this.animHand.SwitchTo( 1,false )
