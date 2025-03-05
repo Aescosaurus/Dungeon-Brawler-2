@@ -41,6 +41,8 @@ class PlayerManager
 		this.enemyBullets = []
 		
 		this.canSpawnSpecificPlayer = true
+		
+		this.mode = PlayerManager.CharSelectMode
 	}
 	
 	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx,attackArea )
@@ -181,18 +183,21 @@ class PlayerManager
 	
 	TryReviveGhosts()
 	{
-		// if( this.GetLivingPlayers().length != this.GetAllPlayers().length ) console.log( "no reviving allowed!" )
-		
-		for( let i = 0; i < this.players.length; ++i )
+		if( this.mode == PlayerManager.RegularAreaMode )
 		{
-			if( this.players[i].isGhost )
+			// if( this.GetLivingPlayers().length != this.GetAllPlayers().length ) console.log( "no reviving allowed!" )
+			
+			for( let i = 0; i < this.players.length; ++i )
 			{
-				this.players[i] = this.deadPlayers[i]
-				this.players[i].hp = this.players[i].maxHP
+				if( this.players[i].isGhost )
+				{
+					this.players[i] = this.deadPlayers[i]
+					this.players[i].hp = this.players[i].maxHP
+				}
 			}
+			
+			this.deadPlayers = []
 		}
-		
-		this.deadPlayers = []
 	}
 	
 	SetInfo( enemies,playerBullets,enemyBullets )
@@ -200,6 +205,30 @@ class PlayerManager
 		this.enemyList = enemies
 		this.playerBullets = playerBullets
 		this.enemyBullets = enemyBullets
+	}
+	
+	SetMode( mode )
+	{
+		this.mode = mode
+	}
+	
+	SpawnCharSelectGhosts( tileList,map )
+	{
+		this.players.length = 0
+		for( let i = 0; i < this.maxPlayers; ++i )
+		{
+			this.players.push( new Ghost( tileList[i]
+				.Copy().Scale( map.tileSize )
+				.Add( Vec2.One().Scale( map.tileSize / 2 ) ),this.ctrls[i] ) )
+		}
+	}
+	
+	SpawnPlayerSwapEntities( tileList,map,entities )
+	{
+		for( let i = 0; i < this.maxPlayers; ++i )
+		{
+			
+		}
 	}
 	
 	GetLivingPlayers()
@@ -228,3 +257,7 @@ class PlayerManager
 		return( this.players )
 	}
 }
+
+PlayerManager.CharSelectMode = 0
+PlayerManager.RegularAreaMode = 1
+PlayerManager.ArcadeMode = 2

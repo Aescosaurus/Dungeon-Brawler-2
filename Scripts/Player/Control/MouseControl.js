@@ -15,7 +15,8 @@ class MouseControl extends PlayerControl
 		const mousePos = new Vec2( mouse.x,mouse.y )
 		const diff = mousePos.Subtract( myPos )
 		
-		return( diff.GetLenSq() > Math.pow( this.minDiff,2 ) ? diff.Normalize() : Vec2.Zero() )
+		return( ( diff.GetLenSq() > Math.pow( this.minDiff,2 ) && mouse.moved )
+			? diff.Normalize() : Vec2.Zero() )
 	}
 	
 	HoldingSuperKeys( mouse,kbd,gpad )

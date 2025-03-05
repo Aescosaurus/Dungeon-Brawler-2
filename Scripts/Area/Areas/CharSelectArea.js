@@ -7,6 +7,8 @@ class CharSelectArea extends Area
 		const height = layout.length
 		this.dummySpots = []
 		const attackTiles = []
+		this.playerSpots = []
+		this.ghostSpots = []
 		for( let y = 0; y < height; ++y )
 		{
 			for( let x = 0; x < width; ++x )
@@ -25,6 +27,13 @@ class CharSelectArea extends Area
 					map.SetTile( x,y,tile )
 					break
 				
+				case 'g':
+					this.ghostSpots.push( tileVec )
+					map.SetTile( x,y,2 )
+					break
+				
+				case 'p':
+					this.playerSpots.push( tileVec )
 				case ' ':
 					tile = 0
 				default:
@@ -33,6 +42,8 @@ class CharSelectArea extends Area
 				}
 			}
 		}
+		
+		Utils.ShuffleArr( this.ghostSpots )
 		
 		// set attack area based on tiles - this.attackArea
 		this.attackArea = new Rect( 9999,-9999,9999,-9999 )
@@ -59,13 +70,25 @@ class CharSelectArea extends Area
 		}
 		return( enemies )
 	}
+	
+	GetGhostTiles()
+	{
+		return( this.ghostSpots )
+	}
+	
+	GetPlayerSpots()
+	{
+		return( this.playerSpots )
+	}
 }
 
 // t = target dummy
+// p = player spot
+// g = potential ghost spot
 CharSelectArea.Layout = [
 	"1111111111111111111111111111",
+	"11p1p1p1p1p1p1   44444444441",
 	"1                44444444441",
-	"1                44444444441",
 	"1                66666666661",
 	"1                66666666661",
 	"1                66666666t61",
@@ -77,10 +100,10 @@ CharSelectArea.Layout = [
 	"1                66666666661",
 	"1                          1",
 	"1                          1",
-	"1                          1",
-	"1                          1",
-	"1                          1",
-	"1                          1",
-	"1                          1",
+	"15555555                   1",
+	"1gggggg5                   1",
+	"1gggggg5                   1",
+	"1gggggg5                   1",
+	"1gggggg5                   1",
 	"1111111111111111111111111111"
 ]

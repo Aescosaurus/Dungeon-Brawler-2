@@ -173,5 +173,15 @@ class AreaManager
 		this.areas[this.curArea].GenerateMap( this.map,this.neutralEntities )
 		
 		this.attackArea = this.areas[this.curArea].GetAttackArea()
+		
+		this.playerManager.SetMode( this.curArea == 0
+			? PlayerManager.CharSelectMode
+			: PlayerManager.RegularAreaMode )
+		if( this.curArea == 0 )
+		{
+			this.playerManager.SpawnCharSelectGhosts( this.areas[0].GetGhostTiles(),this.map )
+			
+			this.playerManager.SpawnPlayerSwapEntities( this.areas[0].GetPlayerSpots(),this.map,this.neutralEntities )
+		}
 	}
 }

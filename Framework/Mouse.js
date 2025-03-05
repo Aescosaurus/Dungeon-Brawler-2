@@ -7,6 +7,7 @@ class Mouse
 		this.down = false
 		this.x = 0
 		this.y = 0
+		this.moved = false
 		const self = this
 		
 		canv.addEventListener( "mousedown",function() { self.down = true } )
@@ -20,6 +21,8 @@ class Mouse
 			
 			self.x = Math.floor( self.x / gfx.xScale )
 			self.y = Math.floor( self.y / gfx.yScale )
+			
+			self.moved = true
 		} )
 	}
 	
