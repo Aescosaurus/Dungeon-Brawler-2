@@ -19,6 +19,8 @@ class HealBauble extends AnimBullet
 		const totalYMove = this.endPos.y - this.startPos.y
 		const t = this.flightTimer.GetDur() * 60
 		this.yVel = ( totalYMove / t ) - ( ( ( g * t * ( t - 1 ) ) / 2 ) / t )
+		
+		this.lifetime = 20 * 60 * Utils.RandFloat( 0.9,1.1 )
 	}
 	
 	Update( map,targets )
@@ -41,6 +43,8 @@ class HealBauble extends AnimBullet
 			//  having it disabled looks ok too tho
 			this.pos.x = this.endPos.x
 			this.pos.y = this.endPos.y
+			
+			if( --this.lifetime < 0 ) this.hp = -1
 		}
 	}
 }
