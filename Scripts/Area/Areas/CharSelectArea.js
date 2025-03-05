@@ -1,6 +1,6 @@
 class CharSelectArea extends Area
 {
-	GenerateMap( map )
+	GenerateMap( map,entities )
 	{
 		const layout = CharSelectArea.Layout
 		const width = layout[0].length
@@ -46,6 +46,8 @@ class CharSelectArea extends Area
 		++this.attackArea.right
 		++this.attackArea.bot
 		this.attackArea.Scale( map.tileSize )
+		
+		entities.push( new CharSelectEntity( map ) )
 	}
 	
 	GenerateEnemyWave( map )
@@ -62,8 +64,8 @@ class CharSelectArea extends Area
 // t = target dummy
 CharSelectArea.Layout = [
 	"1111111111111111111111111111",
-	"1                          1",
-	"1                          1",
+	"1                44444444441",
+	"1                44444444441",
 	"1                66666666661",
 	"1                66666666661",
 	"1                66666666t61",

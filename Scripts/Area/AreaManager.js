@@ -86,6 +86,7 @@ class AreaManager
 		for( const bullet of this.enemyBullets ) bullet.Update( this.map,playerList )
 		
 		const neutralEntityUpdateInfo = {}
+		neutralEntityUpdateInfo.map = this.map
 		for( const entity of this.neutralEntities ) entity.Update( neutralEntityUpdateInfo )
 		
 		this.partHand.Update()
