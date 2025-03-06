@@ -1,8 +1,8 @@
 class Wizard extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,5,"Images/Char/Wizard.png" )
+		super( pos,ctrls,5,"Images/Char/Wizard.png",playerId )
 		
 		this.spd = 0.65
 		

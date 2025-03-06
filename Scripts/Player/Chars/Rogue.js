@@ -1,14 +1,14 @@
 class Rogue extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,4,"Images/Char/Rogue.png" )
+		super( pos,ctrls,4,"Images/Char/Rogue.png",playerId )
 		
 		this.sprSht = new SprSheet( SpriteCodex.LoadSpr( "Images/Char/RogueInvis.png" ),8,8 )
-		this.idleAnim = new Anim( this.sprSht,0,2 )
-		this.walkAnim = new Anim( this.sprSht,1,2 )
+		const idleAnim = new Anim( this.sprSht,0,2 )
+		const walkAnim = new Anim( this.sprSht,1,2 )
 		this.normalAnimHand = this.animHand
-		this.invisAnimHand = new AnimHandler( [ this.idleAnim,this.walkAnim ] )
+		this.invisAnimHand = new AnimHandler( [ idleAnim,walkAnim ] )
 		
 		this.spd = 1.85
 		

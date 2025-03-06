@@ -87,6 +87,8 @@ class AreaManager
 		
 		const neutralEntityUpdateInfo = {}
 		neutralEntityUpdateInfo.map = this.map
+		neutralEntityUpdateInfo.playerManager = this.playerManager
+		neutralEntityUpdateInfo.playerList = playerList
 		for( const entity of this.neutralEntities ) entity.Update( neutralEntityUpdateInfo )
 		
 		this.partHand.Update()

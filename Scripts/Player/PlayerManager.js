@@ -142,13 +142,15 @@ class PlayerManager
 		// if( this.players.length < this.maxPlayers )
 		{
 			const playerPos = pos.Copy().Add( Vec2.One().Scale( map.tileSize / 2 ) )
-			let player = null
-			if( index == 0 ) player = new Knight( playerPos,ctrls )
-			else if( index == 1 ) player = new Archer( playerPos,ctrls )
-			else if( index == 2 ) player = new Healer( playerPos,ctrls )
-			else if( index == 3 ) player = new Rogue( playerPos,ctrls )
-			else if( index == 4 ) player = new Lancer( playerPos,ctrls )
-			else if( index == 5 ) player = new Wizard( playerPos,ctrls )
+			// let player = null
+			// if( index == 0 ) player = new Knight( playerPos,ctrls )
+			// else if( index == 1 ) player = new Archer( playerPos,ctrls )
+			// else if( index == 2 ) player = new Healer( playerPos,ctrls )
+			// else if( index == 3 ) player = new Rogue( playerPos,ctrls )
+			// else if( index == 4 ) player = new Lancer( playerPos,ctrls )
+			// else if( index == 5 ) player = new Wizard( playerPos,ctrls )
+			const player = this.CreatePlayerById( index,pos,ctrls )
+			player.SetPlayerId( index )
 			// this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
@@ -161,6 +163,19 @@ class PlayerManager
 		// {
 		// 	console.log( "Already at max players!" )
 		// }
+	}
+	
+	CreatePlayerById( id,pos,ctrls )
+	{
+		switch( id )
+		{
+			case 0: return( new Knight( pos,ctrls ) )
+			case 1: return( new Archer( pos,ctrls ) )
+			case 2: return( new Healer( pos,ctrls ) )
+			case 3: return( new Rogue( pos,ctrls ) )
+			case 4: return( new Lancer( pos,ctrls ) )
+			case 5: return( new Wizard( pos,ctrls ) )
+		}
 	}
 	
 	// RemovePlayer()
@@ -217,9 +232,7 @@ class PlayerManager
 		this.players.length = 0
 		for( let i = 0; i < this.maxPlayers; ++i )
 		{
-			this.players.push( new Ghost( tileList[i]
-				.Copy().Scale( map.tileSize )
-				.Add( Vec2.One().Scale( map.tileSize / 2 ) ),this.ctrls[i] ) )
+			this.players.push( new Ghost( map.Tile2WorldPosCentered( tileList[i] ),this.ctrls[i] ) )
 		}
 	}
 	
@@ -227,7 +240,20 @@ class PlayerManager
 	{
 		for( let i = 0; i < this.maxPlayers; ++i )
 		{
-			
+			entities.push( new PlayerSwapEntity( map.Tile2WorldPosCentered( tileList[i] ),
+				i,this.CreatePlayerById( i,Vec2.Zero(),this.ctrls[0] ) ) )
+		}
+	}
+	
+	PossessPlayer( ghost,playerId,spawnPos,map )
+	{
+		for( let i = 0; i < this.players.length; ++i )
+		{
+			if( this.players[i] == ghost )
+			{
+				this.players[i] = this.SpawnSpecificPlayer( playerId,ghost.ctrls,spawnPos,map )
+				return
+			}
 		}
 	}
 	

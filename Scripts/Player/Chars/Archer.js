@@ -1,8 +1,8 @@
 class Archer extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,7,"Images/Char/Archer.png" )
+		super( pos,ctrls,7,"Images/Char/Archer.png",playerId )
 		
 		this.spd = 1.4
 		this.bulletSpr = SpriteCodex.LoadSpr( "Images/Bullet/Arrow.png" )

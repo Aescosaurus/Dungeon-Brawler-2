@@ -1,8 +1,8 @@
 class Knight extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,15,"Images/Char/Knight.png" )
+		super( pos,ctrls,15,"Images/Char/Knight.png",playerId )
 		
 		this.spd = 1
 		this.bulletSpr = SpriteCodex.LoadSpr( "Images/Bullet/SwordBolt.png" )

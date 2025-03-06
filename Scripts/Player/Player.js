@@ -1,9 +1,11 @@
 class Player extends Entity
 {
-	constructor( pos,ctrls,hp = 10,sprShtPath = null )
+	constructor( pos,ctrls,hp = 10,sprShtPath = null,playerId )
 	{
 		super( pos,Vec2.One().Scale( 7.5 ),hp )
 		this.maxHP = hp
+		
+		this.playerId = playerId
 		
 		this.ctrls = ctrls
 		
@@ -239,6 +241,11 @@ class Player extends Entity
 		this.enemyBullets = enemyBullets
 	}
 	
+	SetPlayerId( id )
+	{
+		this.playerId = id
+	}
+	
 	GenerateItemInfo()
 	{
 		const info = {}
@@ -255,6 +262,11 @@ class Player extends Entity
 	CanFire( info )
 	{
 		return( info.enemies.length > 0 && info.attackArea.Contains( this.pos ) )
+	}
+	
+	GetPlayerId()
+	{
+		return( this.playerId )
 	}
 	
 	OnEnemyHit( enemy )

@@ -2,7 +2,7 @@ class Ghost extends Player
 {
 	constructor( pos,ctrls )
 	{
-		super( pos,ctrls,0,"Images/Char/Ghost.png" )
+		super( pos,ctrls,0,"Images/Char/Ghost.png",-1 )
 		
 		this.spd = 1.7
 		

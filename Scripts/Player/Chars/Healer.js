@@ -1,8 +1,8 @@
 class Healer extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,8,"Images/Char/Healer.png" )
+		super( pos,ctrls,8,"Images/Char/Healer.png",playerId )
 		
 		this.spinRange = 32
 		this.spinSpd = 5

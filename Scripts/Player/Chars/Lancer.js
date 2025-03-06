@@ -1,8 +1,8 @@
 class Lancer extends Player
 {
-	constructor( pos,ctrls )
+	constructor( pos,ctrls,playerId )
 	{
-		super( pos,ctrls,7,"Images/Char/Lancer.png" )
+		super( pos,ctrls,7,"Images/Char/Lancer.png",playerId )
 		
 		this.spd = 1.5
 		

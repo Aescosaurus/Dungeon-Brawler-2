@@ -136,6 +136,10 @@ class Map
 	{
 		return( tilePos.Copy().Scale( this.tileSize ).Floor() )
 	}
+	Tile2WorldPosCentered( tilePos )
+	{
+		return( this.Tile2WorldPos( tilePos ).Add( Vec2.One().Scale( this.tileSize / 2 ) ) )
+	}
 	
 	IsWalkableTile( x,y )
 	{
