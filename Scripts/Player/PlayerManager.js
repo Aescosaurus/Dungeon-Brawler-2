@@ -40,7 +40,7 @@ class PlayerManager
 		this.playerBullets = []
 		this.enemyBullets = []
 		
-		this.canSpawnSpecificPlayer = true
+		// this.canSpawnSpecificPlayer = true
 		
 		this.mode = PlayerManager.CharSelectMode
 	}
@@ -266,6 +266,16 @@ class PlayerManager
 		for( let i = 0; i < this.players.length; ++i )
 		{
 			if( this.players[i].isGhost ) this.players.splice( i--,1 )
+		}
+	}
+	
+	// move players to valid tiles at start of new area
+	CenterPlayers( map )
+	{
+		for( const player of this.players )
+		{
+			const spawnPos = map.Tile2WorldPosCentered( map.GetRandEmptyTilePos() )
+			player.pos = spawnPos
 		}
 	}
 	

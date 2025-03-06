@@ -126,6 +126,7 @@ class AreaManager
 				this.waveCounter = -1 // cuz it gets incremented later
 				// this.map.GenerateMap()
 				++this.curArea
+				this.playerManager.CenterPlayers( this.map )
 				this.LoadMap()
 			}
 			else
