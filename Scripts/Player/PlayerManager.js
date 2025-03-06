@@ -92,28 +92,31 @@ class PlayerManager
 		// this.canAdd = !addDown
 		// this.canRemove = !removeDown
 		
-		for( let i = 0; i < this.players.length; ++i )
+		if( this.mode == PlayerManager.ArcadeMode )
 		{
-			const curPlayer = this.players[i]
-			if( curPlayer.isPlaceholder && curPlayer.SpawnIn() )
+			for( let i = 0; i < this.players.length; ++i )
 			{
-				let spawnPos = map.Tile2WorldPos( map.GetRandEmptyTilePos() )
-				if( this.players[i].ctrls.isMouse )
+				const curPlayer = this.players[i]
+				if( curPlayer.isPlaceholder && curPlayer.SpawnIn() )
 				{
-					const mouseTile = map.World2TilePos( mouse.GetPos() )
-					if( map.IsTileOnScreen( mouseTile.x,mouseTile.y ) &&
-						map.IsWalkableTile( mouseTile.x,mouseTile.y ) )
-					{
-						spawnPos = map.Tile2WorldPos( mouseTile )
-					}
+					let spawnPos = map.Tile2WorldPosCentered( map.GetRandEmptyTilePos() )
+					// if( this.players[i].ctrls.isMouse )
+					// {
+					// 	const mouseTile = map.World2TilePos( mouse.GetPos() )
+					// 	if( map.IsTileOnScreen( mouseTile.x,mouseTile.y ) &&
+					// 		map.IsWalkableTile( mouseTile.x,mouseTile.y ) )
+					// 	{
+					// 		spawnPos = map.Tile2WorldPos( mouseTile )
+					// 	}
+					// }
+					
+					Utils.ShuffleArr( this.unspawnedPlayers )
+					const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
+						this.players[i].ctrls,
+						spawnPos,
+						map )
+					this.players.splice( i,1,newPlayer )
 				}
-				
-				Utils.ShuffleArr( this.unspawnedPlayers )
-				const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
-					this.players[i].ctrls,
-					spawnPos,
-					map )
-				this.players.splice( i,1,newPlayer )
 			}
 		}
 		
@@ -254,6 +257,14 @@ class PlayerManager
 				this.players[i] = this.SpawnSpecificPlayer( playerId,ghost.ctrls,spawnPos,map )
 				return
 			}
+		}
+	}
+	
+	ClearUnusedGhosts()
+	{
+		for( let i = 0; i < this.players.length; ++i )
+		{
+			if( this.players[i].isGhost ) this.players.splice( i--,1 )
 		}
 	}
 	

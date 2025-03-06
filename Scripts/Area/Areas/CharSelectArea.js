@@ -21,10 +21,9 @@ class CharSelectArea extends Area
 				{
 				case 't':
 					this.dummySpots.push( tilePos )
-					tile = 6
-				case '6':
+				case '-':
 					attackTiles.push( tileVec )
-					map.SetTile( x,y,tile )
+					map.SetTile( x,y,6 )
 					break
 				
 				case 'g':
@@ -71,6 +70,13 @@ class CharSelectArea extends Area
 		return( enemies )
 	}
 	
+	GenerateBoss( map,enemies )
+	{
+		const fakeBoss = new Enemy( new Vec2( -100,-100 ) )
+		fakeBoss.hp = -1
+		return( fakeBoss )
+	}
+	
 	GetGhostTiles()
 	{
 		return( this.ghostSpots )
@@ -85,24 +91,25 @@ class CharSelectArea extends Area
 // t = target dummy
 // p = player spot
 // g = potential ghost spot
+// - = target practice area
 CharSelectArea.Layout = [
 	"1111111111111111111111111111",
-	"1  3   1   1     44444444441",
-	"1  3 p 1 p 1     44444444441",
-	"1  3   1   1     66666666661",
-	"1333             66666666661",
-	"1                66666666t61",
-	"1 p              66666666661",
-	"1                66666666t61",
-	"1111             66666666661",
-	"1                66666666t61",
-	"1 p              66666666661",
-	"1                66666666661",
-	"1111                       1",
+	"1  1   1   1     44444444441",
+	"1  1 p 1 p 1     44444444441",
+	"1  6   3   3     ----------1",
+	"1333   6   6     ----------1",
+	"1                --------t-1",
+	"1 p              ----------1",
+	"1                --------t-1",
+	"13336            ----------1",
+	"1                --------t-1",
+	"1 p              ----------1",
+	"1                ----------1",
+	"13336                      1",
 	"1                          1",
 	"15555555                   1",
-	"1gggggg5                   1",
-	"1gggggg5  1   1   1        1",
+	"1gggggg5  6   6   6        1",
+	"1gggggg5  3   3   3        1",
 	"1gggggg5  1 p 1 p 1        1",
 	"1gggggg5  1   1   1        1",
 	"1111111111111111111111111111"

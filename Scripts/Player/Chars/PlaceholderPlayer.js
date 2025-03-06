@@ -12,6 +12,9 @@ class PlaceholderPlayer extends Player
 	
 	Update( info )
 	{
+		const move = this.ctrls.GetMove( info.mouse,info.kbd,info.gpad,this.pos )
+		if( !move.Equals( Vec2.Zero() ) ) this.spawnIn = true
+		
 		this.UpdateSuper( info )
 	}
 	

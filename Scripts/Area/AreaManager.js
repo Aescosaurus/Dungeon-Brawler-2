@@ -24,9 +24,10 @@ class AreaManager
 		this.enemyActivateTimer = new Timer( 1.0 )
 		this.waveCounter = 0
 		// this.bossInterval = 3
+		this.canSkip = false // don't edit this
 		
 		this.areas = [
-			new CharSelectArea( 1,"Images/Tiles/CharSelectTiles.png" ),
+			new CharSelectArea( 1,"Images/Tiles/CharSelectTiles.png" ), // this must always be areas[0]
 			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
@@ -36,11 +37,11 @@ class AreaManager
 		]
 		
 		this.curArea = 0
+		// CharSelectMode, RegularAreaMode, ArcadeMode
+		this.mode = PlayerManager.CharSelectMode
+		this.enableEnemySpawning = true
 		
 		this.LoadMap()
-		
-		this.enableEnemySpawning = true
-		this.canSkip = false // don't edit this
 	}
 	
 	Update( mouse,kbd,gpad )
@@ -171,6 +172,9 @@ class AreaManager
 	
 	LoadMap()
 	{
+		this.playerManager.ClearUnusedGhosts()
+		this.neutralEntities.length = 0
+		
 		this.map.SetTileSprSht( this.areas[this.curArea].GetTileSheet() )
 		this.areas[this.curArea].GenerateMap( this.map,this.neutralEntities )
 		
@@ -178,7 +182,7 @@ class AreaManager
 		
 		this.playerManager.SetMode( this.curArea == 0
 			? PlayerManager.CharSelectMode
-			: PlayerManager.RegularAreaMode )
+			: this.mode )
 		if( this.curArea == 0 )
 		{
 			this.playerManager.SpawnCharSelectGhosts( this.areas[0].GetGhostTiles(),this.map )
