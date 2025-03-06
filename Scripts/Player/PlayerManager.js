@@ -194,14 +194,15 @@ class PlayerManager
 			{
 				this.players[i].OnKill()
 				this.deadPlayers[i] = this.players[i]
-				this.players[i] = new Ghost( this.players[i].pos.Copy(),this.ctrls[i] )
+				this.players[i] = new Ghost( this.players[i].pos.Copy(),
+					this.players[i].ctrls )
 			}
 		}
 	}
 	
 	TryReviveGhosts()
 	{
-		if( this.mode == PlayerManager.RegularAreaMode )
+		if( this.mode != PlayerManager.CharSelectMode )
 		{
 			// if( this.GetLivingPlayers().length != this.GetAllPlayers().length ) console.log( "no reviving allowed!" )
 			

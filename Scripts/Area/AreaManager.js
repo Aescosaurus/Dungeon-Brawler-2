@@ -39,6 +39,7 @@ class AreaManager
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.mode = PlayerManager.CharSelectMode
+		this.playerManager.SetMode( this.mode )
 		this.enableEnemySpawning = true
 		
 		this.LoadMap()
@@ -188,6 +189,11 @@ class AreaManager
 			this.playerManager.SpawnCharSelectGhosts( this.areas[0].GetGhostTiles(),this.map )
 			
 			this.playerManager.SpawnPlayerSwapEntities( this.areas[0].GetPlayerSpots(),this.map,this.neutralEntities )
+		}
+		else if( this.mode == PlayerManager.CharSelectMode )
+		{
+			this.mode = PlayerManager.RegularAreaMode
+			this.playerManager.SetMode( this.mode )
 		}
 	}
 }
