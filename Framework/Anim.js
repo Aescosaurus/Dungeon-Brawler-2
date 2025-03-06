@@ -48,4 +48,9 @@ class Anim
 	{
 		this.timer.SetDur( 1 / fps )
 	}
+	
+	SetFrame( frame )
+	{
+		this.frameCounter.SetCurItem( frame )
+	}
 }

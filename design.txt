@@ -103,5 +103,7 @@ orchard area enemy wave design
 
 things that need sprites
 	cabbage roller enemy
-	growing pumpkin - entity & boss
+	growing pumpkin - entity & boss - just 1 sprite that grows over time
 	target dummy
+		maybe they have a little ouch animation for when they take damage
+	tiles for dummy area in char select area

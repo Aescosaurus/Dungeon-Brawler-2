@@ -29,6 +29,11 @@ class Counter
 		this.count = count
 	}
 	
+	SetCurItem( cur )
+	{
+		this.cur = cur
+	}
+	
 	IsDone()
 	{
 		return( this.cur >= this.count )

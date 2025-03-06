@@ -23,7 +23,7 @@ class CharSelectArea extends Area
 					this.dummySpots.push( tilePos )
 				case '-':
 					attackTiles.push( tileVec )
-					map.SetTile( x,y,6 )
+					map.SetTile( x,y,8 )
 					break
 				
 				case 'g':
