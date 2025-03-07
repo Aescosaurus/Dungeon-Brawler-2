@@ -34,7 +34,9 @@ class AreaManager
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 		]
 		
-		this.curArea = 3
+		this.ctrlsSpr = new Sprite( "Images/Controls.png" )
+		
+		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.mode = PlayerManager.ArcadeMode
 		this.playerManager.SetMode( this.mode )
@@ -146,6 +148,8 @@ class AreaManager
 	Draw( gfx )
 	{
 		this.map.Draw( gfx )
+		
+		if( this.curArea == 0 ) gfx.DrawSprite( 148,106,this.ctrlsSpr )
 		
 		this.playerManager.Draw( gfx )
 		
