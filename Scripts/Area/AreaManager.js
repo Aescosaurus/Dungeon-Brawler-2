@@ -93,6 +93,7 @@ class AreaManager
 		neutralEntityUpdateInfo.map = this.map
 		neutralEntityUpdateInfo.playerManager = this.playerManager
 		neutralEntityUpdateInfo.playerList = playerList
+		neutralEntityUpdateInfo.areaManager = this
 		for( const entity of this.neutralEntities ) entity.Update( neutralEntityUpdateInfo )
 		
 		this.partHand.Update()
@@ -223,6 +224,11 @@ class AreaManager
 		{
 			this.SetMode( PlayerManager.RegularAreaMode )
 		}
+	}
+	
+	LeaveCharSelect()
+	{
+		this.enemies.length = 0
 	}
 	
 	SetMode( mode )

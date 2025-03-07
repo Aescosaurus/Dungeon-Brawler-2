@@ -16,9 +16,19 @@ class Sprite
 		}
 	}
 	
-	Contains( x,y,sx,sy )
+	Contains( x,y,sx,sy,centered = false )
 	{
+		if( centered )
+		{
+			sx -= this.width
+			sy -= this.height
+		}
 		return( x <= sx + this.width && x >= sx &&
 			y <= sy + this.height && y >= sy )
+	}
+	
+	GetRect()
+	{
+		return( new Rect( 0,this.height,0,this.width ) )
 	}
 }

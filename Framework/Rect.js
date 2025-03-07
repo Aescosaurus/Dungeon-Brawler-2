@@ -8,6 +8,23 @@ class Rect
 		this.right = right
 	}
 	
+	MoveBy( xMove,yMove )
+	{
+		this.top += yMove
+		this.bot += yMove
+		this.left += xMove
+		this.right += xMove
+		return( this )
+	}
+	
+	MoveTo( x,y,centered = false )
+	{
+		const center = this.GetCenter()
+		const xDiff = x - ( centered ? center.x : this.left )
+		const yDiff = y - ( centered ? center.y : this.top )
+		return( this.MoveBy( xDiff,yDiff ) )
+	}
+	
 	GetRandPos()
 	{
 		return( new Vec2(
@@ -65,6 +82,16 @@ class Rect
 		this.right *= amount
 		this.top *= amount
 		this.bot *= amount
+	}
+	
+	GetWidth()
+	{
+		return( this.right - this.left )
+	}
+	
+	GetHeight()
+	{
+		return( this.bot - this.top )
 	}
 }
 
