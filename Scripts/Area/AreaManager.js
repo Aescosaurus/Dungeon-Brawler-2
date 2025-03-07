@@ -25,6 +25,8 @@ class AreaManager
 		this.waveCounter = 0
 		// this.bossInterval = 3
 		this.canSkip = false // don't edit this
+		this.gameOverCheckTimer = new Timer( 0.7 )
+		this.gameOverTimer = new Timer( 1.0 )
 		
 		this.areas = [
 			new CharSelectArea( 1,"Images/Tiles/CharSelectTiles.png" ), // this must always be areas[0]
@@ -38,8 +40,7 @@ class AreaManager
 		
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
-		this.mode = PlayerManager.ArcadeMode
-		this.playerManager.SetMode( this.mode )
+		this.SetMode( PlayerManager.CharSelectMode )
 		this.enableEnemySpawning = true
 		
 		this.LoadMap()
@@ -143,6 +144,25 @@ class AreaManager
 			this.enemySpawnTimer.Reset()
 			++this.waveCounter
 		}
+		
+		if( this.curArea > 0 && this.gameOverCheckTimer.Update() )
+		{
+			if( this.playerManager.AllPlayersGhosts() )
+			{
+				if( this.gameOverTimer.Update() )
+				{
+					this.gameOverTimer.Reset()
+					this.curArea = 0
+					this.enemies.length = 0
+					this.enemyBullets.length = 0
+					this.SetMode( PlayerManager.CharSelectMode )
+					this.enemySpawnTimer.Reset()
+					this.waveCounter = 0
+					this.LoadMap()
+				}
+			}
+			else this.gameOverCheckTimer.Reset()
+		}
 	}
 	
 	Draw( gfx )
@@ -196,8 +216,13 @@ class AreaManager
 		}
 		else if( this.mode == PlayerManager.CharSelectMode )
 		{
-			this.mode = PlayerManager.RegularAreaMode
-			this.playerManager.SetMode( this.mode )
+			this.SetMode( PlayerManager.RegularAreaMode )
 		}
+	}
+	
+	SetMode( mode )
+	{
+		this.mode = mode
+		this.playerManager.SetMode( this.mode )
 	}
 }

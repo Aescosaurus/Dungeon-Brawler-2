@@ -304,6 +304,15 @@ class PlayerManager
 	{
 		return( this.players )
 	}
+	
+	AllPlayersGhosts()
+	{
+		for( const player of this.players )
+		{
+			if( !player.isGhost ) return( false )
+		}
+		return( true )
+	}
 }
 
 PlayerManager.CharSelectMode = 0
