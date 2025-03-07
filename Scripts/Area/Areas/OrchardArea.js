@@ -189,6 +189,7 @@ class OrchardArea extends Area
 		
 		// enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
 		enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+		// enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
 		
 		this.bossEntity.Grow()
 		
@@ -200,7 +201,7 @@ class OrchardArea extends Area
 		for( const spot of this.carrotSpots )
 		{
 			map.SetTile( spot.x,spot.y,0 )
-			// enemies.push( new LivingCarrot( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
+			enemies.push( new LivingCarrot( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
 		}
 		
 		this.bossEntity.hp = -1

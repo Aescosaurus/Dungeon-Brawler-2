@@ -2,7 +2,7 @@ class CabbageRoller extends Enemy
 {
 	constructor( pos )
 	{
-		super( pos/*,"Images/Enemy/LivingCarrot.png"*/ )
+		super( pos,"Images/Enemy/CabbageRoller.png" )
 		this.hp = 11
 		
 		this.spd = 0.4

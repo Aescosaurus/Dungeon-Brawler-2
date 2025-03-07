@@ -4,7 +4,8 @@ class GrowingPumpkinEntity extends Entity
 	{
 		super( pos,Vec2.One().Scale( 7.5 * 0.5 ),9999 )
 		
-		this.col = "#FFAA00"
+		this.sprSht = new SprSheet( new Sprite( "Images/Enemy/Pumpkin.png" ),8,8 )
+		this.idleAnim = new Anim( this.sprSht,0,2,0 )
 		
 		this.growthStages = [
 			Vec2.One().Scale( 0.5 ),
@@ -15,6 +16,12 @@ class GrowingPumpkinEntity extends Entity
 		]
 		
 		this.curGrowthStage = 0
+	}
+	
+	Draw( gfx )
+	{
+		this.idleAnim.DrawScaled( this.pos.Copy().Subtract( Vec2.One().Scale( this.size.x / 2 ) ),
+			this.size.x / 7.5,gfx,-1 )
 	}
 	
 	Grow()

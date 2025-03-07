@@ -2,7 +2,7 @@ class GrowingPumpkinBoss extends Boss
 {
 	constructor( pos )
 	{
-		super( pos,1,"Images/Enemy/BanditChief.png" )
+		super( pos,2,"Images/Enemy/Pumpkin.png",8 )
 		
 		this.hp = 160
 		this.ai = new StandStillAI()

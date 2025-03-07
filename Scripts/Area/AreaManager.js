@@ -36,9 +36,9 @@ class AreaManager
 			new Area( 3,"Images/Tiles/ForestTiles.png" )
 		]
 		
-		this.curArea = 0
+		this.curArea = 3
 		// CharSelectMode, RegularAreaMode, ArcadeMode
-		this.mode = PlayerManager.CharSelectMode
+		this.mode = PlayerManager.ArcadeMode
 		this.playerManager.SetMode( this.mode )
 		this.enableEnemySpawning = true
 		
