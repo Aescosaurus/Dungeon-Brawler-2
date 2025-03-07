@@ -7,6 +7,11 @@ class PlayerSwapEntity extends Entity
 		this.idleAnim = player.idleAnim
 		this.id = id
 		
+		this.markerSpr = new Sprite( "Images/Marker.png" )
+		this.markerFloatTimer = new Timer( 1.0 )
+		this.markerFloatDist = 2
+		this.markerHeightOffset = 7.5
+		
 		this.interactRange = 4
 		
 		this.canSwap = []
@@ -14,6 +19,8 @@ class PlayerSwapEntity extends Entity
 	
 	Update( info )
 	{
+		if( this.markerFloatTimer.Update() ) this.markerFloatTimer.Reset( true )
+		
 		for( let i = 0; i < info.playerList.length; ++i )
 		{
 			const player = info.playerList[i]
@@ -43,7 +50,11 @@ class PlayerSwapEntity extends Entity
 	
 	Draw( gfx )
 	{
-		this.idleAnim.Draw( this.pos.Copy().Subtract( this.idleAnim.sprSht.GetItemSize().Copy().Divide( 2 ) ),
-			gfx )
+		const drawPos = this.pos.Copy().Subtract( this.idleAnim.sprSht.GetItemSize().Copy().Divide( 2 ) )
+		this.idleAnim.Draw( drawPos,gfx )
+		
+		gfx.DrawSprite( drawPos.x,drawPos.y - this.markerHeightOffset -
+			Math.sin( this.markerFloatTimer.GetPercent() * Math.PI * 2.0 ) * this.markerFloatDist,
+			this.markerSpr )
 	}
 }

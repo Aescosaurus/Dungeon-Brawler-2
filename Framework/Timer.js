@@ -14,9 +14,10 @@ class Timer
 		return( this.IsDone() )
 	}
 	
-	Reset()
+	Reset( preserveTime = false )
 	{
-		this.curTime = 0
+		if( preserveTime ) this.curTime -= this.dur
+		else this.curTime = 0
 	}
 	
 	SetDur( dur,setFinished = false )

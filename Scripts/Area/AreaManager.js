@@ -37,6 +37,7 @@ class AreaManager
 		]
 		
 		this.ctrlsSpr = new Sprite( "Images/Controls.png" )
+		this.tutTextSpr = new Sprite( "Images/PossessTutText.png" )
 		
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
@@ -169,7 +170,11 @@ class AreaManager
 	{
 		this.map.Draw( gfx )
 		
-		if( this.curArea == 0 ) gfx.DrawSprite( 148,106,this.ctrlsSpr )
+		if( this.curArea == 0 )
+		{
+			gfx.DrawSprite( 148,109,this.ctrlsSpr )
+			gfx.DrawSprite( 145,97,this.tutTextSpr )
+		}
 		
 		this.playerManager.Draw( gfx )
 		
