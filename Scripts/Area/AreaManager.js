@@ -32,8 +32,6 @@ class AreaManager
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
-			new CastleArea( 99,"Images/Tiles/DungeonTiles.png" ),
-			new Area( 3,"Images/Tiles/ForestTiles.png" )
 		]
 		
 		this.curArea = 3
@@ -126,6 +124,7 @@ class AreaManager
 				this.waveCounter = -1 // cuz it gets incremented later
 				// this.map.GenerateMap()
 				++this.curArea
+				if( this.curArea >= this.areas.length ) this.curArea = 0
 				this.playerManager.CenterPlayers( this.map )
 				this.LoadMap()
 			}
