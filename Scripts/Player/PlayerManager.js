@@ -229,6 +229,29 @@ class PlayerManager
 	SetMode( mode )
 	{
 		this.mode = mode
+		
+		if( mode == PlayerManager.ArcadeMode )
+		{
+			const availableCtrls = []
+			for( const ctrl of this.ctrls )
+			{
+				let ctrlFree = true
+				for( const player of this.players )
+				for( let i = 0; i < this.players.length; ++i )
+				{
+					if( this.players[i].ctrls == ctrl )
+					{
+						ctrlFree = false
+						i = this.players.length
+					}
+				}
+				if( ctrlFree ) availableCtrls.push( ctrl )
+			}
+			for( const ctrl of availableCtrls )
+			{
+				this.players.push( new PlaceholderPlayer( ctrl ) )
+			}
+		}
 	}
 	
 	SpawnCharSelectGhosts( tileList,map )

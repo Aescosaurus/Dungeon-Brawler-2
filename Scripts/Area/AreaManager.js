@@ -222,7 +222,8 @@ class AreaManager
 		}
 		else if( this.mode == PlayerManager.CharSelectMode )
 		{
-			this.SetMode( PlayerManager.RegularAreaMode )
+			// this.SetMode( PlayerManager.RegularAreaMode )
+			this.SetMode( PlayerManager.ArcadeMode )
 		}
 	}
 	
