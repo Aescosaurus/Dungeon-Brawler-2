@@ -31,7 +31,9 @@ class OrchardArea extends Area
 			if( mapTile == 8 ) continue
 			let tileType = 6
 			if( mapTile == 3 ) tileType = 8
-			map.SetTile( tile.x,tile.y,tileType )
+			if( map.IsTileOnScreen( tile.x,tile.y ) ) map.SetTile( tile.x,tile.y,tileType )
+			if( map.IsTileOnScreen( tile.x,tile.y - 1 ) ) map.SetTile( tile.x,tile.y - 1,tileType )
+			// if( map.IsTileOnScreen( tile.x,tile.y + 1 ) ) map.SetTile( tile.x,tile.y + 1,tileType )
 		}
 		
 		const unconnected = this.FindUnconnectedTiles( map )
@@ -48,6 +50,8 @@ class OrchardArea extends Area
 			for( const tile of curve )
 			{
 				if( !map.IsWalkableTile( tile.x,tile.y ) ) map.SetTile( tile.x,tile.y,8 )
+				if( !map.IsWalkableTile( tile.x,tile.y - 1 ) ) map.SetTile( tile.x,tile.y - 1,8 )
+				// if( !map.IsWalkableTile( tile.x,tile.y + 1 ) ) map.SetTile( tile.x,tile.y + 1,8 )
 			}
 		}
 		
@@ -187,9 +191,27 @@ class OrchardArea extends Area
 	{
 		const enemies = []
 		
-		// enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
-		enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
-		// enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
+		switch( this.curWave )
+		{
+		case 0:
+			for( let i = 0; i < 3; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+			break
+		case 1:
+			for( let i = 0; i < 2; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+			enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+			enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
+			break
+		case 2:
+			enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+			for( let i = 0; i < 2; ++i ) enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
+			for( let i = 0; i < 2; ++i ) enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+			break
+		case 3:
+			for( let i = 0; i < 2; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+			for( let i = 0; i < 4; ++i ) enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
+			for( let i = 0; i < 2; ++i ) enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+			break
+		}
 		
 		this.bossEntity.Grow()
 		

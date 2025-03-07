@@ -98,13 +98,3 @@ different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	idle game
 ghosts have diff color/accessory to differentiate which character they are - hat/feather, etc
 once you beat the game it displays you win text, then goes to ng+ - enemies have more hp & dmg
-path & bridges on orchard level might need to be 2x2 cuz sometimes they're really hard to walk over
-orchard area enemy wave design
---maybe scarecrow enemy in orchard
-
-things that need sprites
-	--cabbage roller enemy
-	--growing pumpkin - entity & boss - just 1 sprite that grows over time
-	--target dummy
-		--maybe they have a little ouch animation for when they take damage
-	-tiles for dummy area in char select area
