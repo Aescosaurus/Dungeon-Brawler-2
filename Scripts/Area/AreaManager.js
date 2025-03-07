@@ -36,8 +36,8 @@ class AreaManager
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 		]
 		
-		this.ctrlsSpr = new Sprite( "Images/Controls.png" )
-		this.tutTextSpr = new Sprite( "Images/PossessTutText.png" )
+		this.ctrlsSpr = new Sprite( "Images/UI/Controls.png" )
+		this.tutTextSpr = new Sprite( "Images/UI/PossessTutText.png" )
 		
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
@@ -176,11 +176,11 @@ class AreaManager
 			gfx.DrawSprite( 145,97,this.tutTextSpr )
 		}
 		
-		this.playerManager.Draw( gfx )
-		
 		for( const enemy of this.enemies ) enemy.Draw( gfx )
 		
 		for( const entity of this.neutralEntities ) entity.Draw( gfx )
+		
+		this.playerManager.Draw( gfx )
 			
 		for( const bullet of this.playerBullets ) bullet.Draw( gfx )
 		for( const bullet of this.enemyBullets ) bullet.Draw( gfx )

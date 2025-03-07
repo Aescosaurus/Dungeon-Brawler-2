@@ -58,6 +58,7 @@ class CharSelectArea extends Area
 		this.attackArea.Scale( map.tileSize )
 		
 		entities.push( new CharSelectEntity( map ) )
+		entities.push( new StartButton( new Vec2( 200,50 ) ) )
 	}
 	
 	GenerateEnemyWave( map )

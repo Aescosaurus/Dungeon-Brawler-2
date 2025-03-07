@@ -7,7 +7,7 @@ class PlayerSwapEntity extends Entity
 		this.idleAnim = player.idleAnim
 		this.id = id
 		
-		this.markerSpr = new Sprite( "Images/Marker.png" )
+		this.markerSpr = new Sprite( "Images/UI/Marker.png" )
 		this.markerFloatTimer = new Timer( 1.0 )
 		this.markerFloatDist = 2
 		this.markerHeightOffset = 7.5

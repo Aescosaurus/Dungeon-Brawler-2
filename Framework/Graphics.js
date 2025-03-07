@@ -177,10 +177,16 @@ class Graphics
 		this.ctx.stroke()
 	}
 	
-	DrawSprite( x,y,sprite,flipped = false )
+	DrawSprite( x,y,sprite,flipped = false,centered = false )
 	{
 		x = Math.floor( x )
 		y = Math.floor( y )
+		if( centered )
+		{
+			x -= sprite.width
+			y -= sprite.height
+		}
+		
 		if( flipped )
 		{
 			// gfx.ctx.save()

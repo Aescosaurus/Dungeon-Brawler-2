@@ -4,7 +4,7 @@ class PlayerHeartBar
 	{
 		this.heartWidth = 8
 		this.heartHeight = 7
-		this.sprSht = new SprSheet( SpriteCodex.LoadSpr( "Images/Hearts.png" ),
+		this.sprSht = new SprSheet( SpriteCodex.LoadSpr( "Images/UI/Hearts.png" ),
 			this.heartWidth,this.heartHeight )
 		this.nHeartParts = 6
 		
