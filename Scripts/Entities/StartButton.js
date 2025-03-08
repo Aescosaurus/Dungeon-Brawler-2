@@ -43,7 +43,7 @@ class StartButton extends Entity
 			{
 				this.progress = this.spr.width
 				this.started = true
-				info.areaManager.LeaveCharSelect()
+				info.areaManager.GotoNextArea()
 			}
 		}
 		else if( this.progress > 0 )

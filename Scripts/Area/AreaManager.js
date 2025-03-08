@@ -158,6 +158,7 @@ class AreaManager
 					this.SetMode( PlayerManager.CharSelectMode )
 					this.enemySpawnTimer.Reset()
 					this.waveCounter = 0
+					this.playerManager.ResetPlayerCtrls()
 					for( const area of this.areas ) area.curWave = 0
 					this.LoadMap()
 				}
@@ -238,11 +239,6 @@ class AreaManager
 		if( this.curArea >= this.areas.length ) this.curArea = 0
 		this.LoadMap()
 		this.playerManager.CenterPlayers( this.map )
-	}
-	
-	LeaveCharSelect()
-	{
-		this.enemies.length = 0
 	}
 	
 	SetMode( mode )

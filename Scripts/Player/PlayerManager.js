@@ -344,6 +344,11 @@ class PlayerManager
 		}
 		return( true )
 	}
+	
+	ResetPlayerCtrls()
+	{
+		for( const player of this.players ) player.ctrls.Reset()
+	}
 }
 
 PlayerManager.CharSelectMode = 0
