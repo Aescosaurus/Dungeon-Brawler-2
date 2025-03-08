@@ -73,10 +73,11 @@ class AreaManager
 		this.playerManager.Update( mouse,kbd,gpad,this.map,
 			this.enemies,this.playerBullets,this.enemyBullets,this.gfx,this.attackArea )
 		
+		const playerTargets = this.playerManager.GetPlayerTargets()
 		if( this.enemyActivateTimer.Update() )
 		{
 			const enemyUpdateInfo = {}
-			enemyUpdateInfo.players = this.playerManager.GetPlayerTargets()
+			enemyUpdateInfo.players = playerTargets
 			enemyUpdateInfo.map = this.map
 			enemyUpdateInfo.enemyBullets = this.enemyBullets
 			enemyUpdateInfo.enemies = this.enemies
@@ -87,15 +88,15 @@ class AreaManager
 		{
 			for( const enemy of this.enemies ) enemy.UpdateAnim()
 		}
-			
-		const playerList = this.playerManager.GetAllPlayers()
+		
+		const livingPlayers = this.playerManager.GetLivingPlayers()
 		for( const bullet of this.playerBullets ) bullet.Update( this.map,this.enemies )
-		for( const bullet of this.enemyBullets ) bullet.Update( this.map,playerList )
+		for( const bullet of this.enemyBullets ) bullet.Update( this.map,livingPlayers )
 		
 		const neutralEntityUpdateInfo = {}
 		neutralEntityUpdateInfo.map = this.map
 		neutralEntityUpdateInfo.playerManager = this.playerManager
-		neutralEntityUpdateInfo.playerList = playerList
+		neutralEntityUpdateInfo.playerList = this.playerManager.GetAllPlayers()
 		neutralEntityUpdateInfo.areaManager = this
 		for( const entity of this.neutralEntities ) entity.Update( neutralEntityUpdateInfo )
 		
