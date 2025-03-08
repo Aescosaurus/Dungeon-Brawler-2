@@ -17,13 +17,6 @@ class PlayerManager
 		
 		this.maxPlayers = this.ctrls.length
 		
-		this.unspawnedPlayers = []
-		for( let i = 0; i < this.maxPlayers; ++i )
-		{
-			this.unspawnedPlayers.push( i )
-			this.players.push( new PlaceholderPlayer( this.ctrls[i] ) )
-		}
-		
 		this.colors = [
 			"white",
 			"black",
@@ -40,27 +33,11 @@ class PlayerManager
 		this.playerBullets = []
 		this.enemyBullets = []
 		
-		// this.canSpawnSpecificPlayer = true
-		
 		this.mode = PlayerManager.CharSelectMode
 	}
 	
 	Update( mouse,kbd,gpad,map,enemies,playerBullets,enemyBullets,gfx,attackArea )
 	{
-		// let spawnPlayer = -1
-		// if( kbd.KeyDown( "1" ) ) spawnPlayer = 0
-		// else if( kbd.KeyDown( "2" ) ) spawnPlayer = 1
-		// else if( kbd.KeyDown( "3" ) ) spawnPlayer = 2
-		// else if( kbd.KeyDown( "4" ) ) spawnPlayer = 3
-		// else if( kbd.KeyDown( "5" ) ) spawnPlayer = 4
-		// else if( kbd.KeyDown( "6" ) ) spawnPlayer = 5
-		// else this.canSpawnSpecificPlayer = true
-		// if( spawnPlayer > -1 && this.canSpawnSpecificPlayer )
-		// {
-		// 	this.SpawnSpecificPlayer( spawnPlayer,map.Tile2WorldPos( map.GetRandEmptyTilePos() ),map )
-		// 	this.canSpawnSpecificPlayer = false
-		// }
-		
 		const playerUpdateInfo = {}
 		playerUpdateInfo.mouse = mouse
 		playerUpdateInfo.kbd = kbd
@@ -110,8 +87,8 @@ class PlayerManager
 					// 	}
 					// }
 					
-					Utils.ShuffleArr( this.unspawnedPlayers )
-					const newPlayer = this.SpawnSpecificPlayer( this.unspawnedPlayers.pop(),
+					const newPlayer = this.SpawnSpecificPlayer(
+						Utils.ArrayChooseRand( this.GetAvailableCharIds() ),
 						this.players[i].ctrls,
 						spawnPos,
 						map )
@@ -128,53 +105,18 @@ class PlayerManager
 		for( const player of this.players ) player.Draw( gfx )
 	}
 	
-	// AddPlayer( pos,map )
-	// {
-	// 	if( this.players.length < this.maxPlayers )
-	// 	{
-	// 		this.SpawnSpecificPlayer( this.players.length,pos,map )
-	// 	}
-	// 	else
-	// 	{
-	// 		console.log( "Already at max players!" )
-	// 	}
-	// }
-	
 	SpawnSpecificPlayer( index,ctrls,pos,map )
 	{
 		// if( this.players.length < this.maxPlayers )
 		{
 			const playerPos = pos.Copy().Add( Vec2.One().Scale( map.tileSize / 2 ) )
-			// let player = null
-			// if( index == 0 ) player = new Knight( playerPos,ctrls )
-			// else if( index == 1 ) player = new Archer( playerPos,ctrls )
-			// else if( index == 2 ) player = new Healer( playerPos,ctrls )
-			// else if( index == 3 ) player = new Rogue( playerPos,ctrls )
-			// else if( index == 4 ) player = new Lancer( playerPos,ctrls )
-			// else if( index == 5 ) player = new Wizard( playerPos,ctrls )
 			const player = this.CreatePlayerById( index,pos,ctrls )
 			player.SetPlayerId( index )
 			
-			for( let i = 0; i < this.unspawnedPlayers.length; ++i )
-			{
-				if( index == i )
-				{
-					this.unspawnedPlayers.splice( i,1 )
-					break
-				}
-			}
-			// this.players.push( player )
-			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
 			
-			// const lastPlayer = this.players.length - 1
-			// this.players[lastPlayer].col = this.colors[lastPlayer]
 			return( player )
 		}
-		// else
-		// {
-		// 	console.log( "Already at max players!" )
-		// }
 	}
 	
 	CreatePlayerById( id,pos,ctrls )
@@ -189,11 +131,6 @@ class PlayerManager
 			case 5: return( new Wizard( pos,ctrls ) )
 		}
 	}
-	
-	// RemovePlayer()
-	// {
-	// 	this.players.pop()
-	// }
 	
 	CheckForGhosts()
 	{
@@ -298,6 +235,7 @@ class PlayerManager
 		}
 	}
 	
+	// no longer used, replaced with player inactivity system
 	ClearUnusedGhosts()
 	{
 		for( let i = 0; i < this.players.length; ++i )
@@ -354,6 +292,30 @@ class PlayerManager
 	ResetPlayerCtrls()
 	{
 		for( const player of this.players ) player.ctrls.Reset()
+	}
+	
+	GetAvailableCharIds()
+	{
+		const available = []
+		for( let i = 0; i < this.maxPlayers; ++i ) available.push( i )
+		
+		for( const player of this.players )
+		{
+			const id = player.GetPlayerId()
+			if( id > 0 )
+			{
+				for( let i = 0; i < available.length; ++i )
+				{
+					if( available[i] == id )
+					{
+						available.splice( i,1 )
+						i = available.length
+					}
+				}
+			}
+		}
+		
+		return( available )
 	}
 }
 

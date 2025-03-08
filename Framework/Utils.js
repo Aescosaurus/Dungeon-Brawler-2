@@ -74,6 +74,8 @@ Utils.ShuffleArr = function( arr )
 		arr[i] = arr[cur]
 		arr[cur] = temp
 	}
+	
+	return( arr )
 }
 
 Utils.ArrayChooseRand = function( arr )
