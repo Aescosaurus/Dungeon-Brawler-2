@@ -183,8 +183,8 @@ class Graphics
 		y = Math.floor( y )
 		if( centered )
 		{
-			x -= sprite.width
-			y -= sprite.height
+			x -= sprite.width / 2
+			y -= sprite.height / 2
 		}
 		
 		if( flipped )

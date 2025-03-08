@@ -20,8 +20,8 @@ class Sprite
 	{
 		if( centered )
 		{
-			sx -= this.width
-			sy -= this.height
+			sx -= this.width / 2
+			sy -= this.height / 2
 		}
 		return( x <= sx + this.width && x >= sx &&
 			y <= sy + this.height && y >= sy )

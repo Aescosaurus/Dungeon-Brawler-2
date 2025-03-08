@@ -12,7 +12,7 @@ class PlayerSwapEntity extends Entity
 		this.markerFloatDist = 2
 		this.markerHeightOffset = 7.5
 		
-		this.interactRange = 4
+		this.interactRange = 9
 		
 		this.canSwap = []
 	}

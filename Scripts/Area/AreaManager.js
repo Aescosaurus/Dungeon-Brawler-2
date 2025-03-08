@@ -38,6 +38,7 @@ class AreaManager
 		
 		this.ctrlsSpr = new Sprite( "Images/UI/Controls.png" )
 		this.tutTextSpr = new Sprite( "Images/UI/PossessTutText.png" )
+		this.titleSpr = new Sprite( "Images/UI/Title.png" )
 		
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
@@ -173,8 +174,8 @@ class AreaManager
 		
 		if( this.curArea == 0 )
 		{
-			gfx.DrawSprite( 148,109,this.ctrlsSpr )
 			gfx.DrawSprite( 145,97,this.tutTextSpr )
+			gfx.DrawSprite( 148,109,this.ctrlsSpr )
 		}
 		
 		for( const enemy of this.enemies ) enemy.Draw( gfx )
@@ -187,6 +188,8 @@ class AreaManager
 		for( const bullet of this.enemyBullets ) bullet.Draw( gfx )
 		
 		this.partHand.Draw( gfx )
+		
+		if( this.curArea == 0 ) gfx.DrawSprite( gfx.width / 2,8,this.titleSpr,false,true )
 	}
 	
 	RemoveDeadEntities( entityArr )

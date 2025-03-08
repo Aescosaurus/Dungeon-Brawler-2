@@ -61,8 +61,8 @@ class StartButton extends Entity
 		
 		if( this.progress > 0 )
 		{
-			gfx.DrawRect( Math.floor( this.pos.x - this.spr.width ),
-				Math.floor( this.pos.y - this.spr.height + 16 ),
+			gfx.DrawRect( Math.floor( this.pos.x - this.spr.width / 2 ),
+				Math.floor( this.pos.y - this.spr.height / 2 + 17 ),
 				Math.floor( this.progress ),
 				4,"#9bf4ff" )
 		}

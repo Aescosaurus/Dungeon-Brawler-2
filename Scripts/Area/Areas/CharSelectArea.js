@@ -58,7 +58,7 @@ class CharSelectArea extends Area
 		this.attackArea.Scale( map.tileSize )
 		
 		entities.push( new CharSelectEntity( map ) )
-		entities.push( new StartButton( new Vec2( 200,50 ) ) )
+		entities.push( new StartButton( new Vec2( 182,70 ) ) )
 	}
 	
 	GenerateEnemyWave( map )
@@ -95,6 +95,8 @@ class CharSelectArea extends Area
 // - = target practice area
 CharSelectArea.Layout = [
 	"1111111111111111111111111111",
+	"1111111111111111111111111111",
+	"1111111111111111111111111111",
 	"1  1 p 1 p 144444          1",
 	"1  1   1   144444          1",
 	"1  6   3   344444          1",
@@ -102,16 +104,14 @@ CharSelectArea.Layout = [
 	"1     ------------         1",
 	"1p    ------------         1",
 	"1     -----t------         1",
-	"13336 ------------         1",
+	"1336  ------------         1",
 	"1     --------t---         1",
-	"1p    ------------         1",
-	"1     ---t--------         1",
-	"13336 ------------1111111111",
-	"1     ------------1111111111",
+	"1p    ------------1111111111",
+	"1     ---t--------1111111111",
+	"1336  ------------1111111111",
 	"15555555          1111111111",
 	"1gggggg5  6   6   1111111111",
 	"1gggggg5  3   3   1111111111",
-	"1gggggg5  1   1   1111111111",
 	"1gggggg5  1 p 1 p 1111111111",
 	"1111111111111111111111111111"
 ]
