@@ -39,6 +39,7 @@ class AreaManager
 		this.ctrlsSpr = new Sprite( "Images/UI/Controls.png" )
 		this.tutTextSpr = new Sprite( "Images/UI/PossessTutText.png" )
 		this.titleSpr = new Sprite( "Images/UI/Title.png" )
+		this.gameOverSpr = new Sprite( "Images/UI/GameOver.png" )
 		
 		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
@@ -161,6 +162,7 @@ class AreaManager
 					this.SetMode( PlayerManager.CharSelectMode )
 					this.enemySpawnTimer.Reset()
 					this.waveCounter = 0
+					for( const area of this.areas ) area.curWave = 0
 					this.LoadMap()
 				}
 			}
@@ -190,6 +192,7 @@ class AreaManager
 		this.partHand.Draw( gfx )
 		
 		if( this.curArea == 0 ) gfx.DrawSprite( gfx.width / 2,8,this.titleSpr,false,true )
+		else if( this.gameOverCheckTimer.IsDone() ) gfx.DrawSprite( gfx.width / 2,gfx.height / 2,this.gameOverSpr,false,true )
 	}
 	
 	RemoveDeadEntities( entityArr )

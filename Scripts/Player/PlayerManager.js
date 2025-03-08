@@ -332,7 +332,7 @@ class PlayerManager
 	{
 		for( const player of this.players )
 		{
-			if( !player.isGhost ) return( false )
+			if( !player.isGhost && !player.isPlaceholder ) return( false )
 		}
 		return( true )
 	}
