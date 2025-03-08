@@ -52,6 +52,8 @@ class Player extends Entity
 		
 		// this.PickupItem( new Quiver() )
 		// this.PickupItem( new Quickbow() )
+		
+		this.inactiveTimer = new Timer( 5.0 )
 	}
 	
 	Update( info )
@@ -66,6 +68,7 @@ class Player extends Entity
 	UpdateMove( info )
 	{
 		this.move = this.ctrls.GetMove( info.mouse,info.kbd,info.gpad,this.pos )
+		if( !this.move.Equals( Vec2.Zero() ) ) this.inactiveTimer.Reset()
 		// this.move.Normalize()
 		
 		// this.pos.Add( move.Copy().Scale( this.spd ) )
@@ -78,6 +81,7 @@ class Player extends Entity
 		{
 			if( this.ctrls.HoldingSuperKeys( info.mouse,info.kbd,info.gpad ) )
 			{
+				this.inactiveTimer.Reset()
 				if( this.superChargeTimer.Update() || !this.ctrls.HasSuperTimer() )
 				{
 					this.UseSuper( info )
@@ -121,6 +125,8 @@ class Player extends Entity
 		}
 		
 		this.heartBarDisappearTimer.Update()
+		
+		this.inactiveTimer.Update()
 	}
 	
 	Draw( gfx )
@@ -267,6 +273,11 @@ class Player extends Entity
 	GetPlayerId()
 	{
 		return( this.playerId )
+	}
+	
+	Inactive()
+	{
+		return( this.inactiveTimer.IsDone() )
 	}
 	
 	OnEnemyHit( enemy )

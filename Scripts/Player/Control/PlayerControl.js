@@ -21,4 +21,6 @@ class PlayerControl
 	{
 		return( this.hasSuperTimer )
 	}
+	
+	Reset() {}
 }

@@ -193,9 +193,17 @@ class PlayerManager
 			if( this.players[i].hp <= 0 && !this.players[i].isGhost )
 			{
 				this.players[i].OnKill()
-				this.deadPlayers[i] = this.players[i]
-				this.players[i] = new Ghost( this.players[i].pos.Copy(),
-					this.players[i].ctrls )
+				if( this.players[i].Inactive() )
+				{
+					this.players[i].ctrls.Reset()
+					this.players[i] = new PlaceholderPlayer( this.players[i].ctrls )
+				}
+				else
+				{
+					this.deadPlayers[i] = this.players[i]
+					this.players[i] = new Ghost( this.players[i].pos.Copy(),
+						this.players[i].ctrls )
+				}
 			}
 		}
 	}

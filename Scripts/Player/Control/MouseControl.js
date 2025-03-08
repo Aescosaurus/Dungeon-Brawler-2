@@ -27,4 +27,9 @@ class MouseControl extends PlayerControl
 	{
 		return( mouse.down )
 	}
+	
+	Reset()
+	{
+		this.mouseActivated = false
+	}
 }
