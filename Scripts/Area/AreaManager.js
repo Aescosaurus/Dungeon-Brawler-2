@@ -207,7 +207,7 @@ class AreaManager
 	
 	LoadMap()
 	{
-		this.playerManager.ClearUnusedGhosts()
+		// this.playerManager.ClearUnusedGhosts()
 		this.neutralEntities.length = 0
 		
 		this.map.SetTileSprSht( this.areas[this.curArea].GetTileSheet() )

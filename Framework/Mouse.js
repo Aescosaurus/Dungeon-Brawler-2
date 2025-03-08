@@ -24,6 +24,7 @@ class Mouse
 			
 			self.moved = true
 		} )
+		canv.addEventListener( "contextmenu",function( e ) { e.preventDefault() } )
 	}
 	
 	GetPos()
