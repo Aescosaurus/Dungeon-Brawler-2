@@ -59,11 +59,12 @@ class AreaManager
 				if( this.canSkip )
 				{
 					this.canSkip = false
-					if( this.curArea < this.areas.length - 1 )
-					{
-						this.waveCounter = this.areas[this.curArea].GetBossWave() + 2
-					}
-					this.enemies.length = 0
+					// if( this.curArea < this.areas.length - 1 )
+					// {
+					// 	this.waveCounter = this.areas[this.curArea].GetBossWave() + 2
+					// }
+					// this.enemies.length = 0
+					this.GotoNextArea()
 				}
 			}
 			else this.canSkip = true
@@ -128,12 +129,7 @@ class AreaManager
 			{
 				// todo: loot!
 				
-				this.waveCounter = -1 // cuz it gets incremented later
-				// this.map.GenerateMap()
-				++this.curArea
-				if( this.curArea >= this.areas.length ) this.curArea = 0
-				this.playerManager.CenterPlayers( this.map )
-				this.LoadMap()
+				this.GotoNextArea()
 			}
 			else
 			{
@@ -231,6 +227,17 @@ class AreaManager
 			// this.SetMode( PlayerManager.RegularAreaMode )
 			this.SetMode( PlayerManager.ArcadeMode )
 		}
+	}
+	
+	GotoNextArea()
+	{
+		this.enemies.length = 0
+		this.waveCounter = -1 // cuz it gets incremented later
+		// this.map.GenerateMap()
+		++this.curArea
+		if( this.curArea >= this.areas.length ) this.curArea = 0
+		this.LoadMap()
+		this.playerManager.CenterPlayers( this.map )
 	}
 	
 	LeaveCharSelect()
