@@ -154,6 +154,15 @@ class PlayerManager
 			// else if( index == 5 ) player = new Wizard( playerPos,ctrls )
 			const player = this.CreatePlayerById( index,pos,ctrls )
 			player.SetPlayerId( index )
+			
+			for( let i = 0; i < this.unspawnedPlayers.length; ++i )
+			{
+				if( index == i )
+				{
+					this.unspawnedPlayers.splice( i,1 )
+					break
+				}
+			}
 			// this.players.push( player )
 			
 			player.SetupInfo( this.enemyList,this.playerBullets,this.players,this.enemyBullets )
@@ -238,13 +247,13 @@ class PlayerManager
 	{
 		this.mode = mode
 		
+		// set up placeholder players when switching to arcade mode
 		if( mode == PlayerManager.ArcadeMode )
 		{
 			const availableCtrls = []
 			for( const ctrl of this.ctrls )
 			{
 				let ctrlFree = true
-				for( const player of this.players )
 				for( let i = 0; i < this.players.length; ++i )
 				{
 					if( this.players[i].ctrls == ctrl )
@@ -255,10 +264,7 @@ class PlayerManager
 				}
 				if( ctrlFree ) availableCtrls.push( ctrl )
 			}
-			for( const ctrl of availableCtrls )
-			{
-				this.players.push( new PlaceholderPlayer( ctrl ) )
-			}
+			for( const ctrl of availableCtrls ) this.players.push( new PlaceholderPlayer( ctrl ) )
 		}
 	}
 	
