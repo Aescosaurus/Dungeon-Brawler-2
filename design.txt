@@ -98,3 +98,9 @@ different modes - multiplayer, dungeon speedrun, vampire survivors, etc
 	idle game
 ghosts have diff color/accessory to differentiate which character they are - hat/feather, etc
 once you beat the game it displays you win text, then goes to ng+ - enemies have more hp & dmg
+difficulty slider somehow
+more thematic way to incorporate stand here to start button & progress bar
+some way to indicate ability readiness
+	flash of cyan particles when ability is ready, steady stream of occasional blue particles after that
+	maybe make ability just tap left+right keys so players can do it by accident more easily
+players get random item after beating each boss - all players get one of the same item

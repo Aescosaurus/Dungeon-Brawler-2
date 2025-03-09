@@ -104,24 +104,6 @@ class OrchardArea extends Area
 		entities.push( this.bossEntity )
 	}
 	
-	// cubic bezier curve
-	GenerateCurve( startPos,endPos,ctrl1,ctrl2,map )
-	{
-		const curve = []
-		const step = 0.00001
-		for( let i = 0; i < 1 + step; i += step )
-		{
-			const x = Math.round( Math.pow( 1 - i,3 ) * startPos.x + 3 * Math.pow( 1 - i,2 ) * i * ctrl1.x +
-				3 * ( 1 - i ) * i * i * ctrl2.x + i * i * i * endPos.x )
-			const y = Math.round( Math.pow( 1 - i,3 ) * startPos.y + 3 * Math.pow( 1 - i,2 ) * i * ctrl1.y +
-				3 * ( 1 - i ) * i * i * ctrl2.y + i * i * i * endPos.y )
-			
-			if( map.IsTileOnScreen( x,y ) ) curve.push( new Vec2( x,y ) )
-		}
-		
-		return( curve )
-	}
-	
 	FindUnconnectedTiles( map )
 	{
 		function AddConnectedTiles( pos,arr,existing )

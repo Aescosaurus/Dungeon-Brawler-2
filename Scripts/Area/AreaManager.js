@@ -33,6 +33,7 @@ class AreaManager
 			new TavernArea( 3,"Images/Tiles/TavernTiles.png" ),
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
+			new ForestArea( 4,"Images/Tiles/ForestTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 		]
 		
@@ -41,10 +42,11 @@ class AreaManager
 		this.titleSpr = new Sprite( "Images/UI/Title.png" )
 		this.gameOverSpr = new Sprite( "Images/UI/GameOver.png" )
 		
-		this.curArea = 0
+		this.curArea = 4
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.SetMode( PlayerManager.CharSelectMode )
-		this.enableEnemySpawning = true
+		this.enableEnemySpawning = false
+		this.enableGameOver = false
 		
 		this.LoadMap()
 	}
@@ -146,7 +148,7 @@ class AreaManager
 			++this.waveCounter
 		}
 		
-		if( this.curArea > 0 && this.gameOverCheckTimer.Update() )
+		if( this.enableGameOver && this.curArea > 0 && this.gameOverCheckTimer.Update() )
 		{
 			if( this.playerManager.AllPlayersGhosts() )
 			{

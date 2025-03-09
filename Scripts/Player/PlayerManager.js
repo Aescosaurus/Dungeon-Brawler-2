@@ -235,7 +235,6 @@ class PlayerManager
 		}
 	}
 	
-	// no longer used, replaced with player inactivity system
 	ClearUnusedGhosts()
 	{
 		for( let i = 0; i < this.players.length; ++i )
