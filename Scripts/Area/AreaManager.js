@@ -45,7 +45,7 @@ class AreaManager
 		this.curArea = 4
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.SetMode( PlayerManager.CharSelectMode )
-		this.enableEnemySpawning = false
+		this.enableEnemySpawning = true
 		this.enableGameOver = false
 		
 		this.LoadMap()

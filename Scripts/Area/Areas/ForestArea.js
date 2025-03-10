@@ -35,4 +35,13 @@ class ForestArea extends Area
 			for( const tile of curve ) map.SetTile( tile.x,tile.y,1 )
 		}
 	}
+	
+	GenerateEnemyWave( map )
+	{
+		const enemies = []
+		
+		enemies.push( new EvilMushroom( this.GetRandEnemySpawnPos( map ) ) )
+		
+		return( enemies )
+	}
 }

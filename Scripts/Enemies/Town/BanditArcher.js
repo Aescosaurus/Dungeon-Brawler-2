@@ -8,9 +8,9 @@ class BanditArcher extends Enemy
 		this.spd = 0.3
 		this.moveDelay.SetDur( 1.4 )
 		
-		this.attackTimer = new Timer( 3,false,true )
-		this.attackPattern = new ShotPattern( 1 )
-		this.sprayPattern = new SprayPattern( this.attackPattern,7,0.4,3 )
+		this.attackPattern = null
+		this.sprayTimer = new Timer( 3,false,true )
+		this.sprayPattern = new SprayPattern( new ShotPattern( 1 ),7,0.4,3 )
 		this.bulletSpd = 1
 		this.bulletRange = 140
 		this.targetStyle = TargetFinder.FindFarthest
@@ -18,45 +18,19 @@ class BanditArcher extends Enemy
 		this.sprayTargetPos = null
 	}
 	
-	Update( info )
+	UpdateMove( info )
 	{
-		if( !this.attackTimer.Update() ) this.UpdateMove( info )
-		
-		this.UpdateAttack( info )
-		
-		this.UpdateAnim()
+		if( !this.sprayTimer.IsDone() ) super.UpdateMove( info )
 	}
 	
-	UpdateAttack( info )
+	SetSprayTarget( info )
 	{
-		if( this.attackTimer.Update() )
+		const target = this.targetStyle( this,info.players )
+		if( target != null )
 		{
-			if( this.sprayTargetPos == null )
-			{
-				const target = this.targetStyle( this,info.players )
-				if( target != null )
-				{
-					this.sprayTargetPos = target.pos.Copy()
-					this.dir = Math.sign( this.sprayTargetPos.Copy().Subtract( this.pos ).x )
-					this.aiMove.SetXY( 0,0 )
-				}
-			}
-			else
-			{
-				const result = this.sprayPattern.Update( this.pos,this.sprayTargetPos )
-				if( result )
-				{
-					if( result.done )
-					{
-						this.attackTimer.Reset()
-						this.sprayTargetPos = null
-					}
-					else
-					{
-						for( const ang of result.angs ) this.FireBullet( ang,info )
-					}
-				}
-			}
+			this.sprayTargetPos = target.pos.Copy()
+			this.dir = Math.sign( this.sprayTargetPos.Copy().Subtract( this.pos ).x )
+			this.aiMove.SetXY( 0,0 )
 		}
 	}
 }

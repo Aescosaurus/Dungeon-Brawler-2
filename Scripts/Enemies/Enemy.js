@@ -24,7 +24,10 @@ class Enemy extends Entity
 		this.moveDelay = new Timer( 0.5,false,true )
 		
 		this.attackTimer = new Timer( 2.5,false,true )
+		this.sprayTimer = new Timer( 2.5,false,true )
+		this.sprayTarget = null
 		this.attackPattern = new ShotPattern( 1 )
+		this.sprayPattern = null
 		this.bulletSpd = 1.2
 		this.bulletRange = 80
 		this.targetStyle = TargetFinder.FindClosest
@@ -38,6 +41,8 @@ class Enemy extends Entity
 		this.UpdateMove( info )
 		
 		this.UpdateAttack( info )
+		
+		this.UpdateSpray( info )
 		
 		this.UpdateAnim()
 	}
@@ -55,7 +60,7 @@ class Enemy extends Entity
 	
 	UpdateAttack( info )
 	{
-		if( this.attackTimer.Update() )
+		if( this.attackPattern && this.attackTimer.Update() )
 		{
 			this.attackTimer.Reset()
 			
@@ -66,6 +71,37 @@ class Enemy extends Entity
 				const angs = this.attackPattern.GetShotAngles( this.pos,target.pos,target )
 				for( const ang of angs ) this.FireBullet( ang,info )
 			}
+		}
+	}
+	
+	UpdateSpray( info )
+	{
+		if( this.sprayPattern && this.sprayTimer.Update() )
+		{
+			if( this.sprayTarget == null )
+			{
+				this.SetSprayTarget( info )
+				if( this.sprayTarget == null )
+				{
+					this.sprayTimer.Reset()
+				}
+			}
+			
+			const result = this.sprayPattern.Update( this.pos,this.sprayTarget )
+			if( result )
+			{
+				if( result.done )
+				{
+					this.sprayTarget = null
+					this.sprayTimer.Reset()
+					return( true )
+				}
+				else
+				{
+					for( const ang of result.angs ) this.FireBullet( ang,info )
+				}
+			}
+			return( false )
 		}
 	}
 	
@@ -121,6 +157,12 @@ class Enemy extends Entity
 	ToggleInvul( invul )
 	{
 		this.invul = invul
+	}
+	
+	SetSprayTarget( info )
+	{
+		const target = this.targetStyle( this,info.players )
+		if( target != null ) this.sprayTarget = target.pos.Copy()
 	}
 	
 	GetVelocity()

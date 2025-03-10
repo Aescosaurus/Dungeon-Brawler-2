@@ -104,3 +104,13 @@ some way to indicate ability readiness
 	flash of cyan particles when ability is ready, steady stream of occasional blue particles after that
 	maybe make ability just tap left+right keys so players can do it by accident more easily
 players get random item after beating each boss - all players get one of the same item
+
+
+forest area
+	a couple baby mushroom tiles spawn in every wave
+		maybe this in swamp area instead
+	if you don't stomp on them they turn into mushroom enemies the next wave
+		mushroom enemies drop a baby mushroom (spore) when defeated, so you have to make sure to stomp it
+			or else it will respawn next wave
+	wolf enemy - goes medium slow speed, every once in a while dashes towards you doing a 3 shot shotgun
+	mushroom enemy - spray of 2 shotgun of 2 bullets, to the left & right of player in pretty wide arc
