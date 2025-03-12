@@ -36,6 +36,17 @@ class Area
 		return( enemies )
 	}
 	
+	SpawnEnemies( type,amount,enemyList,map )
+	{
+		for( let i = 0; i < amount; ++i ) enemyList.push( this.SpawnSingleEnemy( type,this.GetRandEnemySpawnPos( map ) ) )
+	}
+	
+	SpawnSingleEnemy( type,pos )
+	{
+		console.log( "Spawn enemy not overridden!" )
+		console.trace()
+	}
+	
 	GenerateBoss( map )
 	{
 		return( new Boss( map.Tile2WorldPos( map.GetCenterTile() ) ) )

@@ -67,26 +67,12 @@ class TavernArea extends Area
 		return( enemies )
 	}
 	
-	SpawnEnemies( type,amount,enemyList,map )
+	SpawnSingleEnemy( type,pos )
 	{
-		for( let i = 0; i < amount; ++i )
+		switch( type )
 		{
-			const spawnPos = this.GetRandEnemySpawnPos( map )
-			let enemy = null
-			switch( type )
-			{
-			case 0:
-				enemy = new TavernBrawler( spawnPos )
-				break
-			case 1:
-				enemy = new LivingWineBottle( spawnPos )
-				break
-			default:
-				enemy = new Enemy( spawnPos )
-				break
-			}
-			
-			enemyList.push( enemy )
+		case 0: return( new TavernBrawler( pos ) )
+		case 1: return( new LivingWineBottle( pos ) )
 		}
 	}
 	

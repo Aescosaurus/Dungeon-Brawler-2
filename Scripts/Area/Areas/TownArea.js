@@ -103,9 +103,6 @@ class TownArea extends Area
 			this.SpawnEnemies( 1,3,enemies,map )
 			this.SpawnEnemies( 2,3,enemies,map )
 			break
-		default:
-			this.SpawnEnemies( -1,3,enemies,map )
-			break
 		}
 		
 		return( enemies )
@@ -116,29 +113,19 @@ class TownArea extends Area
 	{
 		for( let i = 0; i < amount; ++i )
 		{
-			let enemy = null
-			switch( type )
-			{
-			case 0: // archer
-				enemy = new BanditArcher( map.Tile2WorldPos(
-					this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
-					.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) )
-				break
-			case 1: // thief
-				enemy = new Thief( map.Tile2WorldPos(
-					this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
-					.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) )
-				break
-			case 2: // warrior
-				enemy = new BanditWarrior( map.Tile2WorldPos(
-					this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
-					.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) )
-				break
-			default:
-				enemy = new Enemy( new Vec2( 50,50 ) )
-				break
-			}
-			enemyList.push( enemy )
+			enemyList.push( this.SpawnSingleEnemy( type,map.Tile2WorldPos(
+				this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
+				.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) ) )
+		}
+	}
+	
+	SpawnSingleEnemy( type,pos )
+	{
+		switch( type )
+		{
+		case 0: return( new BanditArcher( pos ) )
+		case 1: return( new Thief( pos ) )
+		case 2: return( new BanditWarrior( pos ) )
 		}
 	}
 	

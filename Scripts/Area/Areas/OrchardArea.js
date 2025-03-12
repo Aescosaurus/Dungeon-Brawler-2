@@ -176,28 +176,37 @@ class OrchardArea extends Area
 		switch( this.curWave )
 		{
 		case 0:
-			for( let i = 0; i < 3; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
+			this.SpawnEnemies( 0,3,enemies,map )
 			break
 		case 1:
-			for( let i = 0; i < 2; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
-			enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
-			enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
+			this.SpawnEnemies( 0,2,enemies,map )
+			this.SpawnEnemies( 1,2,enemies,map )
 			break
 		case 2:
-			enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
-			for( let i = 0; i < 2; ++i ) enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
-			for( let i = 0; i < 2; ++i ) enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+			this.SpawnEnemies( 0,1,enemies,map )
+			this.SpawnEnemies( 1,3,enemies,map )
+			this.SpawnEnemies( 2,1,enemies,map )
 			break
 		case 3:
-			for( let i = 0; i < 2; ++i ) enemies.push( new LivingCarrot( this.GetRandEnemySpawnPos( map ) ) )
-			for( let i = 0; i < 4; ++i ) enemies.push( new Scarecrow( this.GetRandEnemySpawnPos( map ) ) )
-			for( let i = 0; i < 2; ++i ) enemies.push( new CabbageRoller( this.GetRandEnemySpawnPos( map ) ) )
+			this.SpawnEnemies( 0,2,enemies,map )
+			this.SpawnEnemies( 1,3,enemies,map )
+			this.SpawnEnemies( 2,3,enemies,map )
 			break
 		}
 		
 		this.bossEntity.Grow()
 		
 		return( enemies )
+	}
+	
+	SpawnSingleEnemy( type,pos )
+	{
+		switch( type )
+		{
+		case 0: return( new LivingCarrot( pos ) )
+		case 1: return( new CabbageRoller( pos ) )
+		case 2: return( new Scarecrow( pos ) )
+		}
 	}
 	
 	GenerateBoss( map,enemies )
