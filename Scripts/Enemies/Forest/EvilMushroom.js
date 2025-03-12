@@ -5,15 +5,12 @@ class EvilMushroom extends Enemy
 		super( pos,"Images/Enemy/Mushroom.png" )
 		this.hp = 14
 		
-		this.spd = 0.27
+		this.spd = 0.32
 		
-		this.attackTimer = new Timer( 2.0,false,true )
+		this.attackTimer = new Timer( 2.1,false,true )
 		this.attackPattern = null
 		this.sprayPattern = new SprayPattern( new ShotPattern( 2,35 ),30,0.25,2,true )
-		this.bulletSpd = 1.3
-		this.bulletRange = 190
-		this.targetStyle = TargetFinder.FindClosest
-		
-		this.curAttack = 0
+		this.bulletSpd = 1.4
+		this.bulletRange = 200
 	}
 }

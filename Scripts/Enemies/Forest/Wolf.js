@@ -5,15 +5,31 @@ class Wolf extends Enemy
 		super( pos,"Images/Enemy/Wolf.png" )
 		this.hp = 17
 		
-		this.spd = 0.27
+		this.baseSpd = 0.27
+		this.spd = this.baseSpd
+		this.dashSpd = 0.75
+		this.dashDur = new Timer( 0.4 )
+		this.dashTimer = new Timer( 1.8 )
 		
-		this.attackTimer = new Timer( 2.5,false,true )
-		this.attackPattern = new ShotPattern( 4,-1,true,45 )
-		this.sprayPattern = new SprayPattern( new ShotPattern( 1 ),0,0.3,2 )
+		this.attackTimer = new Timer( 1.2,false,true )
+		this.attackPattern = new ShotPattern( 3,20 )
 		this.bulletSpd = 1.3
 		this.bulletRange = 190
-		this.targetStyle = TargetFinder.FindClosest
+	}
+	
+	Update( info )
+	{
+		super.Update( info )
 		
-		this.curAttack = 0
+		if( this.dashTimer.Update() )
+		{
+			if( this.dashDur.Update() )
+			{
+				this.spd = this.baseSpd
+				this.dashDur.Reset()
+				this.dashTimer.Reset()
+			}
+			else this.spd = this.dashSpd
+		}
 	}
 }

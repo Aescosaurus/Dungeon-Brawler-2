@@ -40,7 +40,9 @@ class ForestArea extends Area
 	{
 		const enemies = []
 		
-		enemies.push( new EvilMushroom( this.GetRandEnemySpawnPos( map ) ) )
+		// enemies.push( new EvilMushroom( this.GetRandEnemySpawnPos( map ) ) )
+		// enemies.push( new Wolf( this.GetRandEnemySpawnPos( map ) ) )
+		enemies.push( new LivingTree( this.GetRandEnemySpawnPos( map ) ) )
 		
 		return( enemies )
 	}

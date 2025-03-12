@@ -21,14 +21,15 @@ diff chars to choose from with diff attacks, stats, & supers
 				maybe this is just ult for pilot?
 			robot
 			alien
+		undersea
 
 starting room
-	start out as spark/ghost & choose char from lineup
-		ghosts start out in holding area
+	--start out as spark/ghost & choose char from lineup
+		--ghosts start out in holding area
 			can be moved to use as ai area?
-			must stand in ready to start area to be added to the game
-				if any players are moving outside this area it won't start until they either stop or enter area
-	target dummies to test your attacks on
+			--must stand in ready to start area to be added to the game
+				/if any players are moving outside this area it won't start until they either stop or enter area
+	--target dummies to test your attacks on
 	button to add/remove ai chars
 		hold buttons for a sec to take control of ai, it takes ctrl back after 2s idle?
 
@@ -112,5 +113,5 @@ forest area
 	if you don't stomp on them they turn into mushroom enemies the next wave
 		mushroom enemies drop a baby mushroom (spore) when defeated, so you have to make sure to stomp it
 			or else it will respawn next wave
-	wolf enemy - goes medium slow speed, every once in a while dashes towards you doing a 3 shot shotgun
-	mushroom enemy - spray of 2 shotgun of 2 bullets, to the left & right of player in pretty wide arc
+	--wolf enemy - goes medium slow speed, every once in a while dashes towards you doing a 3 shot shotgun
+	--mushroom enemy - spray of 2 shotgun of 2 bullets, to the left & right of player in pretty wide arc
