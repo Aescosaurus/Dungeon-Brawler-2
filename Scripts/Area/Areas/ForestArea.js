@@ -40,10 +40,37 @@ class ForestArea extends Area
 	{
 		const enemies = []
 		
-		// enemies.push( new EvilMushroom( this.GetRandEnemySpawnPos( map ) ) )
-		// enemies.push( new Wolf( this.GetRandEnemySpawnPos( map ) ) )
-		enemies.push( new LivingTree( this.GetRandEnemySpawnPos( map ) ) )
+		switch( this.curWave )
+		{
+		case 0:
+			this.SpawnEnemies( Math.random() > 0.3 ? 0 : 1,5,enemies,map )
+			break
+		case 1:
+			this.SpawnEnemies( 0,3,enemies,map )
+			this.SpawnEnemies( 2,2,enemies,map )
+			break
+		case 2:
+			this.SpawnEnemies( 0,2,enemies,map )
+			this.SpawnEnemies( 2,4,enemies,map )
+			this.SpawnEnemies( 3,1,enemies,map )
+			break
+		case 3:
+			this.SpawnEnemies( 2,4,enemies,map )
+			this.SpawnEnemies( 3,4,enemies,map )
+			break
+		}
 		
 		return( enemies )
+	}
+	
+	SpawnSingleEnemy( type,pos )
+	{
+		switch( type )
+		{
+		case 0: return( new EvilMushroom( pos ) )
+		case 1: return( new Thief( pos ) )
+		case 2: return( new Wolf( pos ) )
+		case 3: return( new LivingTree( pos ) )
+		}
 	}
 }
