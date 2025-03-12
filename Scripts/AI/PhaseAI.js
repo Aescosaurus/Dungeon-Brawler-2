@@ -18,9 +18,9 @@ class PhaseShotPattern extends ShotPattern
 class PhaseSprayPattern extends SprayPattern
 {
 	constructor( shotPattern,rotSpd,shotInterval,shotCount,
-		shotSpd = -1,shotRange = -1 )
+		shotSpd = -1,shotRange = -1,centered = false )
 	{
-		super( shotPattern,rotSpd,shotInterval,shotCount )
+		super( shotPattern,rotSpd,shotInterval,shotCount,centered )
 		
 		this.shotSpd = shotSpd
 		this.shotRange = shotRange
@@ -90,7 +90,18 @@ class PhaseAttackPatternSpray extends PhasePattern
 	
 	Update( self,info )
 	{
-		if( this.done ) return( true )
+		// if( this.done ) return( true )
+		
+		if( this.done )
+		{
+			if( this.refire && this.refire.Update() )
+			{
+				this.refire.Reset()
+				this.sprayPattern.Reset()
+				this.done = false
+			}
+			return( true )
+		}
 		
 		if( this.targetPos == null )
 		{
@@ -118,13 +129,6 @@ class PhaseAttackPatternSpray extends PhasePattern
 				
 				for( const ang of result.angs ) self.FireBullet( ang,info,spd,range )
 			}
-		}
-		
-		if( this.refire && this.refire.Update() )
-		{
-			this.refire.Reset()
-			this.sprayPattern.Reset()
-			this.done = false
 		}
 		
 		return( false )
