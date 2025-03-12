@@ -21,7 +21,7 @@ class Boss extends Enemy
 	{
 		if( this.phaseAI ) this.phase = this.phaseAI.Update( this,info )
 		
-		this.animHand.Update()
+		this.UpdateAnim()
 	}
 	
 	UpdateAnim()

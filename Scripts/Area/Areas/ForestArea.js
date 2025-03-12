@@ -23,7 +23,7 @@ class ForestArea extends Area
 		
 		Utils.ShuffleArr( randSquares )
 		const bossSquare = randSquares.pop()
-		const bossPos = bossSquare.GetCenter()
+		this.bossPos = map.Tile2WorldPosCentered( bossSquare.GetCenter() )
 		// todo: spawn boss as neutral entity from start, slowly firing bullets until activated
 		
 		for( let i = 0; i < nForests; ++i )
@@ -34,6 +34,9 @@ class ForestArea extends Area
 				square.GetRandPos(),square.GetRandPos(),map )
 			for( const tile of curve ) map.SetTile( tile.x,tile.y,1 )
 		}
+		
+		this.treeEntity = new BigTreeEntity( this.bossPos )
+		entities.push( this.treeEntity )
 	}
 	
 	GenerateEnemyWave( map )
@@ -43,7 +46,9 @@ class ForestArea extends Area
 		switch( this.curWave )
 		{
 		case 0:
-			this.SpawnEnemies( Math.random() > 0.3 ? 0 : 1,5,enemies,map )
+			this.SpawnEnemies( 0,2,enemies,map )
+			if( Math.random() < 0.4 ) this.SpawnEnemies( 0,3,enemies,map )
+			else this.SpawnEnemies( 1,4,enemies,map )
 			break
 		case 1:
 			this.SpawnEnemies( 0,3,enemies,map )
@@ -72,5 +77,12 @@ class ForestArea extends Area
 		case 2: return( new Wolf( pos ) )
 		case 3: return( new LivingTree( pos ) )
 		}
+	}
+	
+	GenerateBoss( map,enemies )
+	{
+		this.treeEntity.hp = -1
+		
+		return( new BigTreeBoss( this.treeEntity.pos.Copy() ) )
 	}
 }

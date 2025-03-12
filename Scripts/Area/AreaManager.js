@@ -100,6 +100,7 @@ class AreaManager
 		neutralEntityUpdateInfo.playerManager = this.playerManager
 		neutralEntityUpdateInfo.playerList = this.playerManager.GetAllPlayers()
 		neutralEntityUpdateInfo.areaManager = this
+		neutralEntityUpdateInfo.enemyBullets = this.enemyBullets
 		for( const entity of this.neutralEntities ) entity.Update( neutralEntityUpdateInfo )
 		
 		this.partHand.Update()
@@ -180,9 +181,9 @@ class AreaManager
 			gfx.DrawSprite( 148,109,this.ctrlsSpr )
 		}
 		
-		for( const enemy of this.enemies ) enemy.Draw( gfx )
-		
 		for( const entity of this.neutralEntities ) entity.Draw( gfx )
+		
+		for( const enemy of this.enemies ) enemy.Draw( gfx )
 		
 		this.playerManager.Draw( gfx )
 			

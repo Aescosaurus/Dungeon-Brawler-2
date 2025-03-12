@@ -10,7 +10,7 @@ class EvilMushroom extends Enemy
 		this.attackTimer = new Timer( 2.1,false,true )
 		this.attackPattern = null
 		this.sprayPattern = new SprayPattern( new ShotPattern( 2,35 ),30,0.25,2,true )
-		this.bulletSpd = 1.4
+		this.bulletSpd = 1.1
 		this.bulletRange = 200
 	}
 }

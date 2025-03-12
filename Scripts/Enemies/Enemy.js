@@ -84,6 +84,7 @@ class Enemy extends Entity
 				if( this.sprayTarget == null )
 				{
 					this.sprayTimer.Reset()
+					return
 				}
 			}
 			
