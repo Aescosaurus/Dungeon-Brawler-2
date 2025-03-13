@@ -34,6 +34,7 @@ class AreaManager
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
 			new ForestArea( 4,"Images/Tiles/ForestTiles.png" ),
+			new SwampArea( 4,"Images/Tiles/SwampTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 		]
 		
@@ -42,10 +43,10 @@ class AreaManager
 		this.titleSpr = new Sprite( "Images/UI/Title.png" )
 		this.gameOverSpr = new Sprite( "Images/UI/GameOver.png" )
 		
-		this.curArea = 4
+		this.curArea = 5
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.SetMode( PlayerManager.CharSelectMode )
-		this.enableEnemySpawning = true
+		this.enableEnemySpawning = false
 		this.enableGameOver = false
 		
 		this.LoadMap()

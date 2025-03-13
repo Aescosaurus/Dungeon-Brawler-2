@@ -105,6 +105,7 @@ some way to indicate ability readiness
 	flash of cyan particles when ability is ready, steady stream of occasional blue particles after that
 	maybe make ability just tap left+right keys so players can do it by accident more easily
 players get random item after beating each boss - all players get one of the same item
+	maybe have a shop every few levels where you can choose items
 
 
 forest area
@@ -115,3 +116,11 @@ forest area
 			or else it will respawn next wave
 	--wolf enemy - goes medium slow speed, every once in a while dashes towards you doing a 3 shot shotgun
 	--mushroom enemy - spray of 2 shotgun of 2 bullets, to the left & right of player in pretty wide arc
+maybe swamp area has the respawning mushrooms idea
+	like there's just a ton of mushrooms & it's like a swarm style mission
+		diff mushroom type for the swarm mushrooms with less deadly attack pattern
+		still can have a few of the current mushrooms each wave tho for some difficulty
+		2 diff mushroom types that have diff targeting & attack ai - target closest vs farthest,
+			or maybe based on hp?
+	mushroom trees scattered about that mushrooms spawn nearby
+	maybe boss is a giant mushroom among a swarm of mini mushrooms

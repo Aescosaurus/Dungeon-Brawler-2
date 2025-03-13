@@ -24,7 +24,6 @@ class ForestArea extends Area
 		Utils.ShuffleArr( randSquares )
 		const bossSquare = randSquares.pop()
 		this.bossPos = map.Tile2WorldPosCentered( bossSquare.GetCenter() )
-		// todo: spawn boss as neutral entity from start, slowly firing bullets until activated
 		
 		for( let i = 0; i < nForests; ++i )
 		{

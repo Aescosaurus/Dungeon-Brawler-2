@@ -108,17 +108,6 @@ class TownArea extends Area
 		return( enemies )
 	}
 	
-	// spawn archers around edge, thief on left & warrior on right
-	SpawnEnemies( type,amount,enemyList,map )
-	{
-		for( let i = 0; i < amount; ++i )
-		{
-			enemyList.push( this.SpawnSingleEnemy( type,map.Tile2WorldPos(
-				this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
-				.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) ) )
-		}
-	}
-	
 	SpawnSingleEnemy( type,pos )
 	{
 		switch( type )
@@ -137,5 +126,13 @@ class TownArea extends Area
 			enemies.push( new LivingWineBottle( map.Tile2WorldPos( spot ).Add( Vec2.One().Scale( 4 ) ) ) )
 		}
 		return( new BanditChief( map.Tile2WorldPos( map.GetCenterTile() ) ) )
+	}
+	
+	// spawn archers around edge, thief on left & warrior on right
+	GetRandEnemySpawnPos( map )
+	{
+		return( map.Tile2WorldPos(
+			this.mapEdges[Utils.RandInt( 0,this.mapEdges.length )]
+			.GetRandPos() ).Add( Vec2.One().Scale( 4 ) ) )
 	}
 }
