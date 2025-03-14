@@ -126,8 +126,8 @@ class SwampArea extends Area
 		switch( this.curWave )
 		{
 		case 0:
-			this.SpawnEnemies( 0,2,enemies,map )
-			this.SpawnEnemies( 1,1,enemies,map )
+			this.SpawnEnemies( 0,4,enemies,map )
+			this.SpawnEnemies( 1,3,enemies,map )
 			break
 		}
 		
@@ -145,6 +145,6 @@ class SwampArea extends Area
 	
 	GetRandEnemySpawnPos( map )
 	{
-		return( Utils.ArrayChooseRand( this.enemySpawnLocs ) )
+		return( map.Tile2WorldPosCentered( Utils.ArrayChooseRand( this.enemySpawnLocs ) ) )
 	}
 }
