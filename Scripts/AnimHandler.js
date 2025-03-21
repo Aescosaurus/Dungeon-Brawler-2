@@ -34,4 +34,9 @@ class AnimHandler
 		
 		this.curAnim = index
 	}
+	
+	GetCurAnim()
+	{
+		return( this.curAnim )
+	}
 }
