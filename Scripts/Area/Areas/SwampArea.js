@@ -117,6 +117,8 @@ class SwampArea extends Area
 				}
 			}
 		}
+		
+		this.bossPos = prevPockets[0]
 	}
 	
 	GenerateEnemyWave( map )
@@ -127,6 +129,14 @@ class SwampArea extends Area
 		{
 		case 0:
 			this.SpawnEnemies( 0,4,enemies,map )
+			this.SpawnEnemies( 3,6,enemies,map )
+			break
+		case 1:
+			this.SpawnEnemies( 3,8,enemies,map )
+			this.SpawnEnemies( 2,3,enemies,map )
+			break
+		case 2:
+			this.SpawnEnemies( 2,6,enemies,map )
 			this.SpawnEnemies( 1,3,enemies,map )
 			break
 		}
@@ -140,11 +150,29 @@ class SwampArea extends Area
 		{
 		case 0: return( new EvilMushroom( pos ) )
 		case 1: return( new LivingTree( pos ) )
+		case 2: return( new Frog( pos ) )
+		case 3: return( new FlyEnemy( pos ) )
 		}
 	}
 	
 	GetRandEnemySpawnPos( map )
 	{
 		return( map.Tile2WorldPosCentered( Utils.ArrayChooseRand( this.enemySpawnLocs ) ) )
+	}
+	
+	GenerateBoss( map,enemies )
+	{
+		for( let y = -1; y <= 1; ++y )
+		{
+			for( let x = -1; x <= 1; ++x )
+			{
+				map.SetTile( this.bossPos.x + x,this.bossPos.y + y,2 )
+			}
+		}
+		
+		const mushroomBoss = new GiantMushroomBoss( map.Tile2WorldPosCentered( this.bossPos ) )
+		mushroomBoss.SetArea( this )
+		
+		return( mushroomBoss )
 	}
 }

@@ -34,7 +34,7 @@ class AreaManager
 			new TownArea( 4,"Images/Tiles/TownTiles.png" ),
 			new OrchardArea( 4,"Images/Tiles/OrchardTiles.png" ),
 			new ForestArea( 4,"Images/Tiles/ForestTiles.png" ),
-			new SwampArea( 4,"Images/Tiles/SwampTiles.png" ),
+			new SwampArea( 3,"Images/Tiles/SwampTiles.png" ),
 			new CastleArea( 3,"Images/Tiles/DungeonTiles.png" ),
 		]
 		
