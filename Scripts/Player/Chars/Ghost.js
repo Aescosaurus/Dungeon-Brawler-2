@@ -7,6 +7,7 @@ class Ghost extends Player
 		this.spd = 1.7
 		
 		this.isGhost = true
+		this.targetable = false
 		
 		this.healSpawnDev = new Range( -10,10 )
 	}
