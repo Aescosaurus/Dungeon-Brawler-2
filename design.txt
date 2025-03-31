@@ -114,14 +114,5 @@ maybe items are unique to each level, so beer bottle/wine glass from tavern, var
 
 temple area
 	--mossy stone walls
-	traps that shoot if you get close enough or in los
-		these on corners of mazeTiles?
-			ignore mazeTiles cuz the math is hard, just go tile by tile & add tiles with:
-				at least 1 adjacent air space
-				1-3 adjacent neighbors
-				adjacent as in up down left right, ignore diags
-				aims at empty air space - if multiple then choose one randomly
-				use neutral entity & place on top of wall - spawn bullet a bit in front so it doesn't collide
-					4 facing dirs
 	golden idle entity that triggers a boulder (that damages both you & enemies) when you stand on it for 1s
 		this on the bottom row of the temple

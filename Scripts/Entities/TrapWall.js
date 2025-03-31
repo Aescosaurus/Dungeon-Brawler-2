@@ -11,7 +11,7 @@ class TrapWall extends Enemy
 		this.trapDir = trapDir
 		this.shotDir = Vec2.Cardinals()[this.trapDir]
 		this.shotAng = Math.atan2( this.shotDir.y,this.shotDir.x )
-		this.shotSpot = this.pos.Copy().Add( this.shotDir.Copy().Scale( 8 ) )
+		this.shotSpot = this.pos.Copy().Add( this.shotDir.Copy().Scale( 4 ) )
 		
 		let curPos = map.World2TilePos( pos ).Add( this.shotDir )
 		while( map.IsWalkableTile( curPos.x,curPos.y ) ) curPos.Add( this.shotDir )

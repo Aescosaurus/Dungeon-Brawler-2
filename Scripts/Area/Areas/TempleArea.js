@@ -71,12 +71,17 @@ class TempleArea extends Area
 			}
 		}
 		
-		mazeTiles[( mazeDims.y - 1 ) * mazeDims.x + Utils.RandInt( 0,mazeDims.x )].junctions[1] = true
+		
+		const topIdol = Utils.Choose()
+		const topOffset = topIdol ? 4 : 0
+		
+		mazeTiles[( topIdol ? 0 : mazeDims.y - 1 ) * mazeDims.x + Utils.RandInt( 0,mazeDims.x )]
+			.junctions[topIdol ? 0 : 1] = true
 		
 		for( const mazeTile of mazeTiles )
 		{
 			const tileRect = Rect.CreateXYWH( 1 + mazeTile.x * horizInterval,
-				mazeTile.y * vertInterval,horizInterval,vertInterval )
+				topOffset + mazeTile.y * vertInterval,horizInterval,vertInterval )
 			
 			const edgeArrs = tileRect.GetEdgeArrs()
 			
@@ -120,6 +125,44 @@ class TempleArea extends Area
 					}
 				}
 			}
+		}
+	}
+	
+	GenerateEnemyWave( map )
+	{
+		const enemies = []
+		
+		switch( this.curWave )
+		{
+		case 0:
+			this.SpawnEnemies( 1,3,enemies,map )
+			break
+		case 1:
+			this.SpawnEnemies( 1,3,enemies,map )
+			this.SpawnEnemies( 0,2,enemies,map )
+			break
+		case 2:
+			this.SpawnEnemies( 1,2,enemies,map )
+			this.SpawnEnemies( 0,1,enemies,map )
+			this.SpawnEnemies( 2,2,enemies,map )
+			break
+		case 3:
+			this.SpawnEnemies( 1,4,enemies,map )
+			this.SpawnEnemies( 0,2,enemies,map )
+			this.SpawnEnemies( 2,4,enemies,map )
+			break
+		}
+		
+		return( enemies )
+	}
+	
+	SpawnSingleEnemy( type,pos )
+	{
+		switch( type )
+		{
+		case 0: return( new FrogBig( pos ) )
+		case 1: return( new Basilisk( pos ) )
+		case 2: return( new MaskedWarrior( pos ) )
 		}
 	}
 }
