@@ -31,7 +31,7 @@ class OrchardArea extends Area
 			if( mapTile == 8 ) continue
 			let tileType = 6
 			if( mapTile == 3 ) tileType = 8
-			if( map.IsTileOnScreen( tile.x,tile.y ) ) map.SetTile( tile.x,tile.y,tileType )
+			/*if( map.IsTileOnScreen( tile.x,tile.y ) )*/ map.SetTile( tile.x,tile.y,tileType )
 			if( map.IsTileOnScreen( tile.x,tile.y - 1 ) ) map.SetTile( tile.x,tile.y - 1,tileType )
 			// if( map.IsTileOnScreen( tile.x,tile.y + 1 ) ) map.SetTile( tile.x,tile.y + 1,tileType )
 		}
@@ -50,7 +50,11 @@ class OrchardArea extends Area
 			for( const tile of curve )
 			{
 				if( !map.IsWalkableTile( tile.x,tile.y ) ) map.SetTile( tile.x,tile.y,8 )
-				if( !map.IsWalkableTile( tile.x,tile.y - 1 ) ) map.SetTile( tile.x,tile.y - 1,8 )
+				if( map.IsTileOnScreen( tile.x,tile.y - 1 ) &&
+					!map.IsWalkableTile( tile.x,tile.y - 1 ) )
+				{
+					map.SetTile( tile.x,tile.y - 1,8 )
+				}
 				// if( !map.IsWalkableTile( tile.x,tile.y + 1 ) ) map.SetTile( tile.x,tile.y + 1,8 )
 			}
 		}
