@@ -44,7 +44,7 @@ class AreaManager
 		this.titleSpr = new Sprite( "Images/UI/Title.png" )
 		this.gameOverSpr = new Sprite( "Images/UI/GameOver.png" )
 		
-		this.curArea = 6
+		this.curArea = 0
 		// CharSelectMode, RegularAreaMode, ArcadeMode
 		this.SetMode( PlayerManager.CharSelectMode )
 		this.enableEnemySpawning = true
@@ -244,7 +244,7 @@ class AreaManager
 		++this.curArea
 		if( this.curArea >= this.areas.length ) this.curArea = 0
 		this.LoadMap()
-		this.playerManager.CenterPlayers( this.map )
+		if( this.curArea > 0 ) this.playerManager.CenterPlayers( this.map )
 	}
 	
 	SetMode( mode )
