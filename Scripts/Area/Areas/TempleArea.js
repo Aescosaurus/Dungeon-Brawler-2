@@ -78,10 +78,13 @@ class TempleArea extends Area
 		mazeTiles[( topIdol ? 0 : mazeDims.y - 1 ) * mazeDims.x + Utils.RandInt( 0,mazeDims.x )]
 			.junctions[topIdol ? 0 : 1] = true
 		
+		const possibleBossLocs = []
 		for( const mazeTile of mazeTiles )
 		{
 			const tileRect = Rect.CreateXYWH( 1 + mazeTile.x * horizInterval,
 				topOffset + mazeTile.y * vertInterval,horizInterval,vertInterval )
+			
+			possibleBossLocs.push( tileRect.GetCenter() )
 			
 			const edgeArrs = tileRect.GetEdgeArrs()
 			
@@ -96,6 +99,10 @@ class TempleArea extends Area
 				}
 			}
 		}
+		this.bossLoc = Utils.ArrayChooseRand( possibleBossLocs )
+		
+		this.trapTiles = []
+		this.trapEntities = []
 		
 		const trapChance = 0.1
 		const checkDirs = Vec2.Cardinals()
@@ -120,8 +127,12 @@ class TempleArea extends Area
 					
 					if( airDirs.length > 0 && nWalls > 0 && Math.random() < trapChance )
 					{
-						entities.push( new TrapWall( map.Tile2WorldPosCentered( new Vec2( x,y ) ),
-							Utils.ArrayChooseRand( airDirs ),map ) )
+						const trapTile = new Vec2( x,y )
+						const trapEntity = new TrapWall( map.Tile2WorldPosCentered( trapTile ),
+							Utils.ArrayChooseRand( airDirs ),map )
+						entities.push( trapEntity )
+						this.trapEntities.push( trapEntity )
+						this.trapTiles.push( trapTile )
 					}
 				}
 			}
@@ -164,5 +175,21 @@ class TempleArea extends Area
 		case 1: return( new Basilisk( pos ) )
 		case 2: return( new MaskedWarrior( pos ) )
 		}
+	}
+	
+	GenerateBoss( map,enemies )
+	{
+		for( const tile of this.trapTiles )
+		{
+			map.SetTile( tile.x,tile.y,0 )
+			if( Math.random() < 0.5 )
+			{
+				enemies.push( new Basilisk( map.Tile2WorldPos( tile ).Add( Vec2.One().Scale( 4 ) ) ) )
+			}
+		}
+		
+		for( const trapEntity of this.trapEntities ) trapEntity.hp = -1
+		
+		return( new IdolBoulder( map.Tile2WorldPos( this.bossLoc ) ) )
 	}
 }

@@ -53,4 +53,10 @@ class Anim
 	{
 		this.frameCounter.SetCurItem( frame )
 	}
+	
+	SetNFrames( nFrames )
+	{
+		this.nFrames = nFrames
+		this.frameCounter.SetCount( nFrames )
+	}
 }
